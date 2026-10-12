@@ -1,0 +1,108 @@
+import { ExperienceItem } from "@/lib/types";
+
+export const EXPERIENCES: ExperienceItem[] = [
+  {
+    id: "chargebee",
+    company: "Chargebee",
+    role: "AI Intern",
+    period: "Feb 2026 – Aug 2026",
+    location: "Chennai, India",
+    type: "Internship",
+    badgeColor: "text-violet-400 bg-violet-500/10 border-violet-500/20",
+    summary:
+      "Engineered machine learning systems and AI evaluation pipelines for enterprise sustainability auditing and regulatory compliance.",
+    achievements: [
+      "Built Leviathan, a sustainability and anti-greenwashing audit platform using a scikit-learn ensemble (Random Forest, Gradient Boosting, Ridge Regression) to predict carbon footprint and durability with a reported R² of 0.88.",
+      "Developed an automated Greenwashing Inspector using TF-IDF vectorization and Gemini semantic reasoning to audit corporate marketing claims against international ISO 14021 standards.",
+      "Integrated Open Food Facts and Google Shopping APIs for automated multi-source product catalog ingestion and structured attribute extraction.",
+      "Preserved strict enterprise privacy and clean code standards with reproducible validation suites.",
+    ],
+    technologies: [
+      "scikit-learn",
+      "Python",
+      "Gemini API",
+      "TF-IDF",
+      "Open Food Facts API",
+      "Ensemble Modeling",
+      "REST APIs",
+    ],
+    projectsLinked: ["leviathan"],
+  },
+  {
+    id: "xarc",
+    company: "XARC",
+    role: "XR Developer",
+    period: "May 2026 – Aug 2026",
+    location: "Remote / Hybrid",
+    type: "Internship",
+    badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+    summary:
+      "Developed high-performance desktop clients and cloud-managed asset delivery pipelines for XR simulation modules.",
+    achievements: [
+      "Built the XARC Nexus Aggregator desktop client using React, TypeScript, and Electron, enabling unified access to spatial simulation modules.",
+      "Integrated Unity Addressables for dynamic, on-demand XR module loading, drastically reducing initial client installation footprint.",
+      "Configured AWS S3 for remote asset bundle hosting, cryptographic checksum validation, and version rollbacks.",
+      "Implemented local module cache management, real-time chunked download progress tracking, and automated delta-update detection.",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Electron",
+      "Unity Addressables",
+      "AWS S3",
+      "C#",
+      "Node.js",
+    ],
+  },
+  {
+    id: "femtosoft",
+    company: "Femtosoft Technologies",
+    role: "Machine Learning Intern",
+    period: "Jul 2025 – Aug 2025",
+    location: "Chennai, India",
+    type: "Internship",
+    badgeColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    summary:
+      "Executed supervised and unsupervised machine learning workflows across raw data ingestion, feature engineering, and model validation.",
+    achievements: [
+      "Engineered end-to-end ML training pipelines across diverse tabular and unstructured datasets.",
+      "Conducted rigorous exploratory data analysis (EDA), missing-value imputation, outlier removal, and correlation diagnostics.",
+      "Applied feature selection, categorical encoding, and dimensionality reduction techniques.",
+      "Trained, cross-validated, and benchmarked regression and classification models using scikit-learn and Pandas.",
+    ],
+    technologies: [
+      "Python",
+      "scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Jupyter",
+    ],
+  },
+  {
+    id: "cognifyz",
+    company: "Cognifyz Technologies",
+    role: "Power BI Intern",
+    period: "Sep 2024 – Oct 2024",
+    location: "Remote",
+    type: "Internship",
+    badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+    summary:
+      "Engineered business intelligence dashboards, automated data transformation models, and executive KPI reporting.",
+    achievements: [
+      "Constructed interactive enterprise Power BI dashboards with customized drill-through and multi-level hierarchy navigation.",
+      "Authored optimized Power Query ETL transformations to clean and merge disparate relational datasets.",
+      "Formulated complex DAX measures and calculated columns for dynamic KPI tracking, YoY comparisons, and cohort analysis.",
+      "Configured user-friendly filters, slicers, and bookmarks for executive presentation delivery.",
+    ],
+    technologies: [
+      "Power BI",
+      "Power Query",
+      "DAX",
+      "Data Modeling",
+      "Business Intelligence",
+      "SQL",
+    ],
+  },
+];
