@@ -12,10 +12,10 @@ import {
   Cpu,
   Terminal,
   FileText,
+  Sparkles,
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { ProjectData } from "@/lib/types";
-import { Badge } from "@/components/ui/Badge";
 
 interface ProjectCardProps {
   project: ProjectData;
@@ -28,148 +28,117 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const videoButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Category Icon helper
-  const getCategoryIcon = () => {
-    switch (project.category) {
-      case "LLM & RAG":
-        return <Cpu className="w-3.5 h-3.5 text-violet-400" />;
-      case "AI Security":
-        return <Shield className="w-3.5 h-3.5 text-cyan-400" />;
-      case "Reliability Engineering":
-        return <Layers className="w-3.5 h-3.5 text-amber-400" />;
-      default:
-        return <Terminal className="w-3.5 h-3.5 text-emerald-400" />;
-    }
-  };
-
   return (
-    <article className="group relative flex flex-col justify-between rounded-2xl border border-violet-500/15 bg-[#0C1020]/90 p-5 sm:p-6 transition-all duration-300 hover:border-violet-500/40 hover:bg-[#0E1428] hover:shadow-xl hover:shadow-violet-500/10 backdrop-blur-sm">
-      {/* Top Meta Bar */}
+    <article className="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-6 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900">
       <div>
+        {/* Category & Featured Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-1.5">
-            {getCategoryIcon()}
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-              {project.category}
-            </span>
-          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">
+            {project.category}
+          </span>
           {project.featured && (
-            <Badge variant="violet" size="sm">
-              Featured Case Study
-            </Badge>
+            <span className="text-[11px] font-mono text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 px-2 py-0.5 rounded">
+              Featured System
+            </span>
           )}
         </div>
 
-        {/* Title & Tagline */}
-        <h3 className="font-sans text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-violet-300 transition-colors">
+        {/* Project Title */}
+        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
           <Link
             href={`/projects/${project.slug}`}
-            className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
+            className="hover:text-indigo-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400"
           >
             {project.title}
           </Link>
         </h3>
-        <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+
+        {/* Tagline / Description */}
+        <p className="mt-2 text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
           {project.tagline}
         </p>
 
-        {/* Key Engineering Achievement Banner */}
-        <div className="mt-3.5 rounded-lg border border-violet-500/20 bg-violet-950/20 px-3 py-2 text-[11px] font-mono text-violet-200 flex items-start gap-2">
-          <span className="text-violet-400 font-bold shrink-0">⚡</span>
-          <span>{project.keyAchievement}</span>
+        {/* Key Achievement Banner */}
+        <div className="mt-3.5 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs font-mono text-zinc-300 flex items-start gap-2">
+          <span className="text-emerald-400 font-bold shrink-0">✓</span>
+          <span className="leading-snug">{project.keyAchievement}</span>
         </div>
 
-        {/* Stats Row if available */}
-        {project.stats && project.stats.length > 0 && (
-          <div className="mt-3.5 grid grid-cols-2 gap-2 border-t border-b border-white/[0.06] py-2.5 my-2">
-            {project.stats.slice(0, 2).map((stat) => (
-              <div key={stat.label} className="flex flex-col">
-                <span className="text-[10px] font-mono uppercase text-slate-400">
-                  {stat.label}
-                </span>
-                <span className="text-xs font-mono font-bold text-white">
-                  {stat.value}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Technology Badges */}
-        <div className="mt-3.5 flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 5).map((tech) => (
+        {/* Technologies List */}
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.technologies.slice(0, 6).map((tech) => (
             <span
               key={tech}
-              className="rounded bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono text-slate-300 border border-white/[0.06]"
+              className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] font-mono text-zinc-300 border border-zinc-700/60"
             >
               {tech}
             </span>
           ))}
-          {project.technologies.length > 5 && (
-            <span className="rounded bg-transparent px-1.5 py-0.5 text-[10px] font-mono text-slate-400">
-              +{project.technologies.length - 5}
+          {project.technologies.length > 6 && (
+            <span className="rounded bg-transparent px-1.5 py-0.5 text-[11px] font-mono text-zinc-500">
+              +{project.technologies.length - 6} more
             </span>
           )}
         </div>
       </div>
 
       {/* Action Buttons Bar */}
-      <div className="mt-5 pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2">
-        {/* Primary Case Study Link */}
+      <div className="mt-6 pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+        {/* Case study link */}
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-violet-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded py-1"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
         >
-          <FileText className="h-3.5 w-3.5" />
+          <FileText className="h-3.5 w-3.5 text-zinc-400" />
           <span>Case Study</span>
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="h-3 w-3" />
         </Link>
 
-        {/* External & Interactive Buttons (Strictly Verified Only) */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          {/* GitHub Repo Button */}
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* GitHub Repo */}
           {project.links.githubUrl && (
             <a
               href={project.links.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} on GitHub`}
-              className="flex items-center gap-1 rounded-md border border-white/[0.1] bg-white/[0.04] px-2.5 py-1 text-[11px] font-mono text-slate-300 hover:bg-white/[0.08] hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+              className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-xs text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors"
             >
-              <GithubIcon className="h-3 w-3" />
+              <GithubIcon className="h-3.5 w-3.5" />
               <span>GitHub</span>
             </a>
           )}
 
-          {/* PyPI Button */}
+          {/* Live App */}
+          {project.links.liveUrl && (
+            <a
+              href={project.links.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Launch ${project.title} Live Application`}
+              className="inline-flex items-center gap-1.5 rounded-md border border-emerald-600/40 bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>Live App</span>
+            </a>
+          )}
+
+          {/* PyPI */}
           {project.links.pypiUrl && (
             <a
               href={project.links.pypiUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} on PyPI`}
-              className="flex items-center gap-1 rounded-md border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-[11px] font-mono text-cyan-300 hover:bg-cyan-500/20 hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              className="inline-flex items-center gap-1.5 rounded-md border border-indigo-600/40 bg-indigo-500/10 px-2.5 py-1 text-xs text-indigo-300 hover:bg-indigo-500/20 transition-colors"
             >
-              <Package className="h-3 w-3" />
+              <Package className="h-3.5 w-3.5" />
               <span>PyPI</span>
             </a>
           )}
 
-          {/* Live Application Button */}
-          {project.links.liveUrl && (
-            <a
-              href={project.links.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Launch ${project.title} live application`}
-              className="flex items-center gap-1 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-mono text-emerald-300 hover:bg-emerald-500/20 hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              <ExternalLink className="h-3 w-3" />
-              <span>Live App</span>
-            </a>
-          )}
-
-          {/* Watch Demo Video Modal Trigger */}
+          {/* Watch Demo Modal Trigger */}
           {project.links.demoVideoUrl && onOpenVideo && (
             <button
               ref={videoButtonRef}
@@ -180,10 +149,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   videoButtonRef
                 )
               }
-              aria-label={`Watch ${project.title} demonstration video in modal`}
-              className="flex items-center gap-1 rounded-md border border-violet-500/40 bg-violet-600/20 px-2.5 py-1 text-[11px] font-mono text-violet-200 hover:bg-violet-600/30 hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+              aria-label={`Watch ${project.title} Demo Video`}
+              className="inline-flex items-center gap-1.5 rounded-md border border-sky-500/40 bg-sky-500/10 px-2.5 py-1 text-xs text-sky-300 hover:bg-sky-500/20 transition-colors font-medium cursor-pointer"
             >
-              <Play className="h-3 w-3 fill-violet-300" />
+              <Play className="h-3 w-3 fill-sky-300" />
               <span>Watch Demo</span>
             </button>
           )}

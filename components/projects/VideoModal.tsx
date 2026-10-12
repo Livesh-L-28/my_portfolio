@@ -76,23 +76,23 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       <div
         ref={modalRef}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-4xl overflow-hidden rounded-2xl border border-violet-500/30 bg-[#0B0F1C] shadow-2xl shadow-violet-500/10 focus:outline-none"
+        className="relative z-10 w-full max-w-4xl overflow-hidden rounded-xl border border-zinc-700 bg-zinc-950 shadow-2xl focus:outline-none"
       >
         {/* Header Bar */}
-        <div className="flex items-center justify-between border-b border-white/[0.08] px-5 py-3.5 bg-[#080C16]">
+        <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3.5 bg-zinc-900">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-violet-400 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
             <h2
               id="video-modal-title"
               className="font-sans text-sm sm:text-base font-semibold text-white tracking-tight"
             >
-              {title} — Demo Walkthrough
+              {title} — Demonstration Video
             </h2>
           </div>
           <button
             onClick={onClose}
             aria-label="Close demo video modal"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-slate-400 hover:bg-white/[0.08] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-800 text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>

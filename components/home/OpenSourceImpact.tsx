@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Package, ExternalLink, ShieldCheck, Terminal, Layers } from "lucide-react";
+import { Package, ExternalLink, ShieldCheck } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 
@@ -22,7 +22,7 @@ const PUBLISHED_PACKAGES: PublishedPackage[] = [
     pypiPackageName: "llmfirewall-core",
     installCommand: "pip install llmfirewall-core",
     description:
-      "Lightweight, in-process security framework intercepting adversarial prompt injections, redacting sensitive credentials and PII, and enforcing Policy-as-Code with sub-millisecond overhead.",
+      "In-process defense-in-depth security framework intercepting adversarial prompt injections, redacting sensitive credentials and PII, and enforcing Policy-as-Code with sub-millisecond overhead (~0.02ms).",
     testsCount: "608+ tests passed",
     pypiUrl: "https://pypi.org/project/llmfirewall-core/",
     githubUrl: "https://github.com/Livesh-L-28/LLMFirewall",
@@ -45,7 +45,7 @@ const PUBLISHED_PACKAGES: PublishedPackage[] = [
     installCommand: "pip install aegis-resilience",
     description:
       "Autonomous reliability engineering framework correlating Prometheus, Grafana Loki, and OpenTelemetry signals for incident root-cause diagnosis with approval-gated remediation.",
-    testsCount: "Production-grade release",
+    testsCount: "Production-grade v0.1.0",
     pypiUrl: "https://pypi.org/project/aegis-resilience/",
     githubUrl: "https://github.com/Livesh-L-28/AEGIS-Framework",
     tag: "Incident Remediation",
@@ -54,19 +54,18 @@ const PUBLISHED_PACKAGES: PublishedPackage[] = [
 
 export const OpenSourceImpact: React.FC = () => {
   return (
-    <section className="relative py-20 border-t border-white/[0.08] bg-[#090D1A]/60">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-mono text-cyan-300 mb-2">
-              <Package className="h-3.5 w-3.5 text-cyan-400" />
-              <span>PUBLISHED PYTHON PACKAGES & TOOLS</span>
-            </div>
-            <h2 className="font-sans text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+    <section className="relative py-16 sm:py-20 border-b border-white/[0.08]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div className="max-w-2xl">
+            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-1">
+              Public Python Distributions
+            </span>
+            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               Open-Source & PyPI Releases
             </h2>
-            <p className="mt-2 text-sm text-slate-400 max-w-2xl font-sans">
-              Published distributions available on the Python Package Index (PyPI) with automated CI/CD and regression suites.
+            <p className="mt-2 text-sm text-zinc-400 font-sans">
+              Published packages available on the Python Package Index with automated CI/CD and regression suites.
             </p>
           </div>
 
@@ -74,7 +73,7 @@ export const OpenSourceImpact: React.FC = () => {
             href="https://github.com/Livesh-L-28"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
           >
             <GithubIcon className="h-4 w-4" />
             <span>github.com/Livesh-L-28</span>
@@ -82,16 +81,16 @@ export const OpenSourceImpact: React.FC = () => {
           </a>
         </div>
 
-        {/* 3 Published PyPI Packages Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* 3 Packages Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {PUBLISHED_PACKAGES.map((pkg) => (
             <div
               key={pkg.pypiPackageName}
-              className="flex flex-col justify-between rounded-2xl border border-violet-500/20 bg-[#0C1022] p-5 sm:p-6 transition-all hover:border-violet-500/40 hover:shadow-xl hover:shadow-violet-500/10"
+              className="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 hover:border-zinc-700 transition-colors"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 px-2 py-0.5 rounded">
                     {pkg.tag}
                   </span>
                   <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
@@ -100,14 +99,14 @@ export const OpenSourceImpact: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="font-sans text-lg font-bold text-white tracking-tight">
+                <h3 className="font-sans text-base font-bold text-white">
                   {pkg.name}
                 </h3>
-                <p className="mt-0.5 text-xs font-mono text-slate-400">
-                  Distribution: <code className="text-violet-300">{pkg.pypiPackageName}</code>
+                <p className="text-xs font-mono text-zinc-400 mt-0.5">
+                  Package: <code className="text-zinc-200">{pkg.pypiPackageName}</code>
                 </p>
 
-                <p className="mt-3 text-xs text-slate-300 leading-relaxed font-sans">
+                <p className="mt-3 text-xs text-zinc-300 leading-relaxed font-sans">
                   {pkg.description}
                 </p>
 
@@ -117,12 +116,12 @@ export const OpenSourceImpact: React.FC = () => {
               </div>
 
               {/* Action Links */}
-              <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between gap-2 text-xs font-mono">
+              <div className="mt-5 pt-3 border-t border-zinc-800 flex items-center justify-between text-xs font-mono">
                 <a
                   href={pkg.pypiUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-cyan-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded px-1.5 py-0.5"
+                  className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300"
                 >
                   <Package className="h-3.5 w-3.5" />
                   <span>PyPI Page</span>
@@ -133,10 +132,10 @@ export const OpenSourceImpact: React.FC = () => {
                   href={pkg.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-violet-400 rounded px-1.5 py-0.5"
+                  className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-white"
                 >
                   <GithubIcon className="h-3.5 w-3.5" />
-                  <span>GitHub</span>
+                  <span>Repository</span>
                 </a>
               </div>
             </div>

@@ -3,17 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, FileDown, ExternalLink } from "lucide-react";
+import { Menu, X, FileDown, Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { PROFILE_LINKS } from "@/lib/links";
 
-const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Engineering", href: "/#engineering" },
-  { label: "Experience", href: "/experience" },
-  { label: "Skills", href: "/skills" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+const NAV_LINKS = [
+  { label: "Projects", href: "/#projects" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Skills", href: "/#skills" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const Navbar: React.FC = () => {
@@ -29,75 +28,85 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
-
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
         scrolled
-          ? "border-b border-violet-500/20 bg-[#080A12]/90 backdrop-blur-xl shadow-lg shadow-black/40 py-3"
+          ? "border-b border-white/[0.08] bg-[#09090b]/90 backdrop-blur-md py-3"
           : "border-b border-transparent bg-transparent py-4"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Wordmark Logo */}
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
+        {/* Brand identity */}
         <Link
           href="/"
-          className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded-lg p-1"
-          aria-label="Livesh L. - AI Engineering Portfolio Home"
+          className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
+          aria-label="Livesh L. Portfolio"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-violet-500/40 bg-violet-600/20 text-white font-mono font-bold text-sm tracking-wider shadow-inner group-hover:border-violet-400 group-hover:bg-violet-600/30 transition-all">
-            L
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-800 border border-zinc-700 text-white font-mono font-semibold text-xs group-hover:border-zinc-500 transition-colors">
+            LL
           </div>
           <div className="flex flex-col">
-            <span className="font-mono text-sm font-bold tracking-widest text-white group-hover:text-violet-300 transition-colors">
-              LIVESH
+            <span className="font-sans font-bold text-sm tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+              Livesh L.
             </span>
-            <span className="text-[10px] font-mono text-slate-400 tracking-wider">
-              AI DEVELOPER
+            <span className="text-[11px] font-mono text-zinc-400 leading-none">
+              AI & LLM Developer
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav
-          className="hidden md:flex items-center gap-1 rounded-full border border-white/[0.08] bg-[#0D1220]/80 px-4 py-1.5 backdrop-blur-md"
-          aria-label="Main Navigation"
-        >
-          {NAV_ITEMS.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href));
-
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`px-3 py-1 text-xs font-mono transition-colors rounded-full ${
-                  isActive
-                    ? "text-white bg-violet-500/20 border border-violet-500/30 font-semibold"
-                    : "text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="hidden md:flex items-center gap-6" aria-label="Main Navigation">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="text-xs font-medium text-zinc-400 hover:text-white transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Right CTA Actions */}
+        {/* Right Action Icons & Resume */}
         <div className="hidden sm:flex items-center gap-3">
+          <a
+            href={PROFILE_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="p-1.5 text-zinc-400 hover:text-white transition-colors rounded-md hover:bg-zinc-800"
+          >
+            <GithubIcon className="h-4 w-4" />
+          </a>
+          <a
+            href={PROFILE_LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            className="p-1.5 text-zinc-400 hover:text-white transition-colors rounded-md hover:bg-zinc-800"
+          >
+            <LinkedinIcon className="h-4 w-4" />
+          </a>
+          <a
+            href={`mailto:${PROFILE_LINKS.email}`}
+            aria-label="Email Livesh"
+            className="p-1.5 text-zinc-400 hover:text-white transition-colors rounded-md hover:bg-zinc-800"
+          >
+            <Mail className="h-4 w-4" />
+          </a>
+
+          <div className="h-4 w-[1px] bg-zinc-800 mx-1" />
+
           <a
             href={PROFILE_LINKS.resumePdf}
             download="Livesh_L_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-600/10 px-3.5 py-1.5 text-xs font-mono font-medium text-violet-200 hover:bg-violet-600/20 hover:border-violet-500/50 hover:text-white transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800/80 px-3 py-1.5 text-xs font-medium text-zinc-100 hover:bg-zinc-700 hover:text-white transition-all shadow-sm"
           >
-            <FileDown className="h-3.5 w-3.5 text-violet-400" />
+            <FileDown className="h-3.5 w-3.5 text-zinc-300" />
             <span>Resume</span>
           </a>
         </div>
@@ -107,45 +116,53 @@ export const Navbar: React.FC = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-expanded={mobileMenuOpen}
           aria-label="Toggle navigation menu"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.1] bg-white/[0.04] text-slate-300 md:hidden hover:bg-white/[0.08] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-300 md:hidden hover:text-white"
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-violet-500/20 bg-[#090D1A]/95 px-5 py-5 backdrop-blur-xl animate-in slide-in-from-top-2 duration-150">
-          <nav className="flex flex-col gap-2 font-mono text-sm" aria-label="Mobile Navigation">
-            {NAV_ITEMS.map((item) => (
+        <div className="md:hidden border-b border-zinc-800 bg-[#09090b] px-5 py-4">
+          <nav className="flex flex-col gap-2.5 text-sm" aria-label="Mobile Navigation">
+            {NAV_LINKS.map((link) => (
               <Link
-                key={item.label}
-                href={item.href}
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-slate-300 hover:bg-white/[0.06] hover:text-white transition-colors"
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1.5 text-zinc-300 hover:text-white transition-colors"
               >
-                <span>{item.label}</span>
+                {link.label}
               </Link>
             ))}
-            <div className="pt-3 mt-2 border-t border-white/[0.08] flex flex-col gap-2">
+            <div className="pt-3 mt-2 border-t border-zinc-800 flex items-center justify-between">
               <a
                 href={PROFILE_LINKS.resumePdf}
                 download="Livesh_L_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-lg border border-violet-500/30 bg-violet-600/20 py-2.5 text-xs font-mono font-medium text-white hover:bg-violet-600/30 transition-colors"
+                className="flex items-center gap-2 rounded-lg bg-zinc-800 border border-zinc-700 px-3.5 py-2 text-xs font-medium text-white"
               >
-                <FileDown className="h-4 w-4 text-violet-300" />
-                <span>Download Verified Resume</span>
+                <FileDown className="h-4 w-4" />
+                <span>Download Resume</span>
               </a>
-              <a
-                href={PROFILE_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] py-2 text-xs font-mono text-slate-300 hover:text-white transition-colors"
-              >
-                <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
-                <span>GitHub Profile</span>
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href={PROFILE_LINKS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-400 hover:text-white"
+                >
+                  <GithubIcon className="h-4 w-4" />
+                </a>
+                <a
+                  href={PROFILE_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-400 hover:text-white"
+                >
+                  <LinkedinIcon className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </nav>
         </div>

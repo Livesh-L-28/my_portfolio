@@ -1,15 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Mail,
-  FileDown,
-  Copy,
-  Check,
-  Send,
-  MessageSquare,
-  Sparkles,
-} from "lucide-react";
+import { Mail, Phone, FileDown, Copy, Check, Send } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { PROFILE_LINKS } from "@/lib/links";
 
@@ -22,99 +14,84 @@ export const ContactSection: React.FC = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // ignore clipboard error
+      // fallback
     }
   };
 
   return (
-    <section id="contact" className="relative py-24 border-t border-white/[0.08] overflow-hidden">
-      {/* Background glow effects */}
-      <div className="absolute inset-0 radial-glow-hero opacity-70 pointer-events-none" />
-      <div className="absolute inset-0 tech-grid opacity-40 pointer-events-none" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 py-1 text-xs font-mono text-violet-300">
-            <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
-            <span>DIRECT ENGINEERING COLLABORATION</span>
+    <section id="contact" className="relative py-16 sm:py-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-6 sm:p-10 shadow-2xl">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-1">
+              Direct Contact & Inquiries
+            </span>
+            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              Have a Challenging AI Engineering Problem?
+            </h2>
+            <p className="mt-2 text-sm text-zinc-300 font-sans leading-relaxed">
+              Interested in AI engineering, LLM systems, security, reliability, or building something technically ambitious? Let&rsquo;s connect.
+            </p>
           </div>
 
-          <h2 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-            Have a Challenging AI Engineering Problem?
-          </h2>
-
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-sans">
-            Interested in AI engineering, LLM systems, security, reliability, or building something technically ambitious? Let&rsquo;s connect.
-          </p>
-        </div>
-
-        {/* Contact Action Center */}
-        <div className="mt-12 mx-auto max-w-2xl rounded-2xl border border-violet-500/30 bg-[#0C1022]/90 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Primary Email Mailto CTA */}
+          {/* Action Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
             <a
-              href={`mailto:${PROFILE_LINKS.email}?subject=AI%20Engineering%20Inquiry%20-%20Livesh%20Portfolio`}
-              className="flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-4 text-sm font-mono font-medium text-white shadow-lg shadow-violet-500/25 hover:from-violet-500 hover:to-indigo-500 transition-all border border-violet-400/40 text-center"
+              href={`mailto:${PROFILE_LINKS.email}?subject=AI%20Engineering%20Opportunity%20-%20Livesh%20Portfolio`}
+              className="flex items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-xs font-semibold text-zinc-950 hover:bg-zinc-200 transition-colors font-sans shadow-sm"
             >
               <Send className="h-4 w-4" />
               <span>Send Email Directly</span>
             </a>
 
-            {/* Copy Email Button */}
             <button
               onClick={handleCopyEmail}
-              className="flex items-center justify-center gap-2.5 rounded-xl border border-white/[0.12] bg-white/[0.04] px-5 py-4 text-sm font-mono font-medium text-slate-200 hover:bg-white/[0.08] hover:text-white transition-all text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+              className="flex items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-5 py-3 text-xs font-medium text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors font-mono cursor-pointer"
             >
               {copied ? (
                 <>
                   <Check className="h-4 w-4 text-emerald-400" />
-                  <span className="text-emerald-400">Email Address Copied!</span>
+                  <span className="text-emerald-400">Copied to Clipboard!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="h-4 w-4 text-violet-400" />
+                  <Copy className="h-4 w-4 text-zinc-400" />
                   <span>Copy {PROFILE_LINKS.email}</span>
                 </>
               )}
             </button>
           </div>
 
-          {/* Social Profiles Grid */}
-          <div className="mt-6 pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+          {/* Contact Details Bar */}
+          <div className="pt-6 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs font-mono">
+            <div className="flex items-center gap-2 text-zinc-300">
+              <Mail className="h-3.5 w-3.5 text-zinc-500" />
+              <span className="truncate">{PROFILE_LINKS.email}</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-zinc-300">
+              <Phone className="h-3.5 w-3.5 text-zinc-500" />
+              <span>{PROFILE_LINKS.phone}</span>
+            </div>
+
             <a
               href={PROFILE_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-[#090D1C] p-3 text-slate-300 hover:border-cyan-500/40 hover:text-cyan-300 transition-colors"
+              className="flex items-center gap-2 text-zinc-400 hover:text-sky-400 transition-colors"
             >
-              <LinkedinIcon className="h-4 w-4 text-cyan-400" />
+              <LinkedinIcon className="h-3.5 w-3.5 text-sky-400" />
               <span>LinkedIn Profile</span>
-            </a>
-
-            <a
-              href={PROFILE_LINKS.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-[#090D1C] p-3 text-slate-300 hover:border-violet-500/40 hover:text-white transition-colors"
-            >
-              <GithubIcon className="h-4 w-4 text-violet-400" />
-              <span>GitHub Profile</span>
             </a>
 
             <a
               href={PROFILE_LINKS.resumePdf}
               download="Livesh_L_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-600/10 p-3 text-violet-300 hover:bg-violet-600/20 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
             >
-              <FileDown className="h-4 w-4 text-violet-400" />
+              <FileDown className="h-3.5 w-3.5" />
               <span>Download Resume</span>
             </a>
-          </div>
-
-          <div className="mt-6 text-center text-xs font-mono text-slate-400">
-            Based in Tamil Nadu, India · Open to full-time AI/LLM engineering roles & research collaborations.
           </div>
         </div>
       </div>

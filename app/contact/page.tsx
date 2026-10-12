@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { ContactSection } from "@/components/home/ContactSection";
-import { Mail, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact — Livesh L. | AI Developer",
@@ -10,9 +9,8 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="relative min-h-screen py-12 sm:py-16">
-      <div className="absolute inset-0 tech-grid opacity-50 pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen py-10 sm:py-16">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <ContactSection />
       </div>
     </div>

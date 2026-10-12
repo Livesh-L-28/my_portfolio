@@ -3,66 +3,63 @@
 import React from "react";
 import Link from "next/link";
 import {
-  ArrowDown,
   FileDown,
+  ArrowDown,
   Mail,
+  CheckCircle2,
+  Package,
+  Terminal,
   ShieldCheck,
-  CheckCircle,
-  ExternalLink,
+  Zap,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { PROFILE_LINKS } from "@/lib/links";
-import { InteractiveGraph } from "@/components/ui/InteractiveGraph";
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-18 lg:pb-28">
-      {/* Background gradients and tech grid */}
-      <div className="absolute inset-0 tech-grid opacity-60 pointer-events-none" />
-      <div className="absolute inset-0 radial-glow-hero pointer-events-none" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Editorial Headline & Actions */}
+    <section className="relative pt-10 pb-16 sm:pt-16 sm:pb-20 border-b border-white/[0.08]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Authentic Intro & Direct Actions */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 py-1 text-xs font-mono font-medium text-violet-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span>AI ENGINEERING · LLM SYSTEMS · SECURITY</span>
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-mono text-emerald-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Available for AI Engineering · B.Tech 2027</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="font-sans text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-              I Build AI Systems That Work{" "}
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">
-                Beyond the Demo.
+            {/* Headline */}
+            <h1 className="font-sans text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              I build AI systems that work{" "}
+              <span className="text-zinc-400 font-normal underline decoration-zinc-700 underline-offset-8">
+                beyond the demo.
               </span>
             </h1>
 
-            {/* Supporting Copy */}
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-sans">
-              AI Developer focused on production-oriented LLM applications, retrieval-augmented generation, AI security, reliability engineering, and intelligent software systems.
+            {/* Subtitle */}
+            <p className="text-base text-zinc-300 leading-relaxed max-w-2xl font-sans">
+              Hi, I&rsquo;m <strong className="text-white font-semibold">Livesh L.</strong>, an AI Developer and final-year student at Prathyusha Engineering College (CGPA 8.53/10). I focus on production-oriented LLM applications, retrieval-augmented generation (RAG), in-process AI security firewalls, and deterministic agent reliability testing.
             </p>
 
-            {/* Action Buttons */}
+            {/* Primary Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-3 text-xs sm:text-sm font-mono font-medium text-white shadow-lg shadow-violet-500/20 hover:from-violet-500 hover:to-indigo-500 transition-all border border-violet-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-medium text-zinc-950 hover:bg-zinc-200 transition-all font-sans shadow-sm"
               >
-                <span>Explore My Work</span>
-                <ArrowDown className="h-4 w-4" />
-              </Link>
+                <span>View Projects (10)</span>
+                <ArrowDown className="h-3.5 w-3.5" />
+              </a>
 
               <a
                 href={PROFILE_LINKS.resumePdf}
                 download="Livesh_L_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/[0.15] bg-white/[0.05] px-4 py-3 text-xs sm:text-sm font-mono font-medium text-slate-200 hover:bg-white/[0.1] hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/90 px-4 py-2.5 text-xs font-medium text-zinc-200 hover:bg-zinc-700 hover:text-white transition-all font-sans"
               >
-                <FileDown className="h-4 w-4 text-violet-400" />
-                <span>View Resume</span>
+                <FileDown className="h-3.5 w-3.5 text-zinc-300" />
+                <span>Download Resume (PDF)</span>
               </a>
 
               <a
@@ -70,116 +67,166 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-white/[0.1] bg-white/[0.03] px-3.5 py-3 text-xs sm:text-sm font-mono text-slate-300 hover:bg-white/[0.08] hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-3.5 py-2.5 text-xs text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors font-sans"
               >
-                <GithubIcon className="h-4 w-4" />
+                <GithubIcon className="h-3.5 w-3.5" />
                 <span>GitHub</span>
               </a>
 
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-3 text-xs sm:text-sm font-mono text-cyan-300 hover:bg-cyan-500/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-              >
-                <Mail className="h-4 w-4" />
-                <span>Contact Me</span>
-              </Link>
-            </div>
-
-            {/* Social & Contact Direct Links */}
-            <div className="flex items-center gap-4 pt-1 text-xs font-mono text-slate-400">
-              <span className="text-slate-500">Profiles:</span>
               <a
                 href={PROFILE_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-cyan-300 transition-colors flex items-center gap-1"
+                aria-label="LinkedIn Profile"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900 px-3.5 py-2.5 text-xs text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors font-sans"
               >
-                <LinkedinIcon className="h-3.5 w-3.5 text-cyan-400" />
+                <LinkedinIcon className="h-3.5 w-3.5 text-sky-400" />
                 <span>LinkedIn</span>
               </a>
-              <span className="text-slate-600">·</span>
+            </div>
+
+            {/* Quick Contact link */}
+            <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1 font-mono">
+              <Mail className="h-3.5 w-3.5 text-zinc-400" />
+              <span>Email:</span>
               <a
                 href={`mailto:${PROFILE_LINKS.email}`}
-                className="hover:text-violet-300 transition-colors flex items-center gap-1"
+                className="text-zinc-200 hover:underline"
               >
-                <Mail className="h-3.5 w-3.5 text-violet-400" />
-                <span>{PROFILE_LINKS.email}</span>
+                {PROFILE_LINKS.email}
               </a>
             </div>
           </div>
 
-          {/* Right Column: Live-Looking AI Systems Graph */}
+          {/* Right Column: Engineering Snapshot Card */}
           <div className="lg:col-span-5">
-            <InteractiveGraph />
+            <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-6 shadow-xl">
+              <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <Terminal className="h-4 w-4 text-zinc-400" />
+                  <span className="text-xs font-mono font-semibold text-zinc-200 uppercase tracking-wider">
+                    Engineering At A Glance
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">
+                  Verified Data
+                </span>
+              </div>
+
+              <div className="space-y-3.5 text-xs font-sans">
+                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
+                  <span className="text-zinc-400 flex items-center gap-1.5">
+                    <Package className="h-3.5 w-3.5 text-indigo-400" />
+                    <span>PyPI Published Packages</span>
+                  </span>
+                  <span className="font-mono font-semibold text-zinc-100">
+                    3 Libraries
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
+                  <span className="text-zinc-400 flex items-center gap-1.5">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>Automated Tests Written</span>
+                  </span>
+                  <span className="font-mono font-semibold text-emerald-400">
+                    1,290+ Tests Passed
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
+                  <span className="text-zinc-400 flex items-center gap-1.5">
+                    <Zap className="h-3.5 w-3.5 text-amber-400" />
+                    <span>NexaRAG Retrieval Latency</span>
+                  </span>
+                  <span className="font-mono font-semibold text-zinc-100">
+                    ~24.5 ms avg
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
+                  <span className="text-zinc-400">Education</span>
+                  <span className="text-zinc-200 font-medium text-right">
+                    Prathyusha Eng. College
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-zinc-400">Academic Standing</span>
+                  <span className="font-mono font-semibold text-emerald-400">
+                    8.53 / 10 CGPA (No Backlogs)
+                  </span>
+                </div>
+              </div>
+
+              {/* Quick pip install pills */}
+              <div className="mt-4 pt-3 border-t border-zinc-800 text-[11px] font-mono text-zinc-400">
+                <span className="text-zinc-500 block mb-1.5">Published PyPI distributions:</span>
+                <div className="flex flex-wrap gap-1.5">
+                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
+                    llmfirewall-core
+                  </code>
+                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
+                    aireliability
+                  </code>
+                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
+                    aegis-resilience
+                  </code>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Hero Proof Points: Evidence-based metrics */}
-        <div className="mt-16 pt-8 border-t border-white/[0.08]">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            <div className="rounded-xl border border-white/[0.06] bg-[#0A0E1C]/80 p-3.5">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                NexaRAG Suite
-              </span>
-              <p className="mt-1 text-xl sm:text-2xl font-bold font-mono text-white">
-                321
-              </p>
-              <p className="mt-0.5 text-[11px] text-emerald-400 font-mono">
-                Passing automated tests
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/[0.06] bg-[#0A0E1C]/80 p-3.5">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                LLMFirewall Core
-              </span>
-              <p className="mt-1 text-xl sm:text-2xl font-bold font-mono text-violet-300">
-                608
-              </p>
-              <p className="mt-0.5 text-[11px] text-violet-400 font-mono">
-                Security & regression tests
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/[0.06] bg-[#0A0E1C]/80 p-3.5">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                aireliability
-              </span>
-              <p className="mt-1 text-xl sm:text-2xl font-bold font-mono text-cyan-300">
-                362
-              </p>
-              <p className="mt-0.5 text-[11px] text-cyan-400 font-mono">
-                Deterministic agent tests
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/[0.06] bg-[#0A0E1C]/80 p-3.5">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                Hybrid Retrieval
-              </span>
-              <p className="mt-1 text-xl sm:text-2xl font-bold font-mono text-white">
-                ~24.5 ms
-              </p>
-              <p className="mt-0.5 text-[11px] text-slate-400 font-mono">
-                Reported benchmark avg
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-white/[0.06] bg-[#0A0E1C]/80 p-3.5 col-span-2 sm:col-span-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                Academic Standing
-              </span>
-              <p className="mt-1 text-xl sm:text-2xl font-bold font-mono text-emerald-300">
-                8.53 / 10
-              </p>
-              <p className="mt-0.5 text-[11px] text-emerald-400 font-mono">
-                CGPA · Zero backlogs
-              </p>
-            </div>
+        {/* 4 Clean Proof Points Cards */}
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3.5">
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+              NexaRAG Tests
+            </span>
+            <span className="text-2xl font-bold font-mono text-white mt-1 block">
+              321
+            </span>
+            <span className="text-[11px] text-zinc-400 block mt-0.5">
+              Passing automated tests
+            </span>
           </div>
-          <p className="mt-2 text-right text-[10px] font-mono text-slate-400">
-            * Test counts and retrieval latencies are project-specific reported benchmark results from verified test suites.
-          </p>
+
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+              LLMFirewall Tests
+            </span>
+            <span className="text-2xl font-bold font-mono text-white mt-1 block">
+              608
+            </span>
+            <span className="text-[11px] text-zinc-400 block mt-0.5">
+              Security validation suite
+            </span>
+          </div>
+
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+              aireliability Tests
+            </span>
+            <span className="text-2xl font-bold font-mono text-white mt-1 block">
+              362
+            </span>
+            <span className="text-[11px] text-zinc-400 block mt-0.5">
+              Deterministic agent checks
+            </span>
+          </div>
+
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+            <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">
+              Academic Record
+            </span>
+            <span className="text-2xl font-bold font-mono text-emerald-400 mt-1 block">
+              8.53 / 10
+            </span>
+            <span className="text-[11px] text-zinc-400 block mt-0.5">
+              CGPA · Zero active backlogs
+            </span>
+          </div>
         </div>
       </div>
     </section>
