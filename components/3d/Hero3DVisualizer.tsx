@@ -40,8 +40,24 @@ const MODES: ModeItem[] = [
     desc: "Perspective camera frustum, homography plane, and 3D bounding cubes for real-time appearance Re-ID.",
   },
   {
+    id: "aireliability",
+    title: "AI Reliability",
+    projectSlug: "aireliability-testing",
+    subtitle: "3D Chaos Stress Matrix & Perturbation Vectors",
+    metric: "362 resilience assertions",
+    desc: "Adversarial stress probe beams targeting core neural polytope with energetic damping shield and perturbation telemetry.",
+  },
+  {
+    id: "medical",
+    title: "Medical LM",
+    projectSlug: "medical-transformer-lm",
+    subtitle: "3D Biomedical Attention Double Helix",
+    metric: "PubMed Bio-NLP · 120 tests",
+    desc: "Dual complementary transformer attention helix with bio-entity binding markers and clinical entity extraction.",
+  },
+  {
     id: "aegis",
-    title: "AEGIS Framework",
+    title: "AEGIS Mesh",
     projectSlug: "aegis-framework",
     subtitle: "3D Distributed Cluster Telemetry Mesh",
     metric: "O-Tel + Prometheus + Loki",
@@ -68,7 +84,7 @@ export const Hero3DVisualizer: React.FC = () => {
       </div>
 
       {/* Switcher Buttons */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mb-3" role="tablist">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 mb-3" role="tablist">
         {MODES.map((mode) => {
           const isSelected = activeMode.id === mode.id;
           return (
@@ -77,7 +93,7 @@ export const Hero3DVisualizer: React.FC = () => {
               role="tab"
               aria-selected={isSelected}
               onClick={() => setActiveMode(mode)}
-              className={`rounded-lg px-2.5 py-1.5 text-xs font-mono text-center transition-all cursor-pointer ${
+              className={`rounded-lg px-2 py-1.5 text-[11px] sm:text-xs font-mono text-center transition-all cursor-pointer truncate ${
                 isSelected
                   ? "bg-zinc-100 text-zinc-950 font-bold shadow-sm"
                   : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"

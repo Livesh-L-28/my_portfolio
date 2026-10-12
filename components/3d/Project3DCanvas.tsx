@@ -3,13 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-export type Project3DType =
-  | "nexarag"
-  | "llmfirewall"
-  | "visualmemory"
-  | "aegis"
-  | "medical"
-  | "stock";
+import { Project3DType, getProject3DType } from "@/lib/types";
+export { type Project3DType, getProject3DType };
 
 interface Project3DCanvasProps {
   type: Project3DType;
@@ -60,14 +55,14 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     scene.add(rootGroup);
 
     // Ambient and directional lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0x818cf8, 2, 20);
+    const pointLight = new THREE.PointLight(0x818cf8, 2.2, 20);
     pointLight.position.set(4, 4, 4);
     scene.add(pointLight);
 
-    const cyanLight = new THREE.PointLight(0x06b6d4, 2, 20);
+    const cyanLight = new THREE.PointLight(0x06b6d4, 2.2, 20);
     cyanLight.position.set(-4, -4, 4);
     scene.add(cyanLight);
 
@@ -308,8 +303,8 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       animateCallback = (delta) => {
         rootGroup.rotation.y += delta * 0.35;
       };
-    } else {
-      // 6. STOCK: 3D Time-Series Trajectory Waveform
+    } else if (type === "stock") {
+      // 6. STOCK: 3D Time-Series Trajectory Waveform & Bollinger Envelopes
       const points: THREE.Vector3[] = [];
       for (let i = 0; i < 40; i++) {
         const x = (i / 40) * 4.6 - 2.3;
@@ -319,7 +314,7 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       }
 
       const path = new THREE.CatmullRomCurve3(points);
-      const ribbonGeo = new THREE.TubeGeometry(path, 40, 0.06, 8, false);
+      const ribbonGeo = new THREE.TubeGeometry(path, 40, 0.07, 8, false);
       const ribbonMat = new THREE.MeshStandardMaterial({
         color: 0x10b981,
         metalness: 0.7,
@@ -327,8 +322,322 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       const ribbon = new THREE.Mesh(ribbonGeo, ribbonMat);
       rootGroup.add(ribbon);
 
+      // Lower support boundary ribbon
+      const lowerPoints = points.map((p) => new THREE.Vector3(p.x, p.y - 0.7, p.z));
+      const lowerPath = new THREE.CatmullRomCurve3(lowerPoints);
+      const lowerGeo = new THREE.TubeGeometry(lowerPath, 40, 0.03, 8, false);
+      const lowerMat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.5,
+      });
+      const lowerRibbon = new THREE.Mesh(lowerGeo, lowerMat);
+      rootGroup.add(lowerRibbon);
+
       animateCallback = (delta) => {
         rootGroup.rotation.y += delta * 0.25;
+      };
+    } else if (type === "aireliability") {
+      // 7. AIRELIABILITY: Chaos Stress Matrix & Perturbation Vectors
+      // Central AI Core under test (Crystalline Dodecahedron)
+      const coreGeo = new THREE.DodecahedronGeometry(0.95, 0);
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: 0x6366f1,
+        roughness: 0.2,
+        metalness: 0.8,
+      });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      rootGroup.add(coreMesh);
+
+      // Core wireframe cage
+      const coreWireGeo = new THREE.DodecahedronGeometry(0.98, 0);
+      const coreWireMat = new THREE.MeshBasicMaterial({
+        color: 0x818cf8,
+        wireframe: true,
+      });
+      const coreWireMesh = new THREE.Mesh(coreWireGeo, coreWireMat);
+      rootGroup.add(coreWireMesh);
+
+      // Outer resilience damping sphere / shield
+      const shieldGeo = new THREE.IcosahedronGeometry(2.1, 1);
+      const shieldMat = new THREE.MeshStandardMaterial({
+        color: 0x10b981,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.45,
+      });
+      const shieldMesh = new THREE.Mesh(shieldGeo, shieldMat);
+      rootGroup.add(shieldMesh);
+
+      // 4 Adversarial Stress Probe Vectors (red/amber beams converging on core)
+      const probePositions = [
+        new THREE.Vector3(2.4, 1.8, 1.2),
+        new THREE.Vector3(-2.4, -1.5, 1.4),
+        new THREE.Vector3(1.8, -2.2, -1.5),
+        new THREE.Vector3(-2.0, 2.0, -1.8),
+      ];
+
+      probePositions.forEach((startPos) => {
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([
+          startPos,
+          new THREE.Vector3(0, 0, 0),
+        ]);
+        const lineMat = new THREE.LineBasicMaterial({
+          color: 0xf43f5e,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const line = new THREE.Line(lineGeo, lineMat);
+        rootGroup.add(line);
+
+        // Probe origin beacon
+        const probeBeaconGeo = new THREE.SphereGeometry(0.12, 12, 12);
+        const probeBeaconMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 });
+        const probeBeacon = new THREE.Mesh(probeBeaconGeo, probeBeaconMat);
+        probeBeacon.position.copy(startPos);
+        rootGroup.add(probeBeacon);
+      });
+
+      // Orbital perturbation telemetry ring
+      const ringGeo = new THREE.TorusGeometry(2.5, 0.035, 16, 64);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+      ringMesh.rotation.x = Math.PI / 2.5;
+      rootGroup.add(ringMesh);
+
+      animateCallback = (delta) => {
+        coreMesh.rotation.y += delta * 0.4;
+        coreMesh.rotation.x += delta * 0.2;
+        coreWireMesh.rotation.y += delta * 0.4;
+        shieldMesh.rotation.y -= delta * 0.25;
+        shieldMesh.rotation.z += delta * 0.15;
+        ringMesh.rotation.z += delta * 0.5;
+        rootGroup.rotation.y += delta * 0.1;
+      };
+    } else if (type === "fastapicicd") {
+      // 8. FASTAPICICD: Automated CI/CD Pipeline Circuit & Microservice Containers
+      // Continuous racetrack / pipeline curve
+      const pipelineTrackGeo = new THREE.TorusGeometry(1.9, 0.06, 16, 80);
+      const pipelineTrackMat = new THREE.MeshStandardMaterial({
+        color: 0x06b6d4,
+        roughness: 0.3,
+        metalness: 0.8,
+      });
+      const pipelineTrack = new THREE.Mesh(pipelineTrackGeo, pipelineTrackMat);
+      pipelineTrack.rotation.x = Math.PI / 3;
+      rootGroup.add(pipelineTrack);
+
+      // Inner data bus loop
+      const innerTrackGeo = new THREE.TorusGeometry(1.3, 0.04, 16, 64);
+      const innerTrackMat = new THREE.MeshBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const innerTrack = new THREE.Mesh(innerTrackGeo, innerTrackMat);
+      innerTrack.rotation.x = -Math.PI / 4;
+      rootGroup.add(innerTrack);
+
+      // 3 Pipeline Stage Gates along the perimeter (Lint, Pytest, Docker Deploy)
+      const gateColors = [0x38bdf8, 0x10b981, 0x818cf8];
+      for (let i = 0; i < 3; i++) {
+        const gateGeo = new THREE.TorusGeometry(0.35, 0.04, 12, 32);
+        const gateMat = new THREE.MeshBasicMaterial({ color: gateColors[i] });
+        const gate = new THREE.Mesh(gateGeo, gateMat);
+        const angle = (i * Math.PI * 2) / 3;
+        gate.position.set(Math.cos(angle) * 1.9, Math.sin(angle) * 1.9, 0);
+        pipelineTrack.add(gate);
+      }
+
+      // 3 Docker Container cubes traversing the pipeline
+      const containerCubes: THREE.Mesh[] = [];
+      for (let i = 0; i < 3; i++) {
+        const cubeGeo = new THREE.BoxGeometry(0.32, 0.32, 0.32);
+        const cubeMat = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          roughness: 0.2,
+          metalness: 0.9,
+        });
+        const cube = new THREE.Mesh(cubeGeo, cubeMat);
+        pipelineTrack.add(cube);
+        containerCubes.push(cube);
+      }
+
+      let pipelineTime = 0;
+      animateCallback = (delta) => {
+        pipelineTime += delta * 0.8;
+        containerCubes.forEach((cube, idx) => {
+          const angle = pipelineTime + (idx * Math.PI * 2) / 3;
+          cube.position.set(Math.cos(angle) * 1.9, Math.sin(angle) * 1.9, 0);
+          cube.rotation.x += delta * 1.2;
+          cube.rotation.y += delta * 1.5;
+        });
+        pipelineTrack.rotation.z += delta * 0.25;
+        innerTrack.rotation.z -= delta * 0.35;
+        rootGroup.rotation.y += delta * 0.15;
+      };
+    } else if (type === "skillascend") {
+      // 9. SKILLASCEND: Hierarchical Skill Knowledge Graph & Career Ascension Lattice
+      const tier1Points = [
+        new THREE.Vector3(-1.6, -1.3, -0.7),
+        new THREE.Vector3(1.6, -1.3, -0.7),
+        new THREE.Vector3(-0.9, -1.3, 1.2),
+        new THREE.Vector3(0.9, -1.3, 1.2),
+      ];
+      const tier2Points = [
+        new THREE.Vector3(-1.1, 0.0, -0.5),
+        new THREE.Vector3(1.1, 0.0, -0.5),
+        new THREE.Vector3(-0.6, 0.0, 0.9),
+        new THREE.Vector3(0.6, 0.0, 0.9),
+      ];
+      const apexPoint = new THREE.Vector3(0, 1.4, 0);
+      const allPoints = [...tier1Points, ...tier2Points, apexPoint];
+
+      // Add nodes
+      const nodeGeo = new THREE.SphereGeometry(0.14, 16, 16);
+      allPoints.forEach((pt, idx) => {
+        const isApex = idx === allPoints.length - 1;
+        const nodeMat = new THREE.MeshStandardMaterial({
+          color: isApex ? 0xf59e0b : idx < 4 ? 0x06b6d4 : 0x8b5cf6,
+          roughness: 0.2,
+          metalness: 0.8,
+        });
+        const mesh = new THREE.Mesh(nodeGeo, nodeMat);
+        mesh.position.copy(pt);
+        rootGroup.add(mesh);
+      });
+
+      // Connective synaptic lines between tiers
+      const linePositions: number[] = [];
+      for (let i = 0; i < 4; i++) {
+        linePositions.push(
+          tier1Points[i].x, tier1Points[i].y, tier1Points[i].z,
+          tier2Points[i].x, tier2Points[i].y, tier2Points[i].z
+        );
+        linePositions.push(
+          tier1Points[i].x, tier1Points[i].y, tier1Points[i].z,
+          tier2Points[(i + 1) % 4].x, tier2Points[(i + 1) % 4].y, tier2Points[(i + 1) % 4].z
+        );
+      }
+      for (let i = 0; i < 4; i++) {
+        linePositions.push(
+          tier2Points[i].x, tier2Points[i].y, tier2Points[i].z,
+          apexPoint.x, apexPoint.y, apexPoint.z
+        );
+      }
+
+      const lineGeo = new THREE.BufferGeometry();
+      lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(linePositions, 3));
+      const lineMat = new THREE.LineBasicMaterial({
+        color: 0x818cf8,
+        transparent: true,
+        opacity: 0.4,
+      });
+      const lines = new THREE.LineSegments(lineGeo, lineMat);
+      rootGroup.add(lines);
+
+      // Ascending spiral trajectory helix
+      const spiralPoints: THREE.Vector3[] = [];
+      for (let i = 0; i <= 60; i++) {
+        const t = (i / 60) * Math.PI * 4;
+        const radius = 1.8 * (1 - (i / 60) * 0.7);
+        const y = (i / 60) * 2.8 - 1.4;
+        spiralPoints.push(new THREE.Vector3(Math.cos(t) * radius, y, Math.sin(t) * radius));
+      }
+      const spiralCurve = new THREE.CatmullRomCurve3(spiralPoints);
+      const spiralGeo = new THREE.TubeGeometry(spiralCurve, 60, 0.035, 8, false);
+      const spiralMat = new THREE.MeshBasicMaterial({
+        color: 0xfbbf24,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const spiralMesh = new THREE.Mesh(spiralGeo, spiralMat);
+      rootGroup.add(spiralMesh);
+
+      animateCallback = (delta) => {
+        rootGroup.rotation.y += delta * 0.25;
+        spiralMesh.rotation.y -= delta * 0.15;
+      };
+    } else {
+      // 10. LEVIATHAN: ESG Truth Prism & Multi-Modal Regulatory Scanner
+      const prismGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.7, 6);
+      const prismMat = new THREE.MeshStandardMaterial({
+        color: 0x06b6d4,
+        roughness: 0.1,
+        metalness: 0.9,
+        wireframe: true,
+      });
+      const prism = new THREE.Mesh(prismGeo, prismMat);
+      rootGroup.add(prism);
+
+      const innerCrystalGeo = new THREE.OctahedronGeometry(0.7, 0);
+      const innerCrystalMat = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.1,
+        metalness: 0.7,
+      });
+      const innerCrystal = new THREE.Mesh(innerCrystalGeo, innerCrystalMat);
+      rootGroup.add(innerCrystal);
+
+      // Input claim beam (amber ray)
+      const inputBeamGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.8, 0, 0),
+        new THREE.Vector3(-0.7, 0, 0),
+      ]);
+      const inputBeamMat = new THREE.LineBasicMaterial({ color: 0xfbbf24 });
+      const inputBeam = new THREE.Line(inputBeamGeo, inputBeamMat);
+      rootGroup.add(inputBeam);
+
+      // Verified green beam
+      const verifiedBeamGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0.7, 0, 0),
+        new THREE.Vector3(2.8, -1.2, 0.6),
+      ]);
+      const verifiedBeamMat = new THREE.LineBasicMaterial({ color: 0x10b981 });
+      const verifiedBeam = new THREE.Line(verifiedBeamGeo, verifiedBeamMat);
+      rootGroup.add(verifiedBeam);
+
+      // Greenwashing violation beam (crimson)
+      const flaggedBeamGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0.7, 0, 0),
+        new THREE.Vector3(2.8, 1.2, -0.6),
+      ]);
+      const flaggedBeamMat = new THREE.LineBasicMaterial({ color: 0xf43f5e });
+      const flaggedBeam = new THREE.Line(flaggedBeamGeo, flaggedBeamMat);
+      rootGroup.add(flaggedBeam);
+
+      // Concentric rings
+      const ring1Geo = new THREE.TorusGeometry(2.1, 0.03, 16, 64);
+      const ring1Mat = new THREE.MeshBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+      ring1.rotation.x = Math.PI / 3;
+      rootGroup.add(ring1);
+
+      const ring2Geo = new THREE.TorusGeometry(2.4, 0.03, 16, 64);
+      const ring2Mat = new THREE.MeshBasicMaterial({
+        color: 0x8b5cf6,
+        transparent: true,
+        opacity: 0.5,
+      });
+      const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+      ring2.rotation.x = -Math.PI / 4;
+      rootGroup.add(ring2);
+
+      animateCallback = (delta) => {
+        prism.rotation.y += delta * 0.3;
+        prism.rotation.z += delta * 0.1;
+        innerCrystal.rotation.y -= delta * 0.5;
+        ring1.rotation.z += delta * 0.4;
+        ring2.rotation.z -= delta * 0.3;
+        rootGroup.rotation.y += delta * 0.12;
       };
     }
 

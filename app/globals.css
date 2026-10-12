@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --surface: #111115;
-  --surface-hover: #18181d;
+  --background: #060913;
+  --surface: #0c111e;
+  --surface-hover: #12182b;
   --surface-border: rgba(255, 255, 255, 0.08);
-  --foreground: #fafafa;
-  --muted: #a1a1aa;
-  --muted-dark: #71717a;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --muted-dark: #64748b;
   --accent: #6366f1;
   --accent-cyan: #06b6d4;
   --accent-emerald: #10b981;
@@ -27,17 +27,22 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #09090b;
-  color: #fafafa;
+  background-color: #060913;
+  color: #f8fafc;
 }
 
 body {
-  background-color: #09090b;
-  color: #fafafa;
+  background-color: #060913;
+  color: #f8fafc;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 ::selection {
@@ -51,19 +56,6 @@ body {
   background-size: 24px 24px;
 }
 
-/* Crisp card utility */
-.pro-card {
-  background-color: #111115;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.875rem;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.pro-card:hover {
-  background-color: #15151b;
-  border-color: rgba(255, 255, 255, 0.16);
-}
-
 /* Custom modern scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -71,16 +63,32 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #060913;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* Glow Keyframes */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
 }
 
 /* Respect reduced motion */

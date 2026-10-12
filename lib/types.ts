@@ -105,3 +105,42 @@ export interface CertificationItem {
   credentialUrl?: string;
   year?: string;
 }
+
+export type Project3DType =
+  | 'nexarag'
+  | 'llmfirewall'
+  | 'visualmemory'
+  | 'aegis'
+  | 'medical'
+  | 'stock'
+  | 'aireliability'
+  | 'fastapicicd'
+  | 'skillascend'
+  | 'leviathan';
+
+export function getProject3DType(slug: string): Project3DType {
+  switch (slug) {
+    case 'nexarag':
+      return 'nexarag';
+    case 'medical-transformer-lm':
+      return 'medical';
+    case 'llmfirewall-core':
+      return 'llmfirewall';
+    case 'aireliability-testing':
+      return 'aireliability';
+    case 'aegis-framework':
+      return 'aegis';
+    case 'fastapi-cicd-lab':
+      return 'fastapicicd';
+    case 'stock-price-prediction':
+      return 'stock';
+    case 'ai-skill-assistance':
+      return 'skillascend';
+    case 'ai-visual-memory':
+      return 'visualmemory';
+    case 'greenwashing-detector':
+      return 'leviathan';
+    default:
+      return 'nexarag';
+  }
+}

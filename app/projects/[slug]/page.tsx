@@ -20,11 +20,13 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
-import { Project3DCanvas, Project3DType } from "@/components/3d/Project3DCanvas";
+import { getProject3DType } from "@/lib/types";
+import { ProjectVisualShowcase } from "@/components/projects/ProjectVisualShowcase";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
 
 export async function generateStaticParams() {
   return PROJECTS.map((project) => ({
@@ -167,44 +169,13 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Interactive 3D System Model */}
-        {(() => {
-          const get3DType = (s: string): Project3DType | null => {
-            if (s === "nexarag") return "nexarag";
-            if (s === "llmfirewall-core") return "llmfirewall";
-            if (s === "ai-visual-memory") return "visualmemory";
-            if (s === "aegis-framework") return "aegis";
-            if (s === "medical-transformer-lm") return "medical";
-            if (s === "stock-price-prediction") return "stock";
-            return null;
-          };
-          const threeDType = get3DType(project.slug);
-          if (!threeDType) return null;
-
-          return (
-            <section className="mb-10">
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 shadow-md">
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="font-sans text-xs font-semibold text-white">
-                      Interactive 3D System Architecture Model
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">
-                    WebGL 60FPS · Drag to Orbit
-                  </span>
-                </div>
-                <Project3DCanvas
-                  type={threeDType}
-                  height="h-64 sm:h-72"
-                  interactive={true}
-                  showControlsHelp={true}
-                />
-              </div>
-            </section>
-          );
-        })()}
+        {/* Interactive System Interface & 3D Model Showcase */}
+        <ProjectVisualShowcase
+          slug={project.slug}
+          title={project.title}
+          thumbnail={project.thumbnail}
+          threeDType={getProject3DType(project.slug)}
+        />
 
         {/* Embedded Video Demo Player if available */}
         {project.links.demoVideoUrl && (

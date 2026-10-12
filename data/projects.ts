@@ -39,6 +39,7 @@ export const PROJECTS: ProjectData[] = [
       demoVideoUrl: "/videos/nexa_rag_demo.mov",
       demoVideoType: "local",
     },
+    thumbnail: "/images/projects/nexarag.jpg",
     architectureDiagram: {
       nodes: [
         {
@@ -228,6 +229,7 @@ export const PROJECTS: ProjectData[] = [
       demoVideoUrl: "/videos/medical_llm_demo.mov",
       demoVideoType: "local",
     },
+    thumbnail: "/images/projects/medical.png",
     architectureDiagram: {
       nodes: [
         {
@@ -381,6 +383,7 @@ export const PROJECTS: ProjectData[] = [
       installCommand: "pip install llmfirewall-core",
       documentationUrl: "https://github.com/Livesh-L-28/LLMFirewall#readme",
     },
+    thumbnail: "/images/projects/llmfirewall.jpg",
     architectureDiagram: {
       nodes: [
         {
@@ -546,6 +549,7 @@ export const PROJECTS: ProjectData[] = [
       installCommand: "pip install aireliability",
       documentationUrl: "https://github.com/Livesh-L-28/aireliability_testing#readme",
     },
+    thumbnail: "/images/projects/aireliability.jpg",
     architectureDiagram: {
       nodes: [
         {
@@ -697,6 +701,7 @@ export const PROJECTS: ProjectData[] = [
       installCommand: "pip install aegis-resilience",
       documentationUrl: "https://github.com/Livesh-L-28/AEGIS-Framework#readme",
     },
+    thumbnail: "/images/projects/aegis.jpg",
     architectureDiagram: {
       nodes: [
         {
@@ -855,6 +860,7 @@ export const PROJECTS: ProjectData[] = [
     links: {
       githubUrl: "https://github.com/Livesh-L-28/fastapi-cicd-lab",
     },
+    thumbnail: "/images/projects/fastapicicd.jpg",
     caseStudy: {
       problemStatement:
         "Backend microservices frequently break during deployment due to mismatched Python environments, slow un-cached Docker builds, and unverified database migrations in CI.",
@@ -935,6 +941,7 @@ export const PROJECTS: ProjectData[] = [
       githubUrl: "https://github.com/Livesh-L-28/Stock_price_prediction",
       liveUrl: "https://alphapulse-stock-predictor-xo4h.onrender.com/",
     },
+    thumbnail: "/images/projects/stock.jpg",
     caseStudy: {
       problemStatement:
         "Financial market series exhibit non-stationary distributions and high noise-to-signal ratios. Standard regression models fail to capture sequential temporal dependencies without experiencing data leakage.",
@@ -1013,6 +1020,7 @@ export const PROJECTS: ProjectData[] = [
       githubUrl: "https://github.com/Livesh-L-28/AI_SKILL_ASSISTANCE",
       liveUrl: "https://skill-ascend-rahb.onrender.com/#how-it-works",
     },
+    thumbnail: "/images/projects/skillascend.jpg",
     caseStudy: {
       problemStatement:
         "Static career advice and generic roadmaps fail to address individual student skill deficits or provide actionable, hands-on project milestones.",
@@ -1091,6 +1099,7 @@ export const PROJECTS: ProjectData[] = [
       githubUrl: "https://github.com/Livesh-L-28/AI-Visual-Memory-System",
       liveUrl: "https://ai-visual-memory-system.onrender.com",
     },
+    thumbnail: "/images/projects/visualmemory.jpg",
     caseStudy: {
       problemStatement:
         "Traditional surveillance and camera systems record gigabytes of raw pixels without semantic understanding, making retrospective event search tedious and manual.",
@@ -1171,6 +1180,7 @@ export const PROJECTS: ProjectData[] = [
       demoVideoUrl: "/videos/leviathan_demo.mp4",
       demoVideoType: "local",
     },
+    thumbnail: "/images/projects/leviathan.jpg",
     caseStudy: {
       problemStatement:
         "Consumers and enterprise procurement teams face pervasive 'greenwashing'—vague, unsubstantiated eco-friendly claims ('100% natural', 'carbon neutral') that mislead buyers and violate international advertising regulations.",
