@@ -7,15 +7,11 @@ import {
   Package,
   Play,
   ArrowRight,
-  Shield,
-  Layers,
-  Cpu,
-  Terminal,
   FileText,
-  Sparkles,
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { ProjectData } from "@/lib/types";
+import { Project3DCanvas, Project3DType } from "@/components/3d/Project3DCanvas";
 
 interface ProjectCardProps {
   project: ProjectData;
@@ -28,8 +24,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const videoButtonRef = useRef<HTMLButtonElement>(null);
 
+  const get3DType = (slug: string): Project3DType | null => {
+    if (slug === "nexarag") return "nexarag";
+    if (slug === "llmfirewall-core") return "llmfirewall";
+    if (slug === "ai-visual-memory") return "visualmemory";
+    if (slug === "aegis-framework") return "aegis";
+    if (slug === "medical-transformer-lm") return "medical";
+    if (slug === "stock-price-prediction") return "stock";
+    return null;
+  };
+
+  const threeDType = get3DType(project.slug);
+
   return (
-    <article className="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-6 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900">
+    <article className="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-6 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900 group">
       <div>
         {/* Category & Featured Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
@@ -42,6 +50,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </span>
           )}
         </div>
+
+        {/* Interactive 3D Model for the Project */}
+        {threeDType && (
+          <div className="mb-3.5 relative">
+            <Project3DCanvas
+              type={threeDType}
+              height="h-32 sm:h-36"
+              interactive={true}
+            />
+            <div className="absolute top-2 right-2 rounded bg-zinc-900/80 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400 border border-zinc-800 pointer-events-none">
+              3D Interactive
+            </div>
+          </div>
+        )}
 
         {/* Project Title */}
         <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
@@ -66,7 +88,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Technologies List */}
         <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 6).map((tech) => (
+          {project.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
               className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] font-mono text-zinc-300 border border-zinc-700/60"
@@ -74,9 +96,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               {tech}
             </span>
           ))}
-          {project.technologies.length > 6 && (
+          {project.technologies.length > 5 && (
             <span className="rounded bg-transparent px-1.5 py-0.5 text-[11px] font-mono text-zinc-500">
-              +{project.technologies.length - 6} more
+              +{project.technologies.length - 5}
             </span>
           )}
         </div>

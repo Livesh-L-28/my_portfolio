@@ -6,14 +6,10 @@ import {
   FileDown,
   ArrowDown,
   Mail,
-  CheckCircle2,
-  Package,
-  Terminal,
-  ShieldCheck,
-  Zap,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { PROFILE_LINKS } from "@/lib/links";
+import { Hero3DVisualizer } from "@/components/3d/Hero3DVisualizer";
 
 export const Hero: React.FC = () => {
   return (
@@ -98,83 +94,9 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Engineering Snapshot Card */}
+          {/* Right Column: Interactive 3D Projects Showcase */}
           <div className="lg:col-span-5">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-6 shadow-xl">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-zinc-400" />
-                  <span className="text-xs font-mono font-semibold text-zinc-200 uppercase tracking-wider">
-                    Engineering At A Glance
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">
-                  Verified Data
-                </span>
-              </div>
-
-              <div className="space-y-3.5 text-xs font-sans">
-                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
-                  <span className="text-zinc-400 flex items-center gap-1.5">
-                    <Package className="h-3.5 w-3.5 text-indigo-400" />
-                    <span>PyPI Published Packages</span>
-                  </span>
-                  <span className="font-mono font-semibold text-zinc-100">
-                    3 Libraries
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
-                  <span className="text-zinc-400 flex items-center gap-1.5">
-                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>Automated Tests Written</span>
-                  </span>
-                  <span className="font-mono font-semibold text-emerald-400">
-                    1,290+ Tests Passed
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
-                  <span className="text-zinc-400 flex items-center gap-1.5">
-                    <Zap className="h-3.5 w-3.5 text-amber-400" />
-                    <span>NexaRAG Retrieval Latency</span>
-                  </span>
-                  <span className="font-mono font-semibold text-zinc-100">
-                    ~24.5 ms avg
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center border-b border-zinc-800/60 pb-2.5">
-                  <span className="text-zinc-400">Education</span>
-                  <span className="text-zinc-200 font-medium text-right">
-                    Prathyusha Eng. College
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-zinc-400">Academic Standing</span>
-                  <span className="font-mono font-semibold text-emerald-400">
-                    8.53 / 10 CGPA (No Backlogs)
-                  </span>
-                </div>
-              </div>
-
-              {/* Quick pip install pills */}
-              <div className="mt-4 pt-3 border-t border-zinc-800 text-[11px] font-mono text-zinc-400">
-                <span className="text-zinc-500 block mb-1.5">Published PyPI distributions:</span>
-                <div className="flex flex-wrap gap-1.5">
-                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
-                    llmfirewall-core
-                  </code>
-                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
-                    aireliability
-                  </code>
-                  <code className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded border border-zinc-700">
-                    aegis-resilience
-                  </code>
-                </div>
-              </div>
-            </div>
+            <Hero3DVisualizer />
           </div>
         </div>
 
