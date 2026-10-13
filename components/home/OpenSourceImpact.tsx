@@ -73,7 +73,7 @@ export const OpenSourceImpact: React.FC = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-1.5 rounded-md border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 text-xs font-mono text-cyan-400 mb-2">
               <span className="font-bold">02</span>
-              <span className="text-cyan-400/60">//</span>
+              <span className="text-cyan-400/60">{"//"}</span>
               <span>Public Python Distributions</span>
             </div>
             <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">

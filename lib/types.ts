@@ -28,14 +28,14 @@ export interface ProjectData {
   fullName: string;
   tagline: string;
   category: ProjectCategory;
-  categories: ProjectCategory[];
+  categories: (ProjectCategory | string)[];
   featured: boolean;
   technologies: string[];
   keyAchievement: string;
   stats?: { label: string; value: string }[];
   summary: string;
   description: string;
-  
+
   // Link registry
   links: {
     githubUrl?: string;
@@ -44,14 +44,14 @@ export interface ProjectData {
     publishedPackageName?: string;
     installCommand?: string;
     demoVideoUrl?: string; // Direct video path or iframe embed
-    demoVideoType?: 'local' | 'youtube' | 'vimeo';
+    demoVideoType?: 'local' | 'youtube' | 'vimeo' | 'gdrive' | 'embed';
     documentationUrl?: string;
   };
-  
+
   // Visuals
   thumbnail?: string;
   architectureDiagram?: ArchitectureFlow;
-  
+
   // Case Study Content
   caseStudy: {
     problemStatement: string;

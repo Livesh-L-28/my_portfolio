@@ -51,9 +51,9 @@ const MODES: ModeItem[] = [
     id: "medical",
     title: "Venipuncture VR",
     projectSlug: "venipuncture-vr",
-    subtitle: "3D Medical Equipment & 16-Step VR Protocol",
-    metric: "16-Step VR Protocol · Whisper + RAG",
-    desc: "Interactive virtual medical equipment and clinical AI assistant with dual training/test modes and voice-guided retrieval.",
+    subtitle: "3D Medical Instruments & 16-Step Guided Workflow",
+    metric: "16-Step Workflow · Unity & C#",
+    desc: "Virtual reality clinical training environment simulating phlebotomy with interactive medical equipment and FastAPI session management.",
   },
   {
     id: "aegis",

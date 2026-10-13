@@ -16,7 +16,7 @@ export const ExperienceTimeline: React.FC = () => {
         <div className="mb-10 max-w-2xl">
           <div className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-xs font-mono text-amber-400 mb-2">
             <span className="font-bold">04</span>
-            <span className="text-amber-400/60">//</span>
+            <span className="text-amber-400/60">{"//"}</span>
             <span>Industry Internships & History</span>
           </div>
           <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">

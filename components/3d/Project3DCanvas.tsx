@@ -67,7 +67,7 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     scene.add(cyanLight);
 
     // BUILD SPECIFIC 3D DESIGNS PER PROJECT
-    let animateCallback: (delta: number) => void = () => {};
+    let animateCallback: (delta: number) => void = () => { };
 
     if (type === "nexarag") {
       // 1. NEXARAG: 3D Vector Space & Dense Embeddings Lattice
@@ -751,7 +751,7 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     // Animation loop with pause on offscreen (IntersectionObserver)
     let animationFrameId: number;
     let isVisible = true;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const observer = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
@@ -816,9 +816,8 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       {/* Interactive Helper Label */}
       {showControlsHelp && (
         <div
-          className={`absolute bottom-2 right-2 rounded bg-zinc-900/90 border border-zinc-800 px-2 py-0.5 text-[10px] font-mono text-zinc-400 transition-opacity pointer-events-none ${
-            isHovered ? "opacity-100" : "opacity-60"
-          }`}
+          className={`absolute bottom-2 right-2 rounded bg-zinc-900/90 border border-zinc-800 px-2 py-0.5 text-[10px] font-mono text-zinc-400 transition-opacity pointer-events-none ${isHovered ? "opacity-100" : "opacity-60"
+            }`}
         >
           <span>Drag to orbit 3D</span>
         </div>

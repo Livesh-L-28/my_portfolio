@@ -217,7 +217,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               className="inline-flex h-7 items-center gap-1 rounded-md border border-emerald-600/40 bg-emerald-500/10 px-2 text-xs text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
               <ExternalLink className="h-3 w-3" />
-              <span>Live</span>
+              <span>{project.links.liveUrl.includes("drive.google.com") ? "Demo" : "Live"}</span>
             </a>
           )}
 

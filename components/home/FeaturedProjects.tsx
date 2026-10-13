@@ -17,7 +17,7 @@ export const FeaturedProjects: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-xs font-mono text-indigo-400 mb-2">
               <span className="font-bold">01</span>
-              <span className="text-indigo-400/60">//</span>
+              <span className="text-indigo-400/60">{"//"}</span>
               <span>Flagship AI Architectures</span>
             </div>
             <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">

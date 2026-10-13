@@ -15,7 +15,7 @@ export const AboutPreview: React.FC = () => {
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900/80 px-2.5 py-0.5 text-xs font-mono text-zinc-300">
               <span className="text-zinc-500 font-bold">00</span>
-              <span className="text-zinc-600">//</span>
+              <span className="text-zinc-600">{"//"}</span>
               <span>Engineering Background</span>
             </div>
 

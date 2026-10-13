@@ -15,7 +15,7 @@ export const EducationSection: React.FC = () => {
         <div className="mb-10 max-w-2xl">
           <div className="inline-flex items-center gap-1.5 rounded-md border border-violet-500/30 bg-violet-500/10 px-2.5 py-0.5 text-xs font-mono text-violet-400 mb-2">
             <span className="font-bold">05</span>
-            <span className="text-violet-400/60">//</span>
+            <span className="text-violet-400/60">{"//"}</span>
             <span>Academics & Verified Certifications</span>
           </div>
           <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">

@@ -44,6 +44,15 @@ export function getEmbeddableVideoUrl(rawUrl?: string): {
     return { type: "direct", url: trimmed };
   }
 
+  // Google Drive preview embed (drive.google.com/file/d/FILE_ID/...)
+  const gdriveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i);
+  if (gdriveMatch && gdriveMatch[1]) {
+    return {
+      type: "embed",
+      url: `https://drive.google.com/file/d/${gdriveMatch[1]}/preview`,
+    };
+  }
+
   // YouTube transformation
   const ytMatch = trimmed.match(
     /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/i
