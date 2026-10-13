@@ -28,6 +28,8 @@ interface Props {
 }
 
 
+export const instant = false;
+
 export async function generateStaticParams() {
   const baseParams = PROJECTS.map((project) => ({
     slug: project.slug,
