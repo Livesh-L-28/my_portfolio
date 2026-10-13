@@ -78,7 +78,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
         if (p.id === "llmfirewall-core") return 608;
         if (p.id === "aireliability") return 362;
         if (p.id === "nexarag") return 321;
-        if (p.id === "medical-transformer-lm") return 120;
+        if (p.id === "venipuncture-vr" || p.id === "medical-transformer-lm") return 120;
         return 0;
       };
       result.sort((a, b) => getTestScore(b) - getTestScore(a));

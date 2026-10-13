@@ -14,8 +14,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "Hybrid Retrieval (Vector + Lexical)", highlight: true, linkedProject: "nexarag" },
       { name: "Reciprocal Rank Fusion (RRF)", highlight: true, linkedProject: "nexarag" },
       { name: "Cross-Encoder Reranking", highlight: true, linkedProject: "nexarag" },
-      { name: "Grounded Generation & Citations", highlight: true, linkedProject: "medical-transformer-lm" },
-      { name: "Domain-Specific Model Fine-Tuning", highlight: false, linkedProject: "medical-transformer-lm" },
+      { name: "Grounded Generation & Citations", highlight: true, linkedProject: "venipuncture-vr" },
+      { name: "Voice-Based Medical RAG (Whisper)", highlight: true, linkedProject: "venipuncture-vr" },
     ],
   },
   {
@@ -55,7 +55,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     description: "Deep learning architectures, object tracking, spatial geometry, and time-series forecasting.",
     iconName: "Eye",
     skills: [
-      { name: "PyTorch", highlight: true, linkedProject: "medical-transformer-lm" },
+      { name: "PyTorch", highlight: true, linkedProject: "venipuncture-vr" },
       { name: "TensorFlow / Keras", highlight: true, linkedProject: "stock-price-prediction" },
       { name: "scikit-learn", highlight: true, linkedProject: "leviathan" },
       { name: "OpenCV", highlight: true, linkedProject: "ai-visual-memory" },
@@ -79,7 +79,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "Server-Sent Events (SSE) Streaming", highlight: true, linkedProject: "nexarag" },
       { name: "Electron Desktop Clients", highlight: false, linkedProject: "xarc" },
       { name: "D3.js Data Visualizations", highlight: false, linkedProject: "skill-ascend" },
-      { name: "Java & C#", highlight: false },
+      { name: "Unity & C# (OpenXR / BNG Framework)", highlight: true, linkedProject: "venipuncture-vr" },
       { name: "SQLite & MySQL", highlight: false, linkedProject: "ai-visual-memory" },
     ],
   },

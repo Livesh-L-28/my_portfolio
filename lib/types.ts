@@ -122,6 +122,7 @@ export function getProject3DType(slug: string): Project3DType {
   switch (slug) {
     case 'nexarag':
       return 'nexarag';
+    case 'venipuncture-vr':
     case 'medical-transformer-lm':
       return 'medical';
     case 'llmfirewall-core':

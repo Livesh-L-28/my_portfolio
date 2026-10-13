@@ -29,9 +29,10 @@ interface Props {
 
 
 export async function generateStaticParams() {
-  return PROJECTS.map((project) => ({
+  const baseParams = PROJECTS.map((project) => ({
     slug: project.slug,
   }));
+  return [...baseParams, { slug: "medical-transformer-lm" }];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -268,40 +268,91 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
         rootGroup.rotation.y += delta * 0.15;
       };
     } else if (type === "medical") {
-      // 5. MEDICAL: 3D Biomedical Transformer Attention Helix
-      const curvePoints: THREE.Vector3[] = [];
-      const numPoints = 60;
-      for (let i = 0; i < numPoints; i++) {
-        const t = (i / numPoints) * Math.PI * 4;
-        curvePoints.push(
-          new THREE.Vector3(Math.cos(t) * 1.6, (i / numPoints) * 3.6 - 1.8, Math.sin(t) * 1.6)
-        );
-      }
+      // 5. VENIPUNCTURE VR: 3D Precision Medical Phlebotomy Apparatus, Insertion Angle & Procedural Guidance
+      // Syringe / Vacutainer Barrel (translucent surgical cylinder)
+      const barrelGeo = new THREE.CylinderGeometry(0.35, 0.35, 2.2, 24);
+      const barrelMat = new THREE.MeshStandardMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.65,
+        roughness: 0.1,
+        metalness: 0.8,
+      });
+      const barrel = new THREE.Mesh(barrelGeo, barrelMat);
+      barrel.position.set(0, 0.4, 0);
+      rootGroup.add(barrel);
 
-      const curve = new THREE.CatmullRomCurve3(curvePoints);
-      const tubeGeo = new THREE.TubeGeometry(curve, 60, 0.05, 8, false);
-      const tubeMat = new THREE.MeshStandardMaterial({
+      // Plunger & Stopper (metallic core)
+      const plungerGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.8, 16);
+      const plungerMat = new THREE.MeshStandardMaterial({
+        color: 0x818cf8,
+        metalness: 0.9,
+        roughness: 0.2,
+      });
+      const plunger = new THREE.Mesh(plungerGeo, plungerMat);
+      plunger.position.set(0, 1.2, 0);
+      barrel.add(plunger);
+
+      // Precision Cannula / Needle Tip (angled downwards at 15-30 deg insertion angle)
+      const needleGeo = new THREE.CylinderGeometry(0.04, 0.015, 1.4, 16);
+      const needleMat = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        metalness: 0.95,
+        roughness: 0.1,
+      });
+      const needle = new THREE.Mesh(needleGeo, needleMat);
+      needle.position.set(0, -1.5, 0);
+      barrel.add(needle);
+
+      // Flashback verification glow point
+      const flashGeo = new THREE.SphereGeometry(0.12, 16, 16);
+      const flashMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+      const flash = new THREE.Mesh(flashGeo, flashMat);
+      flash.position.set(0, -0.8, 0);
+      barrel.add(flash);
+
+      // Targeted Vein Channel (cylindrical vessel along the horizontal plane)
+      const veinGeo = new THREE.CylinderGeometry(0.22, 0.22, 4.0, 24);
+      const veinMat = new THREE.MeshStandardMaterial({
         color: 0x06b6d4,
+        transparent: true,
+        opacity: 0.75,
         roughness: 0.3,
       });
-      const tube = new THREE.Mesh(tubeGeo, tubeMat);
-      rootGroup.add(tube);
+      const vein = new THREE.Mesh(veinGeo, veinMat);
+      vein.rotation.z = Math.PI / 2;
+      vein.position.set(0, -1.4, 0);
+      rootGroup.add(vein);
 
-      // Second complementary helix strand
-      const curvePoints2 = curvePoints.map(
-        (p) => new THREE.Vector3(-p.x, p.y, -p.z)
-      );
-      const curve2 = new THREE.CatmullRomCurve3(curvePoints2);
-      const tubeGeo2 = new THREE.TubeGeometry(curve2, 60, 0.05, 8, false);
-      const tubeMat2 = new THREE.MeshStandardMaterial({
-        color: 0x8b5cf6,
-        roughness: 0.3,
+      // Procedural 16-Step Protocol Guidance Ring (glowing emerald orbit)
+      const ringGeo = new THREE.TorusGeometry(2.3, 0.035, 16, 64);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.7,
       });
-      const tube2 = new THREE.Mesh(tubeGeo2, tubeMat2);
-      rootGroup.add(tube2);
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 3;
+      rootGroup.add(ring);
 
+      // Voice AI Clinical RAG Audio Waveform Ring
+      const voiceRingGeo = new THREE.TorusGeometry(2.0, 0.025, 16, 64);
+      const voiceRingMat = new THREE.MeshBasicMaterial({
+        color: 0xa855f7,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const voiceRing = new THREE.Mesh(voiceRingGeo, voiceRingMat);
+      voiceRing.rotation.x = -Math.PI / 4;
+      rootGroup.add(voiceRing);
+
+      let animTime = 0;
       animateCallback = (delta) => {
-        rootGroup.rotation.y += delta * 0.35;
+        animTime += delta;
+        barrel.rotation.z = Math.sin(animTime * 1.2) * 0.12 - 0.25; // 15–25° insertion angle oscillation
+        ring.rotation.z += delta * 0.4;
+        voiceRing.rotation.z -= delta * 0.35;
+        rootGroup.rotation.y += delta * 0.2;
       };
     } else if (type === "stock") {
       // 6. STOCK: 3D Time-Series Trajectory Waveform & Bollinger Envelopes

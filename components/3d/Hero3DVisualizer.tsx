@@ -49,11 +49,11 @@ const MODES: ModeItem[] = [
   },
   {
     id: "medical",
-    title: "Medical LM",
-    projectSlug: "medical-transformer-lm",
-    subtitle: "3D Biomedical Attention Double Helix",
-    metric: "PubMed Bio-NLP · 120 tests",
-    desc: "Dual complementary transformer attention helix with bio-entity binding markers and clinical entity extraction.",
+    title: "Venipuncture VR",
+    projectSlug: "venipuncture-vr",
+    subtitle: "3D Medical Equipment & 16-Step VR Protocol",
+    metric: "16-Step VR Protocol · Whisper + RAG",
+    desc: "Interactive virtual medical equipment and clinical AI assistant with dual training/test modes and voice-guided retrieval.",
   },
   {
     id: "aegis",
