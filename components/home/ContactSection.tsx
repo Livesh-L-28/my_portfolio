@@ -20,67 +20,70 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-16 sm:py-28 overflow-hidden">
-      {/* Background glow orb */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 -z-10 h-96 w-[600px] rounded-full bg-indigo-600/10 blur-3xl pointer-events-none" />
+    <section id="contact" className="relative py-16 sm:py-24 border-b border-zinc-800/80 overflow-hidden bg-zinc-950/60">
+      {/* Ambient background aura & subtle grid */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-96 w-full max-w-3xl aura-indigo pointer-events-none blur-3xl opacity-35" />
+      <div className="absolute inset-0 bg-grid-subtle -z-20 opacity-25 pointer-events-none" />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="rounded-3xl border border-slate-800/90 bg-[#0d121f]/90 backdrop-blur-2xl p-6 sm:p-12 shadow-2xl relative overflow-hidden"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="rounded-3xl border border-zinc-800 bg-zinc-900/80 p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-2xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]"
         >
           <div className="max-w-2xl mb-8">
-            <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold block mb-1">
-              Direct Contact & Inquiries
-            </span>
-            <h2 className="font-sans text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Have a Challenging AI Engineering Problem?
+            <div className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-xs font-mono text-indigo-400 mb-2">
+              <span className="font-bold">06</span>
+              <span className="text-indigo-400/60">//</span>
+              <span>Direct Inquiries & Opportunities</span>
+            </div>
+            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              Let&rsquo;s Build Reliable AI Systems
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
-              Interested in production LLM applications, AI security firewalls, deterministic agent reliability, or technical internship/full-time opportunities? Let&rsquo;s connect.
+            <p className="mt-1 text-sm text-zinc-300 font-sans leading-relaxed">
+              Available for full-time AI Engineering, RAG architectures, in-process security firewalls, deterministic agent reliability, or technical internship roles starting 2026/2027.
             </p>
           </div>
 
-          {/* Action Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
+          {/* Action Row - Clean & Equal Heights */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
             <a
               href={`mailto:${PROFILE_LINKS.email}?subject=AI%20Engineering%20Opportunity%20-%20Livesh%20Portfolio`}
-              className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 px-6 py-3.5 text-xs font-semibold text-white hover:brightness-110 shadow-lg shadow-indigo-600/30 transition-all font-sans cursor-pointer"
+              className="flex h-11 items-center justify-center gap-2 rounded-lg bg-white px-5 text-xs font-semibold text-zinc-950 hover:bg-zinc-200 transition-colors font-sans cursor-pointer shadow-sm"
             >
               <Send className="h-4 w-4" />
-              <span>Send Email Directly</span>
+              <span>Send Direct Email</span>
             </a>
 
             <button
               onClick={handleCopyEmail}
-              className="flex items-center justify-center gap-2 rounded-xl border border-slate-700/80 bg-slate-800/80 px-6 py-3.5 text-xs font-medium text-slate-200 hover:bg-slate-700 hover:text-white transition-all font-mono cursor-pointer shadow-sm"
+              className="flex h-11 items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-5 text-xs font-medium text-zinc-200 hover:bg-zinc-750 hover:text-white transition-colors font-mono cursor-pointer shadow-sm"
             >
               {copied ? (
                 <>
                   <Check className="h-4 w-4 text-emerald-400" />
-                  <span className="text-emerald-400 font-semibold">Copied to Clipboard!</span>
+                  <span className="text-emerald-400 font-semibold">Copied to Clipboard</span>
                 </>
               ) : (
                 <>
-                  <Copy className="h-4 w-4 text-slate-400" />
+                  <Copy className="h-4 w-4 text-zinc-400" />
                   <span>Copy {PROFILE_LINKS.email}</span>
                 </>
               )}
             </button>
           </div>
 
-          {/* Contact Details Bar */}
-          <div className="pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs font-mono">
-            <div className="flex items-center gap-2 text-slate-300">
-              <Mail className="h-3.5 w-3.5 text-indigo-400" />
+          {/* Contact Details Bar - Clean Aligned Grid */}
+          <div className="pt-6 border-t border-zinc-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs font-mono">
+            <div className="flex items-center gap-2 text-zinc-300 rounded-lg border border-zinc-800 bg-zinc-950/60 p-2.5 truncate">
+              <Mail className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
               <span className="truncate">{PROFILE_LINKS.email}</span>
             </div>
 
-            <div className="flex items-center gap-2 text-slate-300">
-              <Phone className="h-3.5 w-3.5 text-cyan-400" />
+            <div className="flex items-center gap-2 text-zinc-300 rounded-lg border border-zinc-800 bg-zinc-950/60 p-2.5">
+              <Phone className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
               <span>{PROFILE_LINKS.phone}</span>
             </div>
 
@@ -88,18 +91,18 @@ export const ContactSection: React.FC = () => {
               href={PROFILE_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white rounded-lg border border-zinc-800 bg-zinc-950/60 p-2.5 transition-colors"
             >
-              <LinkedinIcon className="h-3.5 w-3.5 text-sky-400" />
+              <LinkedinIcon className="h-3.5 w-3.5 text-sky-400 shrink-0" />
               <span>LinkedIn Profile</span>
             </a>
 
             <a
               href={PROFILE_LINKS.resumePdf}
               download="Livesh_L_Resume.pdf"
-              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-zinc-300 hover:text-white rounded-lg border border-zinc-800 bg-zinc-950/60 p-2.5 transition-colors"
             >
-              <FileDown className="h-3.5 w-3.5 text-indigo-400" />
+              <FileDown className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
               <span>Download Resume</span>
             </a>
           </div>

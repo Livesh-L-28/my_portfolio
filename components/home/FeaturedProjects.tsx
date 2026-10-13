@@ -7,14 +7,19 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 
 export const FeaturedProjects: React.FC = () => {
   return (
-    <section id="projects" className="relative py-16 sm:py-20 border-b border-white/[0.08]">
+    <section id="projects" className="relative py-16 sm:py-20 border-b border-zinc-800/80 overflow-hidden">
+      {/* Subtle ambient spotlight */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-80 w-full max-w-4xl aura-indigo pointer-events-none blur-3xl opacity-35" />
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-1">
-              Production Systems & Open Source
-            </span>
+            <div className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-xs font-mono text-indigo-400 mb-2">
+              <span className="font-bold">01</span>
+              <span className="text-indigo-400/60">//</span>
+              <span>Flagship AI Architectures</span>
+            </div>
             <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               Selected Projects & Case Studies
             </h2>

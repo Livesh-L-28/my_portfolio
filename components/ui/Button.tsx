@@ -33,14 +33,14 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/20 border border-violet-400/30 active:scale-[0.98]",
-    cyan: "bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-lg shadow-cyan-500/10 active:scale-[0.98]",
+      "bg-white hover:bg-zinc-200 text-zinc-950 font-semibold shadow-sm active:scale-[0.98]",
+    cyan: "bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700 active:scale-[0.98]",
     secondary:
-      "bg-white/[0.05] hover:bg-white/[0.09] text-white border border-white/[0.12] active:scale-[0.98]",
+      "bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700/80 active:scale-[0.98]",
     outline:
-      "bg-transparent hover:bg-violet-500/10 text-violet-300 border border-violet-500/30 hover:border-violet-500/50 active:scale-[0.98]",
+      "bg-transparent hover:bg-zinc-800 text-zinc-200 border border-zinc-700 active:scale-[0.98]",
     ghost:
-      "bg-transparent hover:bg-white/[0.05] text-slate-300 hover:text-white active:scale-[0.98]",
+      "bg-transparent hover:bg-zinc-800/60 text-zinc-300 hover:text-white active:scale-[0.98]",
   };
 
   const content = (

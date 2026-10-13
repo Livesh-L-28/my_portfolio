@@ -120,10 +120,10 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               allowFullScreen
             />
           ) : (
-            <div className="flex flex-col items-center justify-center p-8 text-center text-slate-400">
-              <AlertCircle className="h-10 w-10 text-amber-400 mb-2" />
-              <p className="text-sm font-medium text-slate-300">Demo video unavailable</p>
-              <p className="text-xs text-slate-500 mt-1 max-w-sm">
+            <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-400">
+              <AlertCircle className="h-10 w-10 text-zinc-400 mb-2" />
+              <p className="text-sm font-medium text-zinc-300">Demo video unavailable</p>
+              <p className="text-xs text-zinc-500 mt-1 max-w-sm">
                 The demonstration recording for this project has not been published or the path is invalid.
               </p>
             </div>
@@ -131,7 +131,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="flex items-center justify-between border-t border-white/[0.06] bg-[#070A14] px-5 py-2.5 text-xs font-mono text-slate-400">
+        <div className="flex items-center justify-between border-t border-zinc-800 bg-zinc-900 px-5 py-2.5 text-xs font-mono text-zinc-400">
           <span>In-Portfolio Demo Player · Native playback</span>
           <span className="hidden sm:inline">Press ESC or click outside to dismiss</span>
         </div>

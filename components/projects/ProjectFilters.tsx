@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Search, X, SlidersHorizontal, Sparkles } from "lucide-react";
+import { Search, X, SlidersHorizontal } from "lucide-react";
 import { ProjectCategory } from "@/lib/types";
 
 interface ProjectFiltersProps {
@@ -27,50 +27,50 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
 }) => {
   return (
     <div className="space-y-4 mb-8">
-      {/* Search Bar & Sort Dropdown */}
+      {/* Search Bar & Sort Dropdown - Perfectly Aligned */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        {/* Search */}
+        {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by title, technology (e.g. pgvector, PyTorch), or keyword..."
-            className="w-full rounded-xl border border-slate-800 bg-[#0d121f]/80 backdrop-blur-md pl-10 pr-9 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-sans shadow-inner transition-colors"
+            placeholder="Search by title, technology, or keywords..."
+            className="h-10 w-full rounded-lg border border-zinc-800 bg-zinc-900/60 pl-9 pr-8 text-xs sm:text-sm text-white placeholder-zinc-500 focus:border-zinc-600 focus:outline-none focus:ring-1 focus:ring-zinc-600 font-sans"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange("")}
               aria-label="Clear search"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
             >
               <X className="h-4 w-4" />
             </button>
           )}
         </div>
 
-        {/* Counter and Sort */}
+        {/* Counter and Sort Control */}
         <div className="flex items-center justify-between sm:justify-end gap-3 text-xs font-sans">
-          <span className="text-slate-400">
-            Showing <strong className="text-cyan-300 font-mono">{totalCount}</strong> projects
+          <span className="text-zinc-400 font-mono text-xs">
+            {totalCount} {totalCount === 1 ? "project" : "projects"}
           </span>
 
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-800 bg-[#0d121f]/80 backdrop-blur-md px-3 py-2">
-            <SlidersHorizontal className="h-3.5 w-3.5 text-indigo-400" />
+          <div className="flex h-10 items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3">
+            <SlidersHorizontal className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
             <select
               value={sortBy}
               onChange={(e) => onSortChange(e.target.value as "featured" | "tests" | "name")}
               aria-label="Sort projects"
-              className="bg-transparent text-slate-200 focus:outline-none cursor-pointer text-xs font-mono"
+              className="bg-transparent text-zinc-200 focus:outline-none cursor-pointer text-xs font-sans"
             >
-              <option value="featured" className="bg-slate-900 text-slate-200">
-                Featured Systems First
+              <option value="featured" className="bg-zinc-900 text-zinc-200">
+                Featured First
               </option>
-              <option value="tests" className="bg-slate-900 text-slate-200">
-                Most Tests / Verified Rigor
+              <option value="tests" className="bg-zinc-900 text-zinc-200">
+                Most Tests / Rigor
               </option>
-              <option value="name" className="bg-slate-900 text-slate-200">
+              <option value="name" className="bg-zinc-900 text-zinc-200">
                 Alphabetical (A-Z)
               </option>
             </select>
@@ -78,7 +78,7 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
         </div>
       </div>
 
-      {/* Category Pills */}
+      {/* Category Pills Bar */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" role="tablist">
         {categories.map((category) => {
           const isActive = activeCategory === category;
@@ -88,10 +88,10 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
               role="tab"
               aria-selected={isActive}
               onClick={() => onSelectCategory(category as ProjectCategory)}
-              className={`whitespace-nowrap rounded-xl px-3.5 py-1.5 text-xs font-mono transition-all cursor-pointer select-none ${
+              className={`whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-mono transition-colors cursor-pointer select-none ${
                 isActive
-                  ? "bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/30 border border-indigo-400/40"
-                  : "bg-[#0d121f]/70 text-slate-400 border border-slate-800/80 hover:bg-slate-800/80 hover:text-white"
+                  ? "bg-zinc-100 text-zinc-950 font-semibold"
+                  : "bg-zinc-900/60 text-zinc-400 border border-zinc-800 hover:text-zinc-200 hover:border-zinc-700"
               }`}
             >
               {category}

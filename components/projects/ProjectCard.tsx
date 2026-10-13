@@ -12,7 +12,6 @@ import {
   FileText,
   Eye,
   Box,
-  Sparkles,
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { ProjectData } from "@/lib/types";
@@ -38,44 +37,54 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const videoButtonRef = useRef<HTMLButtonElement>(null);
   const threeDType = getProject3DType(project.slug);
   const hasBoth = Boolean(threeDType && project.thumbnail);
-  // Default to 'preview' (image thumbnail) to show real software interface, switchable to 3D
   const [activeTab, setActiveTab] = useState<"preview" | "3d">("preview");
 
+  const getCategoryBadgeClass = (category: string) => {
+    switch (category) {
+      case "RAG & Retrieval":
+        return "text-indigo-400 bg-indigo-500/10 border-indigo-500/30";
+      case "AI Security & Safety":
+        return "text-violet-400 bg-violet-500/10 border-violet-500/30";
+      case "Deterministic Evaluation":
+        return "text-emerald-400 bg-emerald-500/10 border-emerald-500/30";
+      case "Computer Vision":
+        return "text-cyan-400 bg-cyan-500/10 border-cyan-500/30";
+      case "Autonomous Resilience":
+        return "text-amber-400 bg-amber-500/10 border-amber-500/30";
+      default:
+        return "text-zinc-300 bg-zinc-800 border-zinc-700/60";
+    }
+  };
+
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="group relative flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-[#0d121f]/70 backdrop-blur-xl p-5 sm:p-6 transition-all duration-300 hover:border-indigo-500/40 hover:bg-[#111728]/90 hover:shadow-[0_12px_40px_-12px_rgba(99,102,241,0.28)]"
-    >
-      <div>
-        {/* Category & Featured Badge */}
-        <div className="flex items-center justify-between gap-2 mb-3.5">
-          <span className="text-[11px] font-mono tracking-wider uppercase text-cyan-400/90 font-medium bg-cyan-950/40 border border-cyan-800/40 px-2 py-0.5 rounded-full">
+    <article className="group flex flex-col justify-between h-full rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/95 hover:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.6)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl">
+      <div className="flex flex-col flex-1">
+        {/* Category & Featured Badge Header */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className={`text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded border ${getCategoryBadgeClass(project.category)}`}>
             {project.category}
           </span>
           {project.featured && (
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-2.5 py-0.5 rounded-full">
-              <Sparkles className="h-2.5 w-2.5 text-indigo-400" />
-              <span>Featured System</span>
+            <span className="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Flagship</span>
             </span>
           )}
         </div>
 
-        {/* Visual Showcase (UI Preview Screenshot or Interactive 3D Model) */}
+        {/* Visual Showcase (UI Screenshot or Interactive 3D Model) */}
         {(project.thumbnail || threeDType) && (
-          <div className="mb-4 relative rounded-xl overflow-hidden border border-slate-800/90 bg-slate-950/80 shadow-inner group/preview">
+          <div className="mb-4 relative rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950 aspect-[16/9] w-full">
             {/* Tab switch if both available */}
             {hasBoth && (
-              <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1 rounded-lg bg-slate-950/85 p-1 border border-slate-800/80 backdrop-blur-md shadow-lg">
+              <div className="absolute top-2 right-2 z-10 flex items-center rounded-md bg-zinc-900/90 p-0.5 border border-zinc-800 backdrop-blur-sm shadow-md">
                 <button
                   type="button"
                   onClick={() => setActiveTab("preview")}
-                  className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono transition-all ${
+                  className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono transition-colors ${
                     activeTab === "preview"
-                      ? "bg-indigo-600 text-white font-medium shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-zinc-800 text-white font-medium"
+                      : "text-zinc-400 hover:text-zinc-200"
                   }`}
                   aria-label="View UI Preview"
                 >
@@ -85,12 +94,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab("3d")}
-                  className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono transition-all ${
+                  className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono transition-colors ${
                     activeTab === "3d"
-                      ? "bg-indigo-600 text-white font-medium shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-zinc-800 text-white font-medium"
+                      : "text-zinc-400 hover:text-zinc-200"
                   }`}
-                  aria-label="View 3D WebGL Model"
+                  aria-label="View 3D Model"
                 >
                   <Box className="h-3 w-3" />
                   <span>3D</span>
@@ -99,57 +108,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
 
             {/* Display either UI Preview or 3D */}
-            <div className="h-40 sm:h-44 w-full relative overflow-hidden bg-slate-950 flex items-center justify-center">
+            <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-zinc-950">
               <AnimatePresence mode="wait">
                 {activeTab === "preview" && project.thumbnail ? (
-                  <motion.div
+                  <Link
                     key="ui-preview"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative w-full h-full"
+                    href={`/projects/${project.slug}`}
+                    className="block w-full h-full cursor-pointer relative overflow-hidden"
+                    tabIndex={-1}
                   >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="block w-full h-full cursor-pointer relative overflow-hidden"
-                      tabIndex={-1}
-                    >
-                      <Image
-                        src={project.thumbnail}
-                        alt={`${project.title} Interface Preview`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        priority={project.featured}
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute bottom-2 left-2 rounded bg-slate-950/80 backdrop-blur-sm px-2 py-0.5 text-[10px] font-mono text-cyan-300 border border-slate-800/80 pointer-events-none flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                        <span>Production Interface</span>
-                      </div>
-                    </Link>
-                  </motion.div>
+                    <Image
+                      src={project.thumbnail}
+                      alt={`${project.title} Interface Preview`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                      priority={project.featured}
+                    />
+                  </Link>
                 ) : threeDType ? (
-                  <motion.div
-                    key="3d-model"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative w-full h-full"
-                  >
+                  <div key="3d-model" className="w-full h-full relative">
                     <Project3DCanvas
                       type={threeDType}
-                      height="h-40 sm:h-44"
+                      height="h-full"
                       interactive={true}
                     />
-                    <div className="absolute bottom-2 left-2 rounded bg-slate-950/80 px-2 py-0.5 text-[10px] font-mono text-indigo-300 border border-slate-800/80 pointer-events-none flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-                      <span>3D WebGL 60FPS</span>
-                    </div>
-                  </motion.div>
+                  </div>
                 ) : null}
               </AnimatePresence>
             </div>
@@ -157,58 +141,58 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
 
         {/* Project Title */}
-        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-indigo-200 transition-colors">
+        <h3 className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-indigo-300 transition-colors min-h-[1.75rem] flex items-center">
           <Link
             href={`/projects/${project.slug}`}
-            className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded"
+            className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400 rounded line-clamp-1"
           >
             {project.title}
           </Link>
         </h3>
 
         {/* Tagline / Description */}
-        <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-2">
+        <p className="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans line-clamp-2 min-h-[2.5rem]">
           {project.tagline}
         </p>
 
-        {/* Key Achievement Banner */}
-        <div className="mt-3.5 rounded-lg border border-emerald-900/40 bg-emerald-950/20 px-3 py-2 text-xs font-mono text-slate-200 flex items-start gap-2">
+        {/* Key Achievement Banner - Uniform Height */}
+        <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950/70 px-3 py-2 text-xs font-mono text-zinc-300 flex items-start gap-2 min-h-[3.25rem]">
           <span className="text-emerald-400 font-bold shrink-0 mt-0.5">✓</span>
-          <span className="leading-snug">{project.keyAchievement}</span>
+          <span className="leading-snug line-clamp-2">{project.keyAchievement}</span>
         </div>
 
-        {/* Technologies List */}
-        <div className="mt-3.5 flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 5).map((tech) => (
+        {/* Technologies List - Strictly 1 Row */}
+        <div className="mt-3.5 flex items-center gap-1.5 mb-4 h-6 overflow-hidden">
+          {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="rounded-md bg-slate-800/70 px-2 py-0.5 text-[11px] font-mono text-slate-300 border border-slate-700/50"
+              className="rounded bg-zinc-800/80 px-2 py-0.5 text-[11px] font-mono text-zinc-300 border border-zinc-700/60 truncate max-w-[120px]"
             >
               {tech}
             </span>
           ))}
-          {project.technologies.length > 5 && (
-            <span className="rounded-md bg-transparent px-1.5 py-0.5 text-[11px] font-mono text-slate-500">
-              +{project.technologies.length - 5}
+          {project.technologies.length > 4 && (
+            <span className="rounded bg-zinc-800/40 px-1.5 py-0.5 text-[10px] font-mono text-zinc-500 border border-zinc-800 shrink-0">
+              +{project.technologies.length - 4}
             </span>
           )}
         </div>
       </div>
 
-      {/* Action Buttons Bar */}
-      <div className="mt-5 pt-3.5 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+      {/* Action Buttons Bar - Strictly Pinned to Bottom with Crisp Heights */}
+      <div className="mt-auto pt-3.5 border-t border-zinc-800 flex items-center justify-between gap-2">
         {/* Case study link */}
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 hover:text-white transition-colors group/link"
+          className="inline-flex items-center gap-1 text-xs font-medium text-zinc-300 hover:text-white transition-colors shrink-0"
         >
-          <FileText className="h-3.5 w-3.5 text-indigo-400" />
+          <FileText className="h-3.5 w-3.5 text-zinc-400" />
           <span>Case Study</span>
-          <ArrowRight className="h-3 w-3 text-slate-400 group-hover/link:translate-x-0.5 transition-transform" />
+          <ArrowRight className="h-3 w-3 text-zinc-500 group-hover:translate-x-0.5 transition-transform" />
         </Link>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex items-center gap-1.5 shrink-0">
           {/* GitHub Repo */}
           {project.links.githubUrl && (
             <a
@@ -216,10 +200,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} on GitHub`}
-              className="inline-flex items-center gap-1 rounded-md border border-slate-700/80 bg-slate-800/70 px-2.5 py-1 text-xs text-slate-200 hover:bg-slate-700 hover:text-white transition-colors"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-zinc-700 bg-zinc-800 px-2 text-xs text-zinc-300 hover:bg-zinc-700 hover:text-white transition-colors"
             >
-              <GithubIcon className="h-3.5 w-3.5" />
-              <span>GitHub</span>
+              <GithubIcon className="h-3 w-3" />
+              <span>Code</span>
             </a>
           )}
 
@@ -230,10 +214,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Launch ${project.title} Live Application`}
-              className="inline-flex items-center gap-1 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-emerald-600/40 bg-emerald-500/10 px-2 text-xs text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
-              <ExternalLink className="h-3.5 w-3.5" />
-              <span>Live App</span>
+              <ExternalLink className="h-3 w-3" />
+              <span>Live</span>
             </a>
           )}
 
@@ -244,9 +228,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} on PyPI`}
-              className="inline-flex items-center gap-1 rounded-md border border-indigo-500/40 bg-indigo-500/10 px-2.5 py-1 text-xs text-indigo-300 hover:bg-indigo-500/20 transition-colors"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-indigo-600/40 bg-indigo-500/10 px-2 text-xs text-indigo-300 hover:bg-indigo-500/20 transition-colors"
             >
-              <Package className="h-3.5 w-3.5" />
+              <Package className="h-3 w-3" />
               <span>PyPI</span>
             </a>
           )}
@@ -263,14 +247,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 )
               }
               aria-label={`Watch ${project.title} Demo Video`}
-              className="inline-flex items-center gap-1 rounded-md border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-1 text-xs text-cyan-300 hover:bg-cyan-500/20 transition-colors font-medium cursor-pointer"
+              className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-500/40 bg-sky-500/10 px-2 text-xs text-sky-300 hover:bg-sky-500/20 transition-colors font-medium cursor-pointer"
             >
-              <Play className="h-3 w-3 fill-cyan-300" />
-              <span>Watch Demo</span>
+              <Play className="h-3 w-3 fill-sky-300" />
+              <span>Demo</span>
             </button>
           )}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 };

@@ -112,12 +112,24 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
 
           {/* Action Links Bar */}
           <div className="mt-6 flex flex-wrap items-center gap-2.5">
+            {project.links.liveUrl && (
+              <a
+                href={project.links.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-3.5 py-2 text-xs font-medium text-zinc-950 hover:bg-zinc-200 transition-colors"
+              >
+                <ExternalLink className="h-4 w-4" />
+                <span>Launch Live Application</span>
+              </a>
+            )}
+
             {project.links.githubUrl && (
               <a
                 href={project.links.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-3.5 py-2 text-xs font-sans text-white hover:bg-zinc-700 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-3.5 py-2 text-xs font-sans text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors"
               >
                 <GithubIcon className="h-4 w-4" />
                 <span>View Repository</span>
@@ -129,22 +141,10 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
                 href={project.links.pypiUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-indigo-600/40 bg-indigo-500/10 px-3.5 py-2 text-xs font-sans text-indigo-300 hover:bg-indigo-500/20 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-3.5 py-2 text-xs font-sans text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors"
               >
                 <Package className="h-4 w-4" />
                 <span>PyPI Package</span>
-              </a>
-            )}
-
-            {project.links.liveUrl && (
-              <a
-                href={project.links.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-emerald-600/40 bg-emerald-500/10 px-3.5 py-2 text-xs font-sans text-emerald-300 hover:bg-emerald-500/20 transition-colors"
-              >
-                <ExternalLink className="h-4 w-4" />
-                <span>Launch Live Application</span>
               </a>
             )}
 

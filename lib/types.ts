@@ -125,19 +125,27 @@ export function getProject3DType(slug: string): Project3DType {
     case 'medical-transformer-lm':
       return 'medical';
     case 'llmfirewall-core':
+    case 'llmfirewall':
       return 'llmfirewall';
+    case 'aireliability':
     case 'aireliability-testing':
       return 'aireliability';
     case 'aegis-framework':
+    case 'aegis':
       return 'aegis';
     case 'fastapi-cicd-lab':
+    case 'fastapicicd':
       return 'fastapicicd';
     case 'stock-price-prediction':
+    case 'stock':
       return 'stock';
+    case 'skill-ascend':
     case 'ai-skill-assistance':
       return 'skillascend';
     case 'ai-visual-memory':
+    case 'visualmemory':
       return 'visualmemory';
+    case 'leviathan':
     case 'greenwashing-detector':
       return 'leviathan';
     default:

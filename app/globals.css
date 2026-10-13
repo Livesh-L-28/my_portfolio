@@ -1,16 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060913;
-  --surface: #0c111e;
-  --surface-hover: #12182b;
+  --background: #09090b;
+  --surface: #121216;
+  --surface-hover: #18181f;
   --surface-border: rgba(255, 255, 255, 0.08);
-  --foreground: #f8fafc;
-  --muted: #94a3b8;
-  --muted-dark: #64748b;
+  --foreground: #f4f4f5;
+  --muted: #a1a1aa;
+  --muted-dark: #71717a;
   --accent: #6366f1;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
 }
 
 @theme inline {
@@ -27,68 +25,84 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #060913;
-  color: #f8fafc;
+  background-color: #09090b;
+  color: #f4f4f5;
 }
 
 body {
-  background-color: #060913;
-  color: #f8fafc;
+  background-color: #09090b;
+  color: #f4f4f5;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+  background-image: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05) 0%, transparent 60%);
   background-attachment: fixed;
 }
 
 ::selection {
-  background-color: rgba(99, 102, 241, 0.35);
+  background-color: rgba(99, 102, 241, 0.3);
   color: #ffffff;
 }
 
-/* Subtle, sophisticated background pattern */
-.dot-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Custom modern scrollbar */
+/* Custom subtle scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #060913;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.4);
+  background: rgba(255, 255, 255, 0.24);
 }
 
-/* Glow Keyframes */
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.05);
-  }
+/* Subtle Technical Grid Texture */
+.bg-grid-subtle {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.animate-glow {
-  animation: pulseGlow 6s ease-in-out infinite;
+/* High-craft Surface Card */
+.surface-card {
+  background-color: rgba(18, 18, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.surface-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle ambient spotlight halos */
+.aura-indigo {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+}
+
+.aura-cyan {
+  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+}
+
+.aura-emerald {
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+}
+
+.aura-violet {
+  background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+}
+
+.aura-amber {
+  background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
 }
 
 /* Respect reduced motion */

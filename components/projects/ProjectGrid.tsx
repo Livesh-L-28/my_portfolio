@@ -120,10 +120,10 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-white/[0.08] bg-[#0A0E1A] p-12 text-center">
-          <SearchX className="mx-auto h-12 w-12 text-slate-500 mb-3" />
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-12 text-center">
+          <SearchX className="mx-auto h-10 w-10 text-zinc-500 mb-3" />
           <h4 className="text-base font-semibold text-white">No projects found</h4>
-          <p className="mt-1 text-xs text-slate-400 max-w-sm mx-auto">
+          <p className="mt-1 text-xs text-zinc-400 max-w-sm mx-auto">
             No projects matched your search criteria for &ldquo;{searchQuery}&rdquo;. Try clearing your search or switching categories.
           </p>
           <button
@@ -131,7 +131,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               setSearchQuery("");
               setActiveCategory("All Projects");
             }}
-            className="mt-4 rounded-lg border border-violet-500/30 bg-violet-600/10 px-4 py-2 text-xs font-mono text-violet-300 hover:bg-violet-600/20"
+            className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2 text-xs font-mono text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors cursor-pointer"
           >
             Reset Filters
           </button>

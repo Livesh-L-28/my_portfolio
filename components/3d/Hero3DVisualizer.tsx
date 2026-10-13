@@ -135,10 +135,10 @@ export const Hero3DVisualizer: React.FC = () => {
           </span>
           <Link
             href={`/projects/${activeMode.projectSlug}`}
-            className="inline-flex items-center gap-1 text-xs font-mono text-indigo-400 hover:text-indigo-300 font-medium"
+            className="inline-flex items-center gap-1 text-xs font-mono text-zinc-300 hover:text-white font-medium transition-colors"
           >
             <span>Inspect {activeMode.title} Case Study</span>
-            <ArrowRight className="h-3 w-3" />
+            <ArrowRight className="h-3 w-3 text-zinc-400" />
           </Link>
         </div>
       </div>
