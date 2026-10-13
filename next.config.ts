@@ -1,7 +1,25 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/vr-demo",
+        destination: "/projects/venipuncture-vr#demos-gallery",
+        permanent: false,
+      },
+      {
+        source: "/venipuncture-demo",
+        destination: "/projects/venipuncture-vr#demos-gallery",
+        permanent: false,
+      },
+      {
+        source: "/medical-vr",
+        destination: "/projects/venipuncture-vr#demos-gallery",
+        permanent: false,
+      },
+    ];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
