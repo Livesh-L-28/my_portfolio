@@ -208,7 +208,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
 
           {/* Live App */}
-          {project.links.liveUrl && (
+          {project.links.liveUrl && !project.links.liveUrl.includes("drive.google.com") && (
             <a
               href={project.links.liveUrl}
               target="_blank"
@@ -217,7 +217,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               className="inline-flex h-7 items-center gap-1 rounded-md border border-emerald-600/40 bg-emerald-500/10 px-2 text-xs text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
               <ExternalLink className="h-3 w-3" />
-              <span>{project.links.liveUrl.includes("drive.google.com") ? "Demo" : "Live"}</span>
+              <span>Live</span>
             </a>
           )}
 
@@ -235,23 +235,35 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </a>
           )}
 
-          {/* Watch Demo Modal Trigger */}
-          {project.links.demoVideoUrl && onOpenVideo && (
-            <button
-              ref={videoButtonRef}
-              onClick={() =>
-                onOpenVideo(
-                  project.links.demoVideoUrl!,
-                  project.title,
-                  videoButtonRef
-                )
-              }
-              aria-label={`Watch ${project.title} Demo Video`}
+          {/* Venipuncture VR: Navigate directly to the 5-demo gallery */}
+          {project.slug === "venipuncture-vr" ? (
+            <Link
+              href={`/projects/${project.slug}#demos-gallery`}
+              aria-label={`Watch all 5 ${project.title} demonstrations`}
               className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-500/40 bg-sky-500/10 px-2 text-xs text-sky-300 hover:bg-sky-500/20 transition-colors font-medium cursor-pointer"
             >
               <Play className="h-3 w-3 fill-sky-300" />
               <span>Demo</span>
-            </button>
+            </Link>
+          ) : (
+            /* Watch Demo Modal Trigger for other projects */
+            project.links.demoVideoUrl && onOpenVideo && (
+              <button
+                ref={videoButtonRef}
+                onClick={() =>
+                  onOpenVideo(
+                    project.links.demoVideoUrl!,
+                    project.title,
+                    videoButtonRef
+                  )
+                }
+                aria-label={`Watch ${project.title} Demo Video`}
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-500/40 bg-sky-500/10 px-2 text-xs text-sky-300 hover:bg-sky-500/20 transition-colors font-medium cursor-pointer"
+              >
+                <Play className="h-3 w-3 fill-sky-300" />
+                <span>Demo</span>
+              </button>
+            )
           )}
         </div>
       </div>

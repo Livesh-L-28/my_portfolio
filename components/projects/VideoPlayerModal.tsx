@@ -118,18 +118,6 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
 
           {/* Action buttons on header */}
           <div className="flex items-center gap-2 shrink-0">
-            <a
-              href={demo.directDriveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open source video directly in Google Drive"
-              title="Open source file on Google Drive"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-xs font-mono text-zinc-300 hover:text-white hover:bg-zinc-700 transition-colors"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              <span>Drive Source</span>
-            </a>
-
             <button
               onClick={onClose}
               aria-label="Close video player"
@@ -194,8 +182,8 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
           )}
         </div>
 
-        {/* Footer Meta & Highlights Bar */}
-        <div className="border-t border-zinc-800/80 px-4 sm:px-6 py-3 bg-zinc-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-zinc-400 shrink-0">
+        {/* Footer Meta Bar */}
+        <div className="border-t border-zinc-800/80 px-4 sm:px-6 py-3 bg-zinc-900/60 flex items-center justify-between gap-3 text-xs font-mono text-zinc-400 shrink-0">
           <div className="flex items-center gap-3 flex-wrap">
             <span className="flex items-center gap-1.5 text-zinc-300">
               <HardDrive className="h-3.5 w-3.5 text-zinc-400" />
@@ -206,20 +194,8 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
             <span className="text-zinc-600">·</span>
             <span className="inline-flex items-center gap-1 text-emerald-400">
               <ShieldCheck className="h-3.5 w-3.5" />
-              <span>Verified Drive Asset</span>
+              <span>In-Page Simulation Stream</span>
             </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <a
-              href={demo.directDriveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 transition-colors text-[11px]"
-            >
-              <span>Direct Link</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
         </div>
       </div>

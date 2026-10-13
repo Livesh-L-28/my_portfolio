@@ -242,7 +242,6 @@ export const PROJECTS: ProjectData[] = [
       "AI-Enhanced VR Venipuncture Training & Medical AI System is an end-to-end clinical simulation ecosystem developed using Unity, C#, PyTorch, and FastAPI. It integrates an authentic 16-step phlebotomy state machine with tactile VR physics, an approximately 110M-parameter custom medical transformer model, a hybrid BM25 + PostgreSQL pgvector RAG pipeline, hands-free Whisper voice assistance, and automated PDF performance reports.",
     links: {
       githubUrl: "https://github.com/Livesh-L-28",
-      liveUrl: "https://drive.google.com/drive/folders/1QKQjTEhglhceLNXSP659OIIYJv5zLr-E?usp=sharing",
       demoVideoUrl: "https://drive.google.com/file/d/1LHKsk5CE26J-j----wyzhhJFx95zEkkN/preview",
       demoVideoType: "embed",
     },

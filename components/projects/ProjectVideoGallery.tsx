@@ -3,10 +3,8 @@
 import React, { useState, useRef } from "react";
 import {
   Play,
-  ExternalLink,
   Film,
   HardDrive,
-  FolderOpen,
   CheckCircle2,
   Cpu,
   Glasses,
@@ -16,7 +14,6 @@ import {
 } from "lucide-react";
 import {
   VENIPUNCTURE_DEMOS,
-  VENIPUNCTURE_FOLDER_SOURCE,
   VenipunctureDemo,
 } from "@/data/venipuncture-demos";
 import { VideoPlayerModal } from "@/components/projects/VideoPlayerModal";
@@ -101,29 +98,19 @@ export const ProjectVideoGallery: React.FC<ProjectVideoGalleryProps> = ({
             </p>
           </div>
 
-          {/* Google Drive Source Info Card */}
-          <div className="shrink-0 rounded-xl border border-zinc-800 bg-zinc-950/80 p-4 flex flex-col gap-2 min-w-[260px]">
+          {/* Demonstration Suite Info Card */}
+          <div className="shrink-0 rounded-xl border border-zinc-800 bg-zinc-950/80 p-4 flex flex-col gap-1.5 min-w-[260px]">
             <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400">
               <span className="flex items-center gap-1.5 text-zinc-300">
-                <FolderOpen className="h-3.5 w-3.5 text-sky-400" />
-                <span>Google Drive Repository</span>
+                <Film className="h-3.5 w-3.5 text-sky-400" />
+                <span>Simulation Demonstrations</span>
               </span>
-              <span className="text-emerald-400 font-bold">5 Files</span>
+              <span className="text-emerald-400 font-bold">5 Recordings</span>
             </div>
 
             <p className="text-[11px] text-zinc-400 font-sans leading-tight">
-              Direct cloud-streamed recordings ranging from 46 MB to 407 MB. Click any demo to play in-page without downloading.
+              High-resolution recordings ranging from 46 MB to 407 MB. Click &quot;Watch Demo&quot; on any card to stream directly in-page.
             </p>
-
-            <a
-              href={VENIPUNCTURE_FOLDER_SOURCE.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1 inline-flex items-center justify-between gap-1.5 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-mono text-zinc-200 hover:text-white hover:bg-zinc-800 transition-colors"
-            >
-              <span className="truncate">Open Drive Folder</span>
-              <ExternalLink className="h-3 w-3 shrink-0 text-zinc-400" />
-            </a>
           </div>
         </div>
       </div>
@@ -197,20 +184,10 @@ export const ProjectVideoGallery: React.FC<ProjectVideoGalleryProps> = ({
                   <span>Watch Demo</span>
                 </button>
 
-                <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-500">
-                  <span className="truncate max-w-[140px] hidden sm:inline" title={demo.filename}>
+                <div className="flex items-center gap-1 text-[11px] font-mono text-zinc-400">
+                  <span className="truncate max-w-[170px] hidden sm:inline" title={demo.filename}>
                     {demo.filename}
                   </span>
-                  <a
-                    href={demo.directDriveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open ${demo.filename} on Google Drive`}
-                    title="Direct Drive Link"
-                    className="p-1.5 rounded hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
-                  >
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
                 </div>
               </div>
             </div>

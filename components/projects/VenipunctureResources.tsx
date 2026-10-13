@@ -7,7 +7,6 @@ import {
   BookOpen,
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
-import { VENIPUNCTURE_FOLDER_SOURCE } from "@/data/venipuncture-demos";
 
 export const VenipunctureResources: React.FC = () => {
   return (
@@ -54,34 +53,31 @@ export const VenipunctureResources: React.FC = () => {
           </a>
         </div>
 
-        {/* Google Drive Video Source Card */}
+        {/* Simulation Demonstrations Suite Card */}
         <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2 text-white">
                 <HardDrive className="h-5 w-5 text-sky-400" />
-                <h3 className="font-sans text-sm font-bold">Google Drive Video Source</h3>
+                <h3 className="font-sans text-sm font-bold">Integrated Simulation Suite</h3>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-sky-500/30 bg-sky-500/10 text-sky-400">
-                5 Recordings · 791 MB
+                5 In-Page Demos
               </span>
             </div>
             <p className="text-xs text-zinc-300 font-sans leading-relaxed mb-4">
-              Official cloud repository containing all five high-resolution demonstration recordings (Medical LLM demo, full VR web walkthrough, test scenes with console telemetry, and training scene).
+              All five high-resolution recordings (Medical LLM demo, full VR web walkthrough, test scenes with console telemetry, and training scene) are embedded directly in this case study.
             </p>
           </div>
 
           <a
-            href={VENIPUNCTURE_FOLDER_SOURCE.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#demos-gallery"
             className="inline-flex items-center justify-between gap-2 rounded-lg border border-sky-500/30 bg-sky-500/10 px-3.5 py-2 text-xs font-mono text-sky-300 hover:bg-sky-500/20 transition-colors"
           >
             <span className="flex items-center gap-2">
               <FolderOpen className="h-4 w-4 text-sky-400" />
-              <span className="truncate">Open Venipunchur T&T Drive Folder</span>
+              <span className="truncate">Explore All 5 Demos In-Page</span>
             </span>
-            <ExternalLink className="h-3.5 w-3.5 shrink-0 text-sky-400" />
           </a>
         </div>
       </div>

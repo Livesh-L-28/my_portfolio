@@ -140,7 +140,7 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
               </a>
             )}
 
-            {project.links.liveUrl && (
+            {project.links.liveUrl && !isVenipuncture && !project.links.liveUrl.includes("drive.google.com") && (
               <a
                 href={project.links.liveUrl}
                 target="_blank"
@@ -148,11 +148,7 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
                 className="inline-flex items-center gap-2 rounded-lg bg-white px-3.5 py-2 text-xs font-medium text-zinc-950 hover:bg-zinc-200 transition-colors"
               >
                 <ExternalLink className="h-4 w-4" />
-                <span>
-                  {project.links.liveUrl.includes("drive.google.com")
-                    ? "View Drive Demonstrations"
-                    : "Launch Live Application"}
-                </span>
+                <span>Launch Live Application</span>
               </a>
             )}
 
