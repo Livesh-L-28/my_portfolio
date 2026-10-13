@@ -42,7 +42,7 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         <div className="relative h-full w-full overflow-hidden rounded-inherit border border-zinc-700/80 bg-zinc-800 shadow-sm">
           <Image
             src={src!}
-            alt="Livesh L."
+            alt="Livesh L"
             fill
             sizes={size === "sm" ? "32px" : size === "md" ? "40px" : "64px"}
             className="object-cover object-top"

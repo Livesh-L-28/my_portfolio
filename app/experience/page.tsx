@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ExperienceTimeline } from "@/components/home/ExperienceTimeline";
 
 export const metadata: Metadata = {
-  title: "Professional Experience — Livesh L.",
+  title: "Professional Experience — Livesh L",
   description:
     "Engineering internships and industry contributions at Chargebee, XARC, Femtosoft Technologies, and Cognifyz Technologies.",
 };

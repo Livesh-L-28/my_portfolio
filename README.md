@@ -1,6 +1,6 @@
-# Livesh L. — AI Engineering & Systems Portfolio
+# Livesh L — AI Engineering & Systems Portfolio
 
-> **Production-grade personal portfolio for Livesh L., AI Developer specializing in LLM applications, RAG architectures, AI security, reliability engineering, and Python/FastAPI systems.**
+> **Production-grade personal portfolio for Livesh L, AI Developer specializing in LLM applications, RAG architectures, AI security, reliability engineering, and Python/FastAPI systems.**
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, and **Tailwind CSS**. Fully statically generated for near-instant load times, zero third-party tracking, and 100% reproducible deployment.
 
@@ -172,7 +172,7 @@ The portfolio is architected for zero-configuration deployment to [Vercel](https
 1. Push your repository to GitHub:
    ```bash
    git add .
-   git commit -m "feat: complete production portfolio for Livesh L."
+   git commit -m "feat: complete production portfolio for Livesh L"
    git push origin main
    ```
 2. Import the project in Vercel:
@@ -186,7 +186,7 @@ The portfolio is architected for zero-configuration deployment to [Vercel](https
 
 ## 👤 Author & Contact
 
-- **Developer**: Livesh L.
+- **Developer**: Livesh L
 - **Email**: [liveshjaidj@gmail.com](mailto:liveshjaidj@gmail.com)
 - **LinkedIn**: [linkedin.com/in/livesh-l-aa9821322](https://linkedin.com/in/livesh-l-aa9821322)
 - **GitHub**: [github.com/Livesh-L-28](https://github.com/Livesh-L-28)

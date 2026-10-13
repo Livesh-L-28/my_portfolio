@@ -43,12 +43,12 @@ export const Navbar: React.FC = () => {
         <Link
           href="/"
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg"
-          aria-label="Livesh L. Portfolio"
+          aria-label="Livesh L Portfolio"
         >
           <ProfileAvatar size="sm" showStatus={true} />
           <div className="flex flex-col">
             <span className="font-sans font-semibold text-sm tracking-tight text-white group-hover:text-zinc-200 transition-colors">
-              Livesh L.
+              Livesh L
             </span>
             <span className="text-[11px] font-mono text-zinc-400 leading-none">
               AI Systems Engineer

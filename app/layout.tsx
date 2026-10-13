@@ -21,9 +21,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Livesh L. — AI Developer | LLM Systems & AI Security",
+  title: "Livesh L — AI Developer | LLM Systems & AI Security",
   description:
-    "Portfolio of Livesh L., AI Developer specializing in production LLM applications, RAG systems, AI security, reliability engineering, and Python/FastAPI services.",
+    "Portfolio of Livesh L, AI Developer specializing in production LLM applications, RAG systems, AI security, reliability engineering, and Python/FastAPI services.",
   keywords: [
     "Livesh L",
     "AI Developer",
@@ -38,20 +38,20 @@ export const metadata: Metadata = {
     "FastAPI",
     "pgvector",
   ],
-  authors: [{ name: "Livesh L." }],
-  creator: "Livesh L.",
+  authors: [{ name: "Livesh L" }],
+  creator: "Livesh L",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://github.com/Livesh-L-28",
-    title: "Livesh L. — AI Developer | LLM Systems & AI Security",
+    title: "Livesh L — AI Developer | LLM Systems & AI Security",
     description:
       "Production-oriented LLM applications, retrieval-augmented generation, AI security firewalls, and deterministic reliability engineering.",
-    siteName: "Livesh L. AI Portfolio",
+    siteName: "Livesh L AI Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Livesh L. — AI Developer | LLM Systems & AI Security",
+    title: "Livesh L — AI Developer | LLM Systems & AI Security",
     description:
       "Production-oriented LLM applications, retrieval-augmented generation, AI security firewalls, and deterministic reliability engineering.",
   },

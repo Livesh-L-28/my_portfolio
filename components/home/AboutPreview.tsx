@@ -20,7 +20,7 @@ export const AboutPreview: React.FC = () => {
             </div>
 
             <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              About Livesh L.
+              About Livesh L
             </h2>
 
             <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-sans">
@@ -78,7 +78,7 @@ export const AboutPreview: React.FC = () => {
             <div className="flex items-center gap-3.5 border-b border-zinc-800 pb-4">
               <ProfileAvatar size="lg" showStatus={true} />
               <div>
-                <h3 className="text-base font-bold text-white font-sans">Livesh L.</h3>
+                <h3 className="text-base font-bold text-white font-sans">Livesh L</h3>
                 <p className="text-xs text-zinc-400 font-mono">
                   AI Systems & Full-Stack Developer
                 </p>

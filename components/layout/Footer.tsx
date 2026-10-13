@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-3">
               <ProfileAvatar size="sm" showStatus={false} />
-              <span className="font-bold tracking-tight text-white text-sm">Livesh L.</span>
+              <span className="font-bold tracking-tight text-white text-sm">Livesh L</span>
               <span className="text-[11px] font-mono text-zinc-400 bg-zinc-800 border border-zinc-700/60 px-2 py-0.5 rounded">
                 AI Engineering
               </span>
@@ -107,7 +107,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
-          <p>© 2026 Livesh L. Built with Next.js & Tailwind CSS.</p>
+          <p>© 2026 Livesh L · Built with Next.js & Tailwind CSS.</p>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
             <span>Static Generation · Zero Third-Party Tracking</span>

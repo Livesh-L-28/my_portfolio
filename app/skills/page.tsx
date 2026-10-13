@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { CapabilityMap } from "@/components/home/CapabilityMap";
 
 export const metadata: Metadata = {
-  title: "Engineering Skills & Stack — Livesh L.",
+  title: "Engineering Skills & Stack — Livesh L",
   description:
     "Comprehensive technical skills matrix spanning LLM systems, AI security, reliability engineering, computer vision, and backend infrastructure.",
 };

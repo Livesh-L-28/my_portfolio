@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { ContactSection } from "@/components/home/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Contact — Livesh L. | AI Developer",
+  title: "Contact — Livesh L | AI Developer",
   description:
-    "Get in touch with Livesh L. for AI engineering inquiries, LLM systems collaboration, security consulting, or full-time opportunities.",
+    "Get in touch with Livesh L for AI engineering inquiries, LLM systems collaboration, security consulting, or full-time opportunities.",
 };
 
 export default function ContactPage() {

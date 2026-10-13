@@ -3,7 +3,7 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { Terminal, ShieldCheck, Database } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Projects & System Architectures — Livesh L.",
+  title: "Projects & System Architectures — Livesh L",
   description:
     "Explore 10 AI engineering projects spanning RAG architectures, in-process LLM firewalls, deterministic agent reliability engines, and computer vision systems.",
 };

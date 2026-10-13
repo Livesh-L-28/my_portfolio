@@ -45,7 +45,7 @@ export const Hero: React.FC = () => {
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-2xl font-sans">
-              Hi, I&rsquo;m <strong className="text-white font-semibold">Livesh L.</strong>, an AI Developer and final-year student at Prathyusha Engineering College. I focus on production-oriented LLM applications, hybrid RAG systems with pgvector and Reciprocal Rank Fusion, in-process AI security firewalls, and deterministic agent reliability testing.
+              Hi, I&rsquo;m <strong className="text-white font-semibold">Livesh L</strong>, an AI Developer and final-year student at Prathyusha Engineering College. I focus on production-oriented LLM applications, hybrid RAG systems with pgvector and Reciprocal Rank Fusion, in-process AI security firewalls, and deterministic agent reliability testing.
             </p>
 
             {/* Primary Action Buttons */}
