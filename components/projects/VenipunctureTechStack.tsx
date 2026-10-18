@@ -82,12 +82,12 @@ export const VenipunctureTechStack: React.FC = () => {
   return (
     <section className="mb-14">
       <div className="flex items-center gap-2 mb-2">
-        <Layers className="h-5 w-5 text-indigo-400" />
-        <h2 className="font-sans text-xl sm:text-2xl font-bold text-white">
+        <Layers className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+        <h2 className="font-sans text-xl sm:text-2xl font-bold text-slate-950 dark:text-white">
           Technology Stack
         </h2>
       </div>
-      <p className="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed mb-6">
+      <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed mb-6">
         An integrated engineering stack spanning real-time game engines, custom deep learning models, hybrid information retrieval, voice AI, and clinical-grade reporting services.
       </p>
 
@@ -95,12 +95,12 @@ export const VenipunctureTechStack: React.FC = () => {
         {techGroups.map((group) => (
           <div
             key={group.category}
-            className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 backdrop-blur-sm flex flex-col justify-between"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center gap-2 pb-3 mb-3 border-b border-zinc-800">
+              <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
                 {group.icon}
-                <h3 className="font-sans text-sm font-bold text-white tracking-tight">
+                <h3 className="font-sans text-sm font-bold text-slate-950 dark:text-white tracking-tight">
                   {group.category}
                 </h3>
               </div>
@@ -108,10 +108,10 @@ export const VenipunctureTechStack: React.FC = () => {
               <div className="space-y-3">
                 {group.technologies.map((t) => (
                   <div key={t.name} className="text-xs">
-                    <span className="font-mono font-bold text-zinc-200 block">
+                    <span className="font-mono font-bold text-slate-950 dark:text-white block">
                       {t.name}
                     </span>
-                    <span className="text-zinc-400 font-sans leading-relaxed block mt-0.5">
+                    <span className="text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed block mt-0.5">
                       {t.detail}
                     </span>
                   </div>

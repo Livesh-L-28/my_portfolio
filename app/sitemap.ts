@@ -2,8 +2,8 @@ import { MetadataRoute } from "next";
 import { PROJECTS } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://livesh-portfolio.vercel.app";
-  const lastModified = "2026-10-12T00:00:00.000Z";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://livesh.dev";
+  const lastModified = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

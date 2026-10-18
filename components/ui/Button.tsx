@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A12] disabled:opacity-50 disabled:pointer-events-none select-none";
+    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8fafc] disabled:opacity-50 disabled:pointer-events-none select-none";
 
   const sizeStyles = {
     sm: "text-xs px-3 py-1.5 gap-1.5",
@@ -33,14 +33,14 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      "bg-white hover:bg-zinc-200 text-zinc-950 font-semibold shadow-sm active:scale-[0.98]",
-    cyan: "bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700 active:scale-[0.98]",
+      "bg-slate-900 hover:bg-slate-800 text-white font-semibold shadow-sm active:scale-[0.98]",
+    cyan: "bg-sky-600 hover:bg-sky-700 text-white shadow-sm active:scale-[0.98]",
     secondary:
-      "bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700/80 active:scale-[0.98]",
+      "bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-xs active:scale-[0.98]",
     outline:
-      "bg-transparent hover:bg-zinc-800 text-zinc-200 border border-zinc-700 active:scale-[0.98]",
+      "bg-transparent hover:bg-slate-100 text-slate-700 border border-slate-300 active:scale-[0.98]",
     ghost:
-      "bg-transparent hover:bg-zinc-800/60 text-zinc-300 hover:text-white active:scale-[0.98]",
+      "bg-transparent hover:bg-slate-100 text-slate-600 hover:text-slate-900 active:scale-[0.98]",
   };
 
   const content = (

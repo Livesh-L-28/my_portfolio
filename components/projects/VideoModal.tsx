@@ -37,19 +37,21 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
     // Prevent body scroll when modal is open
     document.body.style.overflow = "hidden";
+    const videoEl = videoElementRef.current;
+    const triggerEl = triggerRef?.current;
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
 
       // Pause playback if direct video
-      if (videoElementRef.current) {
-        videoElementRef.current.pause();
+      if (videoEl) {
+        videoEl.pause();
       }
 
       // Restore focus to trigger
-      if (triggerRef?.current) {
-        triggerRef.current.focus();
+      if (triggerEl) {
+        triggerEl.focus();
       }
     };
   }, [isOpen, onClose, triggerRef]);
@@ -67,7 +69,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -76,15 +78,15 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       <div
         ref={modalRef}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-4xl overflow-hidden rounded-xl border border-zinc-700 bg-zinc-950 shadow-2xl focus:outline-none"
+        className="relative z-10 w-full max-w-4xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xl focus:outline-none"
       >
         {/* Header Bar */}
-        <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-3.5 bg-zinc-900">
+        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3.5 bg-slate-50">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
             <h2
               id="video-modal-title"
-              className="font-sans text-sm sm:text-base font-semibold text-white tracking-tight"
+              className="font-sans text-sm sm:text-base font-semibold text-slate-900 tracking-tight"
             >
               {title} — Demonstration Video
             </h2>
@@ -92,7 +94,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Close demo video modal"
-            className="flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-800 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -120,10 +122,10 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               allowFullScreen
             />
           ) : (
-            <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-400">
-              <AlertCircle className="h-10 w-10 text-zinc-400 mb-2" />
-              <p className="text-sm font-medium text-zinc-300">Demo video unavailable</p>
-              <p className="text-xs text-zinc-500 mt-1 max-w-sm">
+            <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500">
+              <AlertCircle className="h-10 w-10 text-slate-400 mb-2" />
+              <p className="text-sm font-medium text-slate-800">Demo video unavailable</p>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm">
                 The demonstration recording for this project has not been published or the path is invalid.
               </p>
             </div>
@@ -131,7 +133,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="flex items-center justify-between border-t border-zinc-800 bg-zinc-900 px-5 py-2.5 text-xs font-mono text-zinc-400">
+        <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 px-5 py-2.5 text-xs font-mono text-slate-600">
           <span>In-Portfolio Demo Player · Native playback</span>
           <span className="hidden sm:inline">Press ESC or click outside to dismiss</span>
         </div>

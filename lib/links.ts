@@ -5,6 +5,7 @@ export const PROFILE_LINKS = {
   phone: "+91 9345406612",
   github: "https://github.com/Livesh-L-28",
   linkedin: "https://linkedin.com/in/livesh-l-aa9821322",
+  pypi: "https://pypi.org/user/Livesh-L-28/",
   location: "Tamil Nadu, India",
   education: {
     degree: "B.Tech in Artificial Intelligence & Data Science",

@@ -12,16 +12,19 @@ interface ProjectGridProps {
   initialCategory?: ProjectCategory;
   limit?: number;
   showFilters?: boolean;
+  excludePyPIOnly?: boolean;
 }
 
 export const ProjectGrid: React.FC<ProjectGridProps> = ({
   initialCategory = "All Projects",
   limit,
   showFilters = true,
+  excludePyPIOnly = false,
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortBy, setSortBy] = useState<"featured" | "tests" | "name">("featured");
+  const [viewMode, setViewMode] = useState<"showcase" | "grid">("showcase");
 
   // Video Modal State
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -46,12 +49,18 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   const filteredProjects = useMemo(() => {
     let result = [...PROJECTS];
 
+    // Exclude PyPI-only packages if requested (e.g. for homepage flagship systems section)
+    if (excludePyPIOnly) {
+      result = result.filter((p) => !p.pypiOnly);
+    }
+
     // Filter by category
     if (activeCategory !== "All Projects") {
       result = result.filter(
         (p) =>
           p.category === activeCategory ||
-          p.categories?.includes(activeCategory as ProjectCategory)
+          p.categories?.includes(activeCategory as ProjectCategory) ||
+          (activeCategory === "Published Packages (PyPI)" && (p.pypiOnly || Boolean(p.links.pypiUrl)))
       );
     }
 
@@ -73,12 +82,11 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     if (sortBy === "featured") {
       result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     } else if (sortBy === "tests") {
-      // Prioritize projects with high test counts (LLMFirewall 608, aireliability 362, NexaRAG 321)
       const getTestScore = (p: ProjectData) => {
         if (p.id === "llmfirewall-core") return 608;
         if (p.id === "aireliability") return 362;
         if (p.id === "nexarag") return 321;
-        if (p.id === "venipuncture-vr" || p.id === "medical-transformer-lm") return 120;
+        if (p.id === "venipuncture-vr") return 120;
         return 0;
       };
       result.sort((a, b) => getTestScore(b) - getTestScore(a));
@@ -91,7 +99,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     }
 
     return result;
-  }, [activeCategory, searchQuery, sortBy, limit]);
+  }, [activeCategory, searchQuery, sortBy, limit, excludePyPIOnly]);
 
   return (
     <div className="w-full">
@@ -105,25 +113,43 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           sortBy={sortBy}
           onSortChange={setSortBy}
           totalCount={filteredProjects.length}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
         />
       )}
 
-      {/* Grid of Project Cards */}
+      {/* Project Cards (Showcase 1-by-1 or Compact Grid) */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onOpenVideo={handleOpenVideo}
-            />
-          ))}
-        </div>
+        viewMode === "showcase" ? (
+          <div className="flex flex-col gap-8 sm:gap-10">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                compact={false}
+                onOpenVideo={handleOpenVideo}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                compact={true}
+                onOpenVideo={handleOpenVideo}
+              />
+            ))}
+          </div>
+        )
       ) : (
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-12 text-center">
-          <SearchX className="mx-auto h-10 w-10 text-zinc-500 mb-3" />
-          <h4 className="text-base font-semibold text-white">No projects found</h4>
-          <p className="mt-1 text-xs text-zinc-400 max-w-sm mx-auto">
+        <div className="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-xs">
+          <SearchX className="mx-auto h-10 w-10 text-slate-400 mb-3" />
+          <h4 className="text-base font-semibold text-slate-900">No projects found</h4>
+          <p className="mt-1 text-xs text-slate-500 max-w-sm mx-auto">
             No projects matched your search criteria for &ldquo;{searchQuery}&rdquo;. Try clearing your search or switching categories.
           </p>
           <button
@@ -131,7 +157,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
               setSearchQuery("");
               setActiveCategory("All Projects");
             }}
-            className="mt-4 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-2 text-xs font-mono text-zinc-200 hover:bg-zinc-700 hover:text-white transition-colors cursor-pointer"
+            className="mt-4 rounded-lg border border-slate-200 bg-slate-100 px-4 py-2 text-xs font-mono text-slate-700 hover:bg-slate-200 hover:text-slate-900 transition-colors cursor-pointer"
           >
             Reset Filters
           </button>

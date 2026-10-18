@@ -418,8 +418,9 @@ export const PROJECTS: ProjectData[] = [
     fullName: "LLMFirewall Core — Defense-in-Depth Security Framework for AI & LLMs",
     tagline: "Sub-millisecond in-process firewall intercepting prompt injection, PII leaks, and rogue tool execution.",
     category: "AI Security",
-    categories: ["AI Security", "Reliability Engineering", "Developer Infrastructure"],
+    categories: ["Published Packages (PyPI)", "AI Security", "Reliability Engineering", "Developer Infrastructure"],
     featured: true,
+    pypiOnly: true,
     technologies: [
       "Python",
       "FastAPI",
@@ -438,7 +439,7 @@ export const PROJECTS: ProjectData[] = [
       { label: "Defense Layers", value: "6 in-depth" },
     ],
     summary:
-      "An open-source, provider-agnostic security framework published on PyPI. It acts as an in-process gatekeeper for LLMs, detecting adversarial injections, redacting PII, and sandboxing agent tool calls.",
+      "An open-source, provider-agnostic security framework published on PyPI (llmfirewall-core). Operates purely in-process with zero hosted UI or cloud API dependencies, detecting adversarial injections, redacting PII, and sandboxing agent tool calls.",
     description:
       "LLMFirewall is an in-process application-layer defense system that sits between users, autonomous agents, retrieval systems, and models. Published on PyPI as llmfirewall-core, it enforces Policy-as-Code with sub-millisecond execution latency, intercepting direct and indirect prompt injection, masking sensitive credentials and PII, sandboxing tool execution, and maintaining cryptographic audit trails.",
     links: {
@@ -584,8 +585,9 @@ export const PROJECTS: ProjectData[] = [
     fullName: "AI Reliability Engine (aireliability) — Deterministic Testing & Regression",
     tagline: "Deterministic assertion framework, tool-call validation, and regression testing for LLM workflows and autonomous agents.",
     category: "Reliability Engineering",
-    categories: ["Reliability Engineering", "AI Security", "Developer Infrastructure"],
+    categories: ["Published Packages (PyPI)", "Reliability Engineering", "AI Security", "Developer Infrastructure"],
     featured: true,
+    pypiOnly: true,
     technologies: [
       "Python",
       "Pydantic",
@@ -608,11 +610,11 @@ export const PROJECTS: ProjectData[] = [
     description:
       "Evaluating AI agents with vague vibe-checks fails in production. aireliability provides programmatic assertions over tool invocation sequences, argument schemas, execution budgets, cost ceilings, and latency thresholds. With 362 passing tests and the dedicated `airel` CLI, it integrates directly into GitHub Actions CI/CD pipelines to catch model regressions before code ships.",
     links: {
-      githubUrl: "https://github.com/Livesh-L-28/aireliability_testing",
+      githubUrl: "https://github.com/Livesh-L-28/aireliability",
       pypiUrl: "https://pypi.org/project/aireliability/",
       publishedPackageName: "aireliability",
       installCommand: "pip install aireliability",
-      documentationUrl: "https://github.com/Livesh-L-28/aireliability_testing#readme",
+      documentationUrl: "https://github.com/Livesh-L-28/aireliability#readme",
     },
     thumbnail: "/images/projects/aireliability.jpg",
     architectureDiagram: {
@@ -735,8 +737,9 @@ export const PROJECTS: ProjectData[] = [
     fullName: "AEGIS Framework — AI Reliability & Controlled Autonomous Remediation",
     tagline: "Autonomous incident investigation, evidence correlation, and approval-gated infrastructure remediation.",
     category: "Reliability Engineering",
-    categories: ["Reliability Engineering", "Developer Infrastructure", "AI Security"],
+    categories: ["Published Packages (PyPI)", "Reliability Engineering", "Developer Infrastructure", "AI Security"],
     featured: true,
+    pypiOnly: true,
     technologies: [
       "Python",
       "FastAPI",
@@ -1294,15 +1297,14 @@ export const PROJECTS: ProjectData[] = [
 ];
 
 export function getProjectBySlug(slug: string): ProjectData | undefined {
-  if (slug === "medical-transformer-lm") {
-    return PROJECTS.find((p) => p.slug === "venipuncture-vr");
-  }
-  return PROJECTS.find((p) => p.slug === slug);
+  const normalized = slug.toLowerCase().trim();
+  return PROJECTS.find((p) => p.slug === normalized);
 }
 
 export function getAllProjectCategories(): string[] {
   return [
     "All Projects",
+    "Published Packages (PyPI)",
     "LLM & RAG",
     "AI Security",
     "Reliability Engineering",

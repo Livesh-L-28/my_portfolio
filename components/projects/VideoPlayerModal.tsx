@@ -80,7 +80,7 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/85 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -89,18 +89,18 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
       <div
         ref={modalRef}
         tabIndex={-1}
-        className="relative z-10 w-full max-w-5xl overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-950 shadow-2xl focus:outline-none flex flex-col max-h-[92vh]"
+        className="relative z-10 w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl focus:outline-none flex flex-col max-h-[92vh]"
       >
         {/* Header Bar */}
-        <div className="flex items-center justify-between border-b border-zinc-800/80 px-4 sm:px-6 py-3.5 bg-zinc-900/90 backdrop-blur-md shrink-0">
+        <div className="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3.5 bg-slate-50 shrink-0">
           <div className="flex items-center gap-3 min-w-0 pr-2">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
                   {demo.demoNumber}
                 </span>
-                <span className="text-zinc-600 font-mono text-xs">·</span>
+                <span className="text-slate-300 font-mono text-xs">·</span>
                 <span
                   className={`text-[10px] font-mono px-2 py-0.5 rounded border ${demo.badgeStyle.bg} ${demo.badgeStyle.text} ${demo.badgeStyle.border}`}
                 >
@@ -109,7 +109,7 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
               </div>
               <h2
                 id="video-modal-title"
-                className="font-sans text-sm sm:text-base font-bold text-white tracking-tight truncate mt-0.5"
+                className="font-sans text-sm sm:text-base font-bold text-slate-900 tracking-tight truncate mt-0.5"
               >
                 {demo.title}
               </h2>
@@ -121,7 +121,7 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
             <button
               onClick={onClose}
               aria-label="Close video player"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-700 transition-colors cursor-pointer"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
             >
               <X className="h-4 w-4" />
             </button>
@@ -133,11 +133,11 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
           {/* Loading Indicator */}
           {isLoading && !hasError && (
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/90 p-4 text-center">
-              <Loader2 className="h-9 w-9 text-sky-400 animate-spin mb-3" />
+              <Loader2 className="h-9 w-9 text-indigo-400 animate-spin mb-3" />
               <p className="text-sm font-sans font-medium text-white">
                 Initializing Demonstration Video Stream
               </p>
-              <p className="text-xs font-mono text-zinc-400 mt-1 max-w-sm">
+              <p className="text-xs font-mono text-slate-400 mt-1 max-w-sm">
                 Streaming directly from Google Drive ({demo.fileSize} · {demo.format})
               </p>
             </div>
@@ -150,14 +150,14 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
               <h3 className="font-sans text-base font-semibold text-white">
                 Embedded Player Restricted by Browser Security
               </h3>
-              <p className="text-xs text-zinc-400 mt-1.5 font-sans leading-relaxed">
+              <p className="text-xs text-slate-400 mt-1.5 font-sans leading-relaxed">
                 Your browser or network policy blocked third-party Google Drive frame embeds. You can watch the full verified recording directly on Google Drive.
               </p>
               <a
                 href={demo.directDriveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-xs font-semibold text-white hover:bg-sky-400 transition-colors shadow-lg shadow-sky-500/20"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors shadow-sm"
               >
                 <Play className="h-3.5 w-3.5 fill-white" />
                 <span>Watch Directly on Google Drive ({demo.fileSize})</span>
@@ -183,16 +183,16 @@ const VideoPlayerDialog: React.FC<VideoPlayerDialogProps> = ({
         </div>
 
         {/* Footer Meta Bar */}
-        <div className="border-t border-zinc-800/80 px-4 sm:px-6 py-3 bg-zinc-900/60 flex items-center justify-between gap-3 text-xs font-mono text-zinc-400 shrink-0">
+        <div className="border-t border-slate-200 px-4 sm:px-6 py-3 bg-slate-50 flex items-center justify-between gap-3 text-xs font-mono text-slate-600 shrink-0">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="flex items-center gap-1.5 text-zinc-300">
-              <HardDrive className="h-3.5 w-3.5 text-zinc-400" />
+            <span className="flex items-center gap-1.5 text-slate-700">
+              <HardDrive className="h-3.5 w-3.5 text-slate-500" />
               <span className="truncate">{demo.filename}</span>
             </span>
-            <span className="text-zinc-600">·</span>
-            <span className="text-zinc-400 font-semibold">{demo.fileSize}</span>
-            <span className="text-zinc-600">·</span>
-            <span className="inline-flex items-center gap-1 text-emerald-400">
+            <span className="text-slate-300">·</span>
+            <span className="text-slate-600 font-semibold">{demo.fileSize}</span>
+            <span className="text-slate-300">·</span>
+            <span className="inline-flex items-center gap-1 text-emerald-700">
               <ShieldCheck className="h-3.5 w-3.5" />
               <span>In-Page Simulation Stream</span>
             </span>

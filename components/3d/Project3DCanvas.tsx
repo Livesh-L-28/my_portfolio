@@ -14,6 +14,8 @@ interface Project3DCanvasProps {
   showControlsHelp?: boolean;
 }
 
+import { checkWebGLSupport } from "@/lib/utils/webgl";
+
 export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
   type,
   interactive = true,
@@ -23,10 +25,11 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [webGlSupported] = useState<boolean>(() => checkWebGLSupport());
 
   useEffect(() => {
     const container = mountRef.current;
-    if (!container) return;
+    if (!container || !webGlSupported) return;
 
     // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia(
@@ -41,11 +44,17 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
     camera.position.z = 7;
 
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance",
+      });
+    } catch {
+      return;
+    }
+
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
@@ -751,7 +760,7 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     // Animation loop with pause on offscreen (IntersectionObserver)
     let animationFrameId: number;
     let isVisible = true;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
 
     const observer = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
@@ -762,7 +771,10 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       animationFrameId = requestAnimationFrame(render);
       if (!isVisible) return;
 
-      const delta = clock.getDelta();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
       if (!prefersReducedMotion && (!isDragging || !interactive)) {
         animateCallback(delta);
       }
@@ -803,11 +815,29 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
         container.removeChild(domElement);
       }
     };
-  }, [type, interactive]);
+  }, [type, interactive, webGlSupported]);
+
+  if (!webGlSupported) {
+    return (
+      <div
+        className={`relative w-full overflow-hidden select-none rounded-xl bg-slate-900 border border-slate-800 flex flex-col items-center justify-center p-4 text-center ${height} ${className}`}
+      >
+        <div className="h-10 w-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-2">
+          <span className="font-mono text-xs font-bold">3D</span>
+        </div>
+        <p className="text-xs font-mono font-semibold text-slate-200">
+          Interactive Architecture Topology
+        </p>
+        <p className="text-[10px] font-mono text-slate-400 mt-1">
+          {type.toUpperCase()} · Hardware acceleration disabled
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div
-      className={`relative w-full overflow-hidden select-none cursor-grab active:cursor-grabbing rounded-xl bg-zinc-950/70 border border-zinc-800/80 ${height} ${className}`}
+      className={`relative w-full overflow-hidden select-none cursor-grab active:cursor-grabbing rounded-xl bg-slate-950 border border-slate-800/90 shadow-inner ${height} ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -816,8 +846,9 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       {/* Interactive Helper Label */}
       {showControlsHelp && (
         <div
-          className={`absolute bottom-2 right-2 rounded bg-zinc-900/90 border border-zinc-800 px-2 py-0.5 text-[10px] font-mono text-zinc-400 transition-opacity pointer-events-none ${isHovered ? "opacity-100" : "opacity-60"
-            }`}
+          className={`absolute bottom-2 right-2 rounded bg-slate-900/90 border border-slate-700/80 px-2 py-0.5 text-[10px] font-mono text-slate-300 transition-opacity pointer-events-none shadow-xs ${
+            isHovered ? "opacity-100" : "opacity-60"
+          }`}
         >
           <span>Drag to orbit 3D</span>
         </div>

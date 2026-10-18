@@ -1,5 +1,6 @@
 export type ProjectCategory =
   | 'All Projects'
+  | 'Published Packages (PyPI)'
   | 'LLM & RAG'
   | 'AI Security'
   | 'Reliability Engineering'
@@ -30,6 +31,7 @@ export interface ProjectData {
   category: ProjectCategory;
   categories: (ProjectCategory | string)[];
   featured: boolean;
+  pypiOnly?: boolean;
   technologies: string[];
   keyAchievement: string;
   stats?: { label: string; value: string }[];
@@ -123,7 +125,6 @@ export function getProject3DType(slug: string): Project3DType {
     case 'nexarag':
       return 'nexarag';
     case 'venipuncture-vr':
-    case 'medical-transformer-lm':
       return 'medical';
     case 'llmfirewall-core':
     case 'llmfirewall':

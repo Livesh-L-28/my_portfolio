@@ -18,8 +18,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "01",
       title: "Unity VR Development",
       shortTitle: "Unity VR Client",
-      icon: <Glasses className="h-5 w-5 text-violet-400" />,
-      accentColor: "border-violet-500/30 bg-violet-500/5 text-violet-400",
+      icon: <Glasses className="h-5 w-5 text-violet-600" />,
+      accentColor: "border-violet-200 bg-violet-50 text-violet-700",
       badge: "OpenXR · C# · VRIF 3D",
       tagline: "High-fidelity clinical virtual room with tactile physics and 16-step procedural progression",
       overview:
@@ -50,8 +50,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "02",
       title: "Custom MedicalTransformerLM",
       shortTitle: "MedicalTransformerLM (~110M)",
-      icon: <Cpu className="h-5 w-5 text-emerald-400" />,
-      accentColor: "border-emerald-500/30 bg-emerald-500/5 text-emerald-400",
+      icon: <Cpu className="h-5 w-5 text-emerald-600" />,
+      accentColor: "border-emerald-200 bg-emerald-50 text-emerald-700",
       badge: "PyTorch · ~110M Params · OpenBioLLM · Llama 3.2",
       tagline: "Custom PyTorch autoregressive transformer paired with tiered multi-model clinical routing",
       overview:
@@ -82,8 +82,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "03",
       title: "Medical RAG Pipeline",
       shortTitle: "Medical RAG",
-      icon: <Database className="h-5 w-5 text-cyan-400" />,
-      accentColor: "border-cyan-500/30 bg-cyan-500/5 text-cyan-400",
+      icon: <Database className="h-5 w-5 text-cyan-600" />,
+      accentColor: "border-cyan-200 bg-cyan-50 text-cyan-800",
       badge: "BM25 + pgvector · PostgreSQL · Hybrid Search",
       tagline: "Dense semantic embeddings combined with sparse BM25 retrieval and strict grounding verification",
       overview:
@@ -115,8 +115,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "04",
       title: "Voice-Based Medical Assistant",
       shortTitle: "Voice Assistant",
-      icon: <Mic className="h-5 w-5 text-sky-400" />,
-      accentColor: "border-sky-500/30 bg-sky-500/5 text-sky-400",
+      icon: <Mic className="h-5 w-5 text-sky-600" />,
+      accentColor: "border-sky-200 bg-sky-50 text-sky-700",
       badge: "Whisper STT · macOS Speech TTS · Hands-Free",
       tagline: "Sterile field-preserving voice interaction pipeline delivering real-time clinical answers",
       overview:
@@ -147,8 +147,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "05",
       title: "Assessment and PDF Reporting",
       shortTitle: "Assessment & PDF Reports",
-      icon: <FileText className="h-5 w-5 text-amber-400" />,
-      accentColor: "border-amber-500/30 bg-amber-500/5 text-amber-400",
+      icon: <FileText className="h-5 w-5 text-amber-600" />,
+      accentColor: "border-amber-200 bg-amber-50 text-amber-800",
       badge: "Automated Rubrics · ReportLab · Audit Trail",
       tagline: "Automated objective grading with timestamped mistake detection and downloadable clinical PDF reports",
       overview:
@@ -179,8 +179,8 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
       sectionNumber: "06",
       title: "Backend Integration and Validation",
       shortTitle: "FastAPI Backend",
-      icon: <Server className="h-5 w-5 text-rose-400" />,
-      accentColor: "border-rose-500/30 bg-rose-500/5 text-rose-400",
+      icon: <Server className="h-5 w-5 text-rose-600" />,
+      accentColor: "border-rose-200 bg-rose-50 text-rose-700",
       badge: "FastAPI · ASGI · Pydantic · pytest",
       tagline: "High-throughput asynchronous web services coordinating AI models, speech, and telemetry",
       overview:
@@ -211,35 +211,35 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
   return (
     <div className="space-y-12">
       {/* Section Header */}
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 -z-10 h-72 w-72 bg-violet-600/10 blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 -z-10 h-72 w-72 bg-cyan-600/10 blur-3xl rounded-full pointer-events-none" />
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 -z-10 h-72 w-72 bg-indigo-50 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 -z-10 h-72 w-72 bg-sky-50 blur-3xl rounded-full pointer-events-none" />
 
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-md border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-mono text-violet-300 mb-3">
-            <Sparkles className="h-3.5 w-3.5 text-violet-400" />
+          <div className="inline-flex items-center gap-2 rounded-md border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-mono text-indigo-800 mb-3">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
             <span>Integrated Clinical Architecture</span>
-            <span className="text-violet-500 font-bold">•</span>
+            <span className="text-indigo-400 font-bold">•</span>
             <span>6 Core Engineering Pillars</span>
           </div>
 
-          <h2 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
+          <h2 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             System Components & Technical Deep Dives
           </h2>
 
-          <p className="mt-2 text-sm sm:text-base text-zinc-300 font-sans leading-relaxed">
+          <p className="mt-2 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed">
             A comprehensive breakdown of the integrated clinical architecture combining Unity VR simulation, custom PyTorch language modeling, hybrid RAG retrieval, hands-free voice assistance, and automated clinical evaluation.
           </p>
         </div>
 
         {/* Quick jump navigation chips */}
-        <div className="mt-6 pt-6 border-t border-zinc-800/80 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-          <span className="text-xs font-mono text-zinc-400 shrink-0 mr-1">Quick Jump:</span>
+        <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+          <span className="text-xs font-mono text-slate-700 dark:text-slate-300 font-bold shrink-0 mr-1">Quick Jump:</span>
           {pillars.map((pillar) => (
             <a
               key={pillar.id}
               href={`#${pillar.id}`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-950/80 px-3 py-1 text-xs font-mono text-zinc-300 hover:text-white hover:border-zinc-700 hover:bg-zinc-800 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-3 py-1 text-xs font-mono text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:border-slate-400 dark:hover:border-slate-600 transition-colors shrink-0 font-medium"
             >
               <span>{pillar.shortTitle}</span>
             </a>
@@ -253,28 +253,28 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
           <section
             key={pillar.id}
             id={pillar.id}
-            className="scroll-mt-24 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6 sm:p-8 backdrop-blur-xl shadow-xl transition-all duration-300 hover:border-zinc-700/80"
+            className="scroll-mt-24 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm transition-all duration-300 hover:border-slate-300 dark:hover:border-slate-700"
           >
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-zinc-800/80">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
               <div className="flex items-start gap-4">
                 <div className={`p-3 rounded-xl border ${pillar.accentColor} shrink-0`}>
                   {pillar.icon}
                 </div>
                 <div>
                   <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
-                    <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300 font-bold">
                       Pillar {pillar.sectionNumber} of 06
                     </span>
-                    <span className="text-zinc-600 font-mono text-xs">•</span>
-                    <span className="rounded bg-zinc-800 border border-zinc-700/80 px-2 py-0.5 text-[10px] font-mono text-zinc-300">
+                    <span className="text-slate-400 dark:text-slate-600 font-mono text-xs">•</span>
+                    <span className="rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-2 py-0.5 text-[10px] font-mono text-slate-800 dark:text-slate-200 font-semibold">
                       {pillar.badge}
                     </span>
                   </div>
-                  <h3 className="font-sans text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <h3 className="font-sans text-xl sm:text-2xl font-bold text-slate-950 dark:text-white tracking-tight">
                     {pillar.title}
                   </h3>
-                  <p className="mt-1 text-xs sm:text-sm font-mono text-zinc-400">
+                  <p className="mt-1 text-xs sm:text-sm font-mono text-slate-700 dark:text-slate-300 font-medium">
                     {pillar.tagline}
                   </p>
                 </div>
@@ -282,23 +282,23 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
             </div>
 
             {/* Overview text */}
-            <p className="mt-6 text-sm text-zinc-300 font-sans leading-relaxed">
+            <p className="mt-6 text-sm text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed">
               {pillar.overview}
             </p>
 
-            {/* Architecture Components Required in Section 8 */}
+            {/* Architecture Components */}
             <div className="mt-6">
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-sky-400 mb-3 flex items-center gap-2">
-                <Workflow className="h-3.5 w-3.5" />
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-sky-800 dark:text-sky-300 mb-3 flex items-center gap-2">
+                <Workflow className="h-3.5 w-3.5 text-sky-600 dark:text-sky-400" />
                 <span>Architecture Components & Subsystems</span>
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {pillar.architectureComponents.map((comp, cIdx) => (
                   <div
                     key={cIdx}
-                    className="rounded-lg border border-zinc-800 bg-zinc-950/70 p-3 text-xs text-zinc-300 font-sans flex items-start gap-2.5 leading-relaxed"
+                    className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 p-3 text-xs text-slate-800 dark:text-slate-200 font-sans flex items-start gap-2.5 leading-relaxed font-medium"
                   >
-                    <span className="text-sky-400 font-bold shrink-0 mt-0.5">›</span>
+                    <span className="text-sky-600 dark:text-sky-400 font-bold shrink-0 mt-0.5">›</span>
                     <span>{comp}</span>
                   </div>
                 ))}
@@ -307,17 +307,17 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
 
             {/* Key Capabilities */}
             <div className="mt-6">
-              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 mb-3 flex items-center gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5" />
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 mb-3 flex items-center gap-2">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Key Procedural & Algorithmic Capabilities</span>
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {pillar.capabilities.map((cap, capIdx) => (
                   <div
                     key={capIdx}
-                    className="rounded-lg border border-zinc-800/80 bg-zinc-950/50 p-3 text-xs text-zinc-300 font-sans flex items-start gap-2.5 leading-relaxed"
+                    className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 p-3 text-xs text-slate-800 dark:text-slate-200 font-sans flex items-start gap-2.5 leading-relaxed font-medium"
                   >
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <span>{cap}</span>
                   </div>
                 ))}
@@ -325,16 +325,16 @@ export const VenipunctureTechnicalDeepDive: React.FC = () => {
             </div>
 
             {/* Specifications Matrix */}
-            <div className="mt-6 pt-6 border-t border-zinc-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {pillar.specifications.map((spec, sIdx) => (
                 <div
                   key={sIdx}
-                  className="rounded-lg border border-zinc-800 bg-zinc-900/90 p-3 text-left"
+                  className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 p-3 text-left"
                 >
-                  <span className="block text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+                  <span className="block text-[10px] font-mono text-slate-700 dark:text-slate-300 uppercase tracking-wider font-bold">
                     {spec.label}
                   </span>
-                  <span className="block text-xs sm:text-sm font-mono font-bold text-white mt-1">
+                  <span className="block text-xs sm:text-sm font-mono font-bold text-slate-950 dark:text-white mt-1">
                     {spec.value}
                   </span>
                 </div>

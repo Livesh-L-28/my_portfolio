@@ -39,7 +39,7 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
       className={`relative shrink-0 select-none ${sizeClasses[size]} ${className}`}
     >
       {hasValidImage ? (
-        <div className="relative h-full w-full overflow-hidden rounded-inherit border border-zinc-700/80 bg-zinc-800 shadow-sm">
+        <div className="relative h-full w-full overflow-hidden rounded-inherit border border-slate-200 bg-slate-100 shadow-sm">
           <Image
             src={src!}
             alt="Livesh L"
@@ -52,12 +52,12 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         </div>
       ) : (
         /* Executive High-Craft Developer Monogram */
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-inherit border border-zinc-700/80 bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)]">
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-inherit border border-indigo-200 bg-gradient-to-br from-indigo-50 via-slate-50 to-indigo-100 shadow-[inset_0_1px_0_0_rgba(255,255,255,1)]">
           {/* Subtle tech grid background accent */}
-          <div className="absolute inset-0 bg-grid-subtle opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 bg-grid-subtle opacity-40 pointer-events-none" />
 
           {/* Monogram Typography */}
-          <span className="relative z-10 font-mono font-bold tracking-tight text-white drop-shadow-sm">
+          <span className="relative z-10 font-mono font-bold tracking-tight text-indigo-900 drop-shadow-xs">
             LL
           </span>
         </div>
@@ -66,10 +66,10 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
       {/* Live availability indicator */}
       {showStatus && (
         <span
-          className={`absolute -bottom-0.5 -right-0.5 rounded-full bg-emerald-400 ring-zinc-950 ${statusDotSizes[size]} shadow-sm`}
+          className={`absolute -bottom-0.5 -right-0.5 rounded-full bg-emerald-500 ring-white ${statusDotSizes[size]} shadow-xs`}
           title="Available for AI Engineering"
         >
-          <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+          <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75" />
         </span>
       )}
     </div>
