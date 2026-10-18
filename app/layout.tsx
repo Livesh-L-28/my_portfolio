@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#06070B",
+  themeColor: "#fafbfc",
   width: "device-width",
   initialScale: 1,
 };
@@ -165,12 +165,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const theme = localStorage.getItem('portfolio-theme');
-                if (theme === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else {
-                  document.documentElement.classList.add('dark');
-                }
+                localStorage.removeItem('portfolio-theme');
+                sessionStorage.removeItem('portfolio-theme');
+                document.documentElement.classList.remove('dark');
               } catch (_) {}
             `,
           }}

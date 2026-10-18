@@ -123,12 +123,12 @@ export class SceneController {
   private pointerY = 0;
   private targetPointerX = 0;
   private targetPointerY = 0;
-  private isDark = true;
+  private isDark = false;
   private isReducedMotion = false;
 
   private targetTheme: ProjectThemeConfig = DEFAULT_THEME;
 
-  constructor(canvas: HTMLCanvasElement, isDark: boolean = true) {
+  constructor(canvas: HTMLCanvasElement, isDark: boolean = false) {
     this.canvas = canvas;
     this.isDark = isDark;
     this.lastTime = performance.now();

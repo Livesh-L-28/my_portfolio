@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 type Theme = "light" | "dark";
 
@@ -12,57 +12,37 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const THEME_CHANGE_EVENT = "portfolio-theme-change";
-
-function subscribe(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener(THEME_CHANGE_EVENT, callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(THEME_CHANGE_EVENT, callback);
-  };
-}
-
-function getSnapshot(): Theme {
-  try {
-    const saved = localStorage.getItem("portfolio-theme") as Theme | null;
-    if (saved === "light") return "light";
-    return "dark";
-  } catch {
-    return "dark";
-  }
-}
-
-function getServerSnapshot(): Theme {
-  return "dark";
-}
-
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [theme, setThemeState] = useState<Theme>("light");
 
   useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const setTheme = (newTheme: Theme) => {
     try {
-      localStorage.setItem("portfolio-theme", newTheme);
+      localStorage.removeItem("portfolio-theme");
+      sessionStorage.removeItem("portfolio-theme");
     } catch {}
+    document.documentElement.classList.remove("dark");
+  }, []);
+
+  const setTheme = useCallback((newTheme: Theme) => {
+    setThemeState(newTheme);
     if (newTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
-  };
+  }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const toggleTheme = useCallback(() => {
+    setThemeState((prev) => {
+      const nextTheme = prev === "light" ? "dark" : "light";
+      if (nextTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      return nextTheme;
+    });
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
@@ -78,3 +58,4 @@ export const useTheme = () => {
   }
   return context;
 };
+
