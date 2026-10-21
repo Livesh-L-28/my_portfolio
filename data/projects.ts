@@ -896,6 +896,173 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
+    id: "logicfalcon",
+    slug: "logicfalcon",
+    title: "LogicFalcon",
+    fullName: "LogicFalcon — AI-Powered Code Review & Developer Intelligence Package",
+    tagline: "Modular Python code review engine with CLI, SDK, and Model Context Protocol (MCP) interfaces, AST analysis, and safe remediation.",
+    category: "Developer Infrastructure",
+    categories: ["Published Packages (PyPI)", "Developer Infrastructure", "AI Security", "Reliability Engineering"],
+    featured: false,
+    pypiOnly: true,
+    technologies: [
+      "Python",
+      "AST Analysis",
+      "CLI",
+      "SDK",
+      "MCP",
+      "Ruff",
+      "SARIF",
+      "GitHub Actions",
+      "pytest",
+      "Pydantic",
+    ],
+    keyAchievement: "101/101 tests passed · 3 interfaces (CLI, SDK, MCP) · 10 safe remediation acceptance checks",
+    stats: [
+      { label: "PyPI Package", value: "logicfalcon" },
+      { label: "Automated Tests", value: "101 passed" },
+      { label: "Interfaces", value: "CLI + SDK + MCP" },
+      { label: "Safety Controls", value: "10 Acceptance Checks" },
+    ],
+    summary:
+      "A modular Python code review package offering CLI, SDK, and Model Context Protocol (MCP) interfaces for programmatic code analysis, structured diagnostic reporting, proposed code fixes, and safe approval-controlled remediation.",
+    description:
+      "LogicFalcon is a high-precision code review and developer intelligence package engineered for modern software pipelines and AI developer workflows. It exposes 3 distinct interfaces: a CLI for developer workstations, an importable SDK for backend integrations, and an MCP server enabling autonomous coding agents to inspect and remediate workspaces safely. It features file and workspace scanning, structured findings, severity classification, SARIF reporting, and 10 acceptance-checked safety mechanisms including path containment, symlink protection, dry-run diffs, and automatic backup rollback.",
+    links: {
+      githubUrl: "https://github.com/Livesh-L-28/logicfalcon",
+      pypiUrl: "https://pypi.org/project/logicfalcon/",
+      publishedPackageName: "logicfalcon",
+      installCommand: "pip install logicfalcon",
+      documentationUrl: "https://github.com/Livesh-L-28/logicfalcon#readme",
+    },
+    thumbnail: "/images/projects/aegis.jpg",
+    architectureDiagram: {
+      nodes: [
+        {
+          id: "interfaces",
+          label: "Developer Interfaces",
+          role: "Access Layer",
+          tech: "CLI / SDK / Model Context Protocol (MCP)",
+          description: "Provides terminal commands, importable Python classes, and MCP tools for AI coding assistants.",
+        },
+        {
+          id: "ast_parser",
+          label: "AST & Syntax Parser",
+          role: "Code Analysis",
+          tech: "Python ast & Tree Traversal",
+          description: "Parses source code into abstract syntax trees for deep semantic pattern recognition without executing untrusted code.",
+        },
+        {
+          id: "rule_engine",
+          label: "Rule Engine & Ruff Bridge",
+          role: "Linting & Heuristics",
+          tech: "Ruff + Custom AST Rules",
+          description: "Evaluates security risks, code smells, type violations, and generates structured findings with severity classifications.",
+        },
+        {
+          id: "safety_governor",
+          label: "Remediation Governor",
+          role: "Safety Layer",
+          tech: "10 Acceptance Checks",
+          description: "Enforces dry-run diffs, approval controls, path containment, symlink protection, atomic backups, and rollback.",
+        },
+        {
+          id: "exporter",
+          label: "Diagnostics & SARIF Exporter",
+          role: "Reporting",
+          tech: "SARIF 2.1.0 + Machine JSON",
+          description: "Outputs structured findings for GitHub Code Scanning, CI/CD gates, and interactive terminal diffs.",
+        },
+      ],
+      connections: [
+        { from: "interfaces", to: "ast_parser", label: "File/Workspace Query" },
+        { from: "ast_parser", to: "rule_engine", label: "AST Nodes" },
+        { from: "rule_engine", to: "safety_governor", label: "Proposed Fixes" },
+        { from: "safety_governor", to: "exporter", label: "Approved Diffs & Findings" },
+        { from: "exporter", to: "interfaces", label: "SARIF / JSON / Terminal" },
+      ],
+    },
+    caseStudy: {
+      problemStatement:
+        "Developer tools and AI coding assistants frequently propose automated code changes without verification, risking destructive overwrites, directory traversal, broken syntax, or unvetted logic errors in production codebases.",
+      engineeringGoals: [
+        "Provide 3 seamless interfaces: CLI, SDK, and Model Context Protocol (MCP) for modern AI-assisted engineering.",
+        "Implement automated file and workspace analysis with structured findings and severity ratings.",
+        "Guarantee safe remediation with 10 strict acceptance checks including path containment and rollback.",
+        "Achieve 100% test pass rate across core review, security, and CLI modules.",
+      ],
+      systemArchitecture:
+        "LogicFalcon uses a modular architecture where the Analysis Core parses Python AST and coordinates with Ruff rule-checking. Proposed fixes pass through a fail-closed Remediation Governor that creates atomic file backups and enforces path boundaries before any write occurs. Results are surfaced via CLI, Python SDK, or MCP server with SARIF and JSON export options.",
+      pipelineSteps: [
+        {
+          step: "01",
+          title: "Multi-Interface Ingestion",
+          detail: "Accepts review requests via CLI flags, Python method calls, or Model Context Protocol tool invocations.",
+        },
+        {
+          step: "02",
+          title: "AST & Heuristic Analysis",
+          detail: "Constructs syntax trees to detect dead code, insecure patterns, and type inconsistencies without runtime risk.",
+        },
+        {
+          step: "03",
+          title: "Safety-Gated Remediation",
+          detail: "Executes 10 acceptance checks: path containment, symlink traversal prevention, dry-run diff generation, approval confirmation, and automated backup.",
+        },
+        {
+          step: "04",
+          title: "SARIF & Diagnostic Export",
+          detail: "Generates machine-readable SARIF 2.1.0 outputs compatible with GitHub Security tabs and CI/CD quality gates.",
+        },
+      ],
+      implementationHighlights: [
+        "3 unified interfaces: CLI, SDK, and Model Context Protocol (MCP).",
+        "10 verified safety acceptance checks for approval-controlled code remediation.",
+        "101/101 automated Python tests passing with zero failures.",
+        "SARIF 2.1.0 and machine-readable JSON output for CI/CD automation.",
+        "Prepared version 0.1.2 release artifacts (wheel and source distribution) with clean virtual-environment verification.",
+      ],
+      technicalTradeoffs: [
+        {
+          decision: "In-process AST and Ruff analysis instead of running dynamic code execution.",
+          rationale: "Dynamic execution introduces severe security and sandbox vulnerability risks on untrusted repositories.",
+          alternativeRejected: "Running untrusted code in an unisolated runtime.",
+        },
+        {
+          decision: "Strict fail-closed approval requirement for all automated file edits.",
+          rationale: "Prevents accidental mass-modification or developer data loss when running automated review scripts.",
+          alternativeRejected: "Silent in-place file mutation.",
+        },
+      ],
+      testingAndEvaluation: {
+        metrics: [
+          "101 / 101 tests passed (100% test pass rate)",
+          "10 safe remediation acceptance checks verified",
+          "Zero path traversal vulnerabilities (symlink protection enabled)",
+        ],
+        methodology:
+          "Comprehensive pytest suite verifying AST visitor correctness, CLI flag parsing, MCP server protocol adherence, and edge-case error recovery.",
+        testCount: 101,
+      },
+      securityReliability: [
+        "Path containment checks prevent edits outside targeted workspace directories.",
+        "Symlink traversal protection blocks malicious link-following attacks.",
+        "Atomic backup creation prior to any file mutation with automatic rollback on failure.",
+        "Post-fix re-analysis verifies that proposed fixes do not introduce new syntax errors.",
+      ],
+      keyLearnings: [
+        "Providing an MCP interface allows AI coding assistants like Claude or Cursor to leverage deterministic linting tools as first-class tools.",
+      ],
+      localDeploymentInstructions: [
+        "pip install logicfalcon",
+        "logicfalcon review ./src",
+        "from logicfalcon import ReviewEngine",
+        "engine = ReviewEngine()",
+        "report = engine.review_workspace('./src')",
+      ],
+    },
+  },
+  {
     id: "fastapi-cicd-lab",
     slug: "fastapi-cicd-lab",
     title: "FastAPI CI/CD Lab",

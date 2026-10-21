@@ -24,6 +24,7 @@ export const PublishedPackagesSection: React.FC = () => {
   const [firewallView, setFirewallView] = useState<"pipeline" | "code">("pipeline");
   const [airelView, setAirelView] = useState<"pipeline" | "code">("pipeline");
   const [aegisView, setAegisView] = useState<"architecture" | "cli">("architecture");
+  const [falconView, setFalconView] = useState<"architecture" | "code">("architecture");
   const [activeAutonomy, setActiveAutonomy] = useState<number>(1);
 
   return (
@@ -44,7 +45,7 @@ export const PublishedPackagesSection: React.FC = () => {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 dark:border-indigo-900/60 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 text-xs font-mono text-indigo-800 dark:text-indigo-300 mb-3 shadow-xs font-semibold">
               <span>02</span>
               <span className="text-indigo-400 dark:text-indigo-600">{"//"}</span>
-              <span>Published Python Distributions · 3 Verified PyPI Packages</span>
+              <span>Published Python Distributions · 4 Verified PyPI Packages</span>
             </div>
             <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
               Open-Source &amp; Published Packages
@@ -915,6 +916,285 @@ $ aegis demo              # Simulates 7-step incident triage`}</code>
 aegis = Aegis.from_config("aegis.yaml")
 assessment = aegis.evaluate_incident(incident_id="INC-4091")
 print(f"Status: {assessment.status} (Autonomy Level: {aegis.config.autonomy.level})")`}</code>
+                        </pre>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* ========================================================================= */}
+          {/* PACKAGE 4: LogicFalcon (logicfalcon) */}
+          {/* ========================================================================= */}
+          <article className="rounded-3xl border border-slate-200 dark:border-slate-800/90 bg-white dark:bg-slate-900/70 p-6 sm:p-9 lg:p-10 shadow-sm transition-all relative overflow-hidden">
+            {/* Top Accent Strip */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-indigo-600" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              {/* Left Column: Metadata, Description & Actions */}
+              <div className="lg:col-span-6 space-y-6">
+                {/* Identification Badges */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800/80 px-2.5 py-1 text-xs font-mono font-bold text-teal-800 dark:text-teal-300">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+                    <span>logicfalcon v0.1.2</span>
+                  </span>
+                  <span className="rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-[11px] font-mono text-slate-700 dark:text-slate-300 font-semibold">
+                    Python &gt;=3.10
+                  </span>
+                  <span className="rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-[11px] font-mono text-slate-700 dark:text-slate-300 font-semibold">
+                    Apache-2.0
+                  </span>
+                  <span className="rounded-lg bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 font-bold">
+                    101/101 Tests Passed
+                  </span>
+                  <span className="rounded-lg bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 px-2.5 py-1 text-[11px] font-mono text-indigo-700 dark:text-indigo-300 font-bold">
+                    CLI • SDK • MCP
+                  </span>
+                </div>
+
+                {/* Live PyPI Shields Telemetry Badges */}
+                <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                  <img
+                    src="https://img.shields.io/pypi/v/logicfalcon.svg?label=PyPI&color=8b5cf6&style=flat-square"
+                    alt="PyPI Version: logicfalcon"
+                    className="h-5 rounded"
+                    loading="lazy"
+                  />
+                  <img
+                    src="https://img.shields.io/pypi/dm/logicfalcon.svg?color=10b981&style=flat-square"
+                    alt="PyPI Monthly Downloads"
+                    className="h-5 rounded"
+                    loading="lazy"
+                  />
+                  <img
+                    src="https://img.shields.io/pypi/pyversions/logicfalcon.svg?style=flat-square&color=38bdf8"
+                    alt="Supported Python Versions"
+                    className="h-5 rounded"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Package Title & Positioning */}
+                <div>
+                  <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight">
+                    LogicFalcon
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2 mt-1 font-mono text-xs">
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">PyPI Distribution:</span>
+                    <code className="bg-slate-100 dark:bg-slate-800 text-slate-950 dark:text-slate-100 font-bold px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-700">
+                      logicfalcon
+                    </code>
+                    <span className="text-slate-400">•</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Import:</span>
+                    <code className="bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 font-bold px-1.5 py-0.5 rounded border border-teal-200 dark:border-teal-800">
+                      import logicfalcon
+                    </code>
+                  </div>
+                </div>
+
+                {/* Package Description Callout */}
+                <div className="rounded-xl border border-teal-200 dark:border-teal-900/60 bg-teal-50/80 dark:bg-teal-950/40 p-3.5 text-xs font-sans text-teal-950 dark:text-teal-200 space-y-1">
+                  <div className="font-bold flex items-center gap-1.5 text-teal-900 dark:text-teal-300">
+                    <ShieldCheck className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                    <span>AI-Powered Code Review &amp; Developer Intelligence:</span>
+                  </div>
+                  <p className="text-[11px] leading-relaxed">
+                    Developed a modular Python code review package with <strong>3 interfaces: CLI, SDK, and Model Context Protocol (MCP)</strong> for programmatic code analysis and developer-tool integration. Enforces safe remediation with <strong>10 reported acceptance checks</strong> and <strong>101/101 automated tests passed</strong>.
+                  </p>
+                </div>
+
+                <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-sans leading-relaxed">
+                  Automates code review with file and workspace analysis, structured findings, severity classification, diagnostic reporting, and proposed code fixes. Prepared package release artifacts for <strong>version 0.1.2</strong> (wheel and source distribution) with strict package metadata validation and clean virtual-environment installation checks.
+                </p>
+
+                {/* Verified Core Capabilities */}
+                <div className="space-y-2 pt-1 font-sans text-xs text-slate-800 dark:text-slate-200">
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 text-teal-500 shrink-0 mt-0.5" />
+                    <span><strong>3 Unified Interfaces (CLI, SDK, MCP):</strong> Seamless integration from developer terminal flags to AI coding assistants via Model Context Protocol.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <ShieldCheck className="h-4 w-4 text-teal-500 shrink-0 mt-0.5" />
+                    <span><strong>10 Safe Remediation Acceptance Checks:</strong> Dry-run diffs, approval-controlled changes, atomic backup and rollback, path containment, and symlink protection.</span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 text-teal-500 shrink-0 mt-0.5" />
+                    <span><strong>SARIF &amp; Diagnostics Export:</strong> Machine-readable JSON output and SARIF 2.1.0 reporting for GitHub Security and CI/CD quality gates.</span>
+                  </div>
+                </div>
+
+                {/* Installation Panel */}
+                <div className="pt-2">
+                  <span className="block text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold mb-2">
+                    Installation Command:
+                  </span>
+                  <CodeBlock code="pip install logicfalcon" prefix="$" />
+                </div>
+
+                {/* Action Links */}
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <a
+                    href="https://pypi.org/project/logicfalcon/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-slate-900 dark:bg-teal-600 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 dark:hover:bg-teal-500 transition-all shadow-xs"
+                  >
+                    <Package className="h-3.5 w-3.5" />
+                    <span>View on PyPI</span>
+                    <ExternalLink className="h-3 w-3 opacity-75" />
+                  </a>
+
+                  <a
+                    href="https://github.com/Livesh-L-28/logicfalcon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-400 transition-colors shadow-2xs"
+                  >
+                    <GithubIcon className="h-3.5 w-3.5" />
+                    <span>View Source</span>
+                  </a>
+
+                  <a
+                    href="https://github.com/Livesh-L-28/logicfalcon#readme"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition-colors"
+                  >
+                    <BookOpen className="h-3.5 w-3.5 text-teal-500" />
+                    <span>Documentation</span>
+                  </a>
+
+                  <Link
+                    href="/projects/logicfalcon"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-teal-600 dark:text-teal-400 hover:underline ml-auto"
+                  >
+                    <span>Read Architecture Case Study</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Purposeful Technical Visualization */}
+              <div className="lg:col-span-6 w-full">
+                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-950/80 overflow-hidden shadow-xs">
+                  {/* View Switcher Header */}
+                  <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 bg-white dark:bg-slate-900/90">
+                    <div className="flex items-center gap-2 font-mono text-xs font-bold text-slate-800 dark:text-slate-200">
+                      <Workflow className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+                      <span>Review Engine Architecture</span>
+                    </div>
+
+                    <div className="flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 p-0.5 border border-slate-200 dark:border-slate-700">
+                      <button
+                        type="button"
+                        onClick={() => setFalconView("architecture")}
+                        className={`px-2.5 py-1 text-xs font-mono rounded-md transition-colors ${
+                          falconView === "architecture"
+                            ? "bg-white dark:bg-slate-900 text-slate-950 dark:text-white font-bold shadow-2xs"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                        }`}
+                      >
+                        Safety Controls
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFalconView("code")}
+                        className={`px-2.5 py-1 text-xs font-mono rounded-md transition-colors ${
+                          falconView === "code"
+                            ? "bg-white dark:bg-slate-900 text-slate-950 dark:text-white font-bold shadow-2xs"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                        }`}
+                      >
+                        CLI &amp; SDK Quickstart
+                      </button>
+                    </div>
+                  </div>
+
+                  {falconView === "architecture" ? (
+                    <div className="p-4 sm:p-5 space-y-4">
+                      <div className="flex items-center justify-between text-xs font-mono">
+                        <span className="text-slate-600 dark:text-slate-400 font-semibold">
+                          10 Remediation Safety Acceptance Checks
+                        </span>
+                        <span className="text-teal-700 dark:text-teal-300 font-bold bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded border border-teal-200 dark:border-teal-800">
+                          100% Passed
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                        {[
+                          { name: "Path Containment", desc: "No traversal outside workspace" },
+                          { name: "Symlink Protection", desc: "Blocks link-following attacks" },
+                          { name: "Atomic File Backup", desc: "Automatic rollback on error" },
+                          { name: "Approval Gate", desc: "Interactive/flagged confirmation" },
+                          { name: "Dry-Run Diffing", desc: "Unified diff preview before writes" },
+                          { name: "Post-Fix Re-Analysis", desc: "Verifies syntax integrity" },
+                        ].map((check, idx) => (
+                          <div
+                            key={idx}
+                            className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 flex items-start gap-2"
+                          >
+                            <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5" />
+                            <div>
+                              <div className="font-bold text-slate-900 dark:text-white text-[11px]">
+                                {check.name}
+                              </div>
+                              <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                                {check.desc}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 space-y-1.5 text-xs font-mono">
+                        <div className="flex items-center justify-between text-slate-900 dark:text-white font-bold">
+                          <span>3 Multi-Interface Gateways</span>
+                          <span className="text-[10px] text-teal-600 dark:text-teal-400 font-semibold">Active</span>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800">
+                          <span>1. Terminal CLI:</span>
+                          <code className="text-teal-600 dark:text-teal-400">$ logicfalcon review ./src</code>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
+                          <span>2. Python SDK:</span>
+                          <code className="text-teal-600 dark:text-teal-400">from logicfalcon import ReviewEngine</code>
+                        </div>
+                        <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
+                          <span>3. MCP Server:</span>
+                          <code className="text-teal-600 dark:text-teal-400">modelcontextprotocol/v1</code>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-4 sm:p-5 font-mono text-xs overflow-x-auto space-y-4">
+                      <div>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                          Terminal CLI Review with SARIF Output:
+                        </span>
+                        <pre className="text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-100 dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                          <code>{`$ logicfalcon review ./src --format sarif --dry-run
+$ logicfalcon fix ./src/app.py --backup --approval
+$ logicfalcon doctor   # Validates Ruff, AST parser & virtualenv`}</code>
+                        </pre>
+                      </div>
+
+                      <div>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                          Python SDK Programmatic Review:
+                        </span>
+                        <pre className="text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-100 dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                          <code>{`from logicfalcon import ReviewEngine
+
+engine = ReviewEngine(strict=True)
+report = engine.review_workspace("./src")
+
+print(f"Passed: {report.passed} | Findings: {len(report.findings)}")
+for finding in report.findings:
+    print(f"[{finding.severity}] {finding.file}:{finding.line} - {finding.message}")`}</code>
                         </pre>
                       </div>
                     </div>

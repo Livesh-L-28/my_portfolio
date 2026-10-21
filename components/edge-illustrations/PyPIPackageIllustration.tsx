@@ -51,6 +51,17 @@ export const PyPIPackageIllustration: React.FC = () => {
       githubUrl: "https://github.com/Livesh-L-28/llmfirewall-core",
       modules: ["firewall.interceptor", "firewall.pii", "firewall.jailbreak"],
     },
+    {
+      id: "logicfalcon",
+      distName: "logicfalcon",
+      importName: "logicfalcon",
+      version: "0.1.2",
+      description: "AI-powered code review with CLI, SDK & Model Context Protocol (MCP).",
+      command: "pip install logicfalcon",
+      pypiUrl: "https://pypi.org/project/logicfalcon/",
+      githubUrl: "https://github.com/Livesh-L-28/logicfalcon",
+      modules: ["falcon.mcp", "falcon.ast", "falcon.remediate"],
+    },
   ];
 
   const [activePkgIdx, setActivePkgIdx] = useState(0);
@@ -88,7 +99,7 @@ export const PyPIPackageIllustration: React.FC = () => {
       </div>
 
       {/* Package Selector Tabs */}
-      <div className="grid grid-cols-3 gap-1 font-mono text-[10px]">
+      <div className="grid grid-cols-4 gap-1 font-mono text-[9px]">
         {packages.map((pkg, idx) => (
           <button
             key={pkg.id}
@@ -97,7 +108,7 @@ export const PyPIPackageIllustration: React.FC = () => {
               setActivePkgIdx(idx);
               setCopied(false);
             }}
-            className={`py-1 px-1.5 rounded-lg border text-center transition-all cursor-pointer truncate ${
+            className={`py-1 px-1 rounded border text-center transition-all cursor-pointer truncate ${
               activePkgIdx === idx
                 ? "bg-indigo-50 dark:bg-indigo-950/70 border-indigo-400 dark:border-indigo-600 text-indigo-900 dark:text-indigo-200 font-bold shadow-xs"
                 : "bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300"

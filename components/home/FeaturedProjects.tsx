@@ -36,7 +36,7 @@ export const FeaturedProjects: React.FC = () => {
             href="/projects"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md px-4 py-2.5 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 hover:border-indigo-300 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-xs transition-all hover:translate-x-0.5 self-start sm:self-auto"
           >
-            <span>Browse All 10 Projects</span>
+            <span>Browse All 11 Projects</span>
             <ArrowRight className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
           </Link>
         </div>
@@ -54,7 +54,7 @@ export const FeaturedProjects: React.FC = () => {
             href="/projects"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-3 text-xs font-mono font-bold text-slate-900 dark:text-white hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm transition-all hover:scale-[1.02]"
           >
-            <span>Browse All 10 Engineering Projects in Directory</span>
+            <span>Browse All 11 Engineering Projects in Directory</span>
             <ArrowRight className="h-4 w-4 text-indigo-500" />
           </Link>
         </div>

@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     "llmfirewall-core",
     "aireliability",
     "aegis-resilience",
+    "logicfalcon",
+    "LogicFalcon",
     "AEGIS Framework",
     "AI Security",
     "Deterministic Testing",

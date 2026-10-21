@@ -34,6 +34,13 @@ const PACKAGES: QuickPackage[] = [
     install: "pip install aegis-resilience",
     pypiUrl: "https://pypi.org/project/aegis-resilience/",
   },
+  {
+    name: "LogicFalcon",
+    dist: "logicfalcon",
+    version: "v0.1.2",
+    install: "pip install logicfalcon",
+    pypiUrl: "https://pypi.org/project/logicfalcon/",
+  },
 ];
 
 export const PublishedPackagesCredibilityStrip: React.FC = () => {

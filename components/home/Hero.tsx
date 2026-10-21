@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
             </span>
             <span className="text-slate-400 dark:text-slate-600 font-bold">•</span>
             <span className="text-slate-700 dark:text-slate-300 font-medium">
-              1,291 Tests Passing
+              1,392 Tests Passing
             </span>
             <span className="text-slate-400 dark:text-slate-600 font-bold">•</span>
             <span className="text-indigo-700 dark:text-indigo-300 font-bold inline-flex items-center gap-1">
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
             >
               {/* Light sweep animation */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-              <span>Explore Projects (10)</span>
+              <span>Explore Projects (11)</span>
               <ArrowDown className="h-3.5 w-3.5 text-indigo-300 group-hover:translate-y-0.5 transition-transform" />
             </a>
 

@@ -43,7 +43,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="mt-3 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed">
-            Final-year B.Tech in Artificial Intelligence &amp; Data Science at Prathyusha Engineering College with a CGPA of 8.53/10. Author of 3 published PyPI distributions and architect of production AI platforms.
+            Final-year B.Tech in Artificial Intelligence &amp; Data Science at Prathyusha Engineering College with a CGPA of 8.53/10. Author of 4 published PyPI distributions and architect of production AI platforms.
           </p>
 
           {/* Quick Metrics Bar */}
@@ -58,7 +58,7 @@ export default function AboutPage() {
               <div className="h-5 w-5 rounded-md bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center">
                 <Award className="h-3 w-3 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-slate-950 dark:text-white font-bold">3 Published PyPI Packages</span>
+              <span className="text-slate-950 dark:text-white font-bold">4 Published PyPI Packages</span>
             </span>
             <span className="flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/90 backdrop-blur-md px-3.5 py-2 shadow-2xs font-medium">
               <div className="h-5 w-5 rounded-md bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
