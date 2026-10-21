@@ -181,7 +181,7 @@ export const SecurityPlayground: React.FC = () => {
     const audit = {
       timestamp: new Date().toISOString(),
       event: "SECURITY_INTERCEPTION_EVALUATION",
-      framework: "llmfirewall-core v0.1.0",
+      framework: "llmfirewall-core v1.1.0",
       input_sample: customInput.slice(0, 100),
       interception_decision: simulationResult.status,
       threat_category: simulationResult.category,

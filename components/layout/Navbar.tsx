@@ -99,7 +99,7 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`rounded-full px-3 py-1 text-xs transition-all ${
+                className={`rounded-full px-3 py-1 text-xs transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
                   isActive
                     ? "bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 font-bold shadow-2xs border border-indigo-200/80 dark:border-indigo-800/80"
                     : "font-semibold text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -116,7 +116,7 @@ export const Navbar: React.FC = () => {
           {/* Quick Command Palette Button */}
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
-            className="flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 hover:border-indigo-500 dark:hover:border-indigo-500 hover:text-slate-950 dark:hover:text-white transition-all shadow-xs cursor-pointer group"
+            className="flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 hover:border-indigo-500 dark:hover:border-indigo-500 hover:text-slate-950 dark:hover:text-white transition-all shadow-xs cursor-pointer group active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             aria-label="Open command palette"
           >
             <Search className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
@@ -129,7 +129,7 @@ export const Navbar: React.FC = () => {
             onClick={handleToggleSound}
             aria-label={soundActive ? "Mute interactive audio feedback" : "Enable interactive audio feedback"}
             title={soundActive ? "Sound FX: Enabled (Click to mute)" : "Sound FX: Muted (Click to enable)"}
-            className={`p-1.5 transition-colors rounded-xl border cursor-pointer ${
+            className={`p-1.5 transition-all rounded-xl border cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 ${
               soundActive
                 ? "text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50 border-indigo-300 dark:border-indigo-800 shadow-2xs font-bold"
                 : "text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900"
@@ -142,7 +142,7 @@ export const Navbar: React.FC = () => {
           <button
             onClick={handleToggleTheme}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            className="p-1.5 text-slate-800 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white transition-colors rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 cursor-pointer"
+            className="p-1.5 text-slate-800 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white transition-all rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4 text-amber-400" />}
           </button>
@@ -152,7 +152,7 @@ export const Navbar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
-            className="p-1.5 text-slate-800 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white transition-colors rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="p-1.5 text-slate-800 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white transition-all rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             <GithubIcon className="h-4 w-4" />
           </a>
@@ -161,14 +161,14 @@ export const Navbar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-            className="p-1.5 text-slate-800 hover:text-sky-600 dark:text-slate-200 dark:hover:text-sky-400 transition-colors rounded-xl hover:bg-sky-50 dark:hover:bg-sky-950/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="p-1.5 text-slate-800 hover:text-sky-600 dark:text-slate-200 dark:hover:text-sky-400 transition-all rounded-xl hover:bg-sky-50 dark:hover:bg-sky-950/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
           >
             <LinkedinIcon className="h-4 w-4" />
           </a>
           <a
             href={`mailto:${PROFILE_LINKS.email}`}
             aria-label="Email Livesh"
-            className="p-1.5 text-slate-800 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-indigo-400 transition-colors rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900"
+            className="p-1.5 text-slate-800 hover:text-indigo-600 dark:text-slate-200 dark:hover:text-indigo-400 transition-all rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             <Mail className="h-4 w-4" />
           </a>
@@ -180,7 +180,7 @@ export const Navbar: React.FC = () => {
             download="Livesh_L_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-900 dark:border-indigo-600 bg-slate-900 dark:bg-indigo-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-all shadow-sm hover:shadow-indigo-500/20"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-900 dark:border-indigo-600 bg-slate-900 dark:bg-indigo-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-all shadow-sm hover:shadow-indigo-500/20 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           >
             <FileDown className="h-3.5 w-3.5 text-slate-300 dark:text-white" />
             <span>Resume</span>

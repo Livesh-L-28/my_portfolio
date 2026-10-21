@@ -6,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { KeyboardShortcutsModal } from "@/components/ui/KeyboardShortcutsModal";
-import { PortfolioScene } from "@/components/scene";
 import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 
 const geistSans = Geist({
@@ -105,7 +104,7 @@ const jsonLd = {
       "@type": "SoftwareSourceCode",
       "@id": "https://pypi.org/project/llmfirewall-core/",
       name: "llmfirewall-core",
-      version: "0.1.0",
+      version: "1.1.0",
       programmingLanguage: "Python",
       runtimePlatform: "Python 3.9+",
       codeRepository: "https://github.com/Livesh-L-28/llmfirewall-core",
@@ -179,7 +178,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-[#f8fafc] dark:bg-[#06070b] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative selection:bg-indigo-500/30">
         <ThemeProvider>
-          <PortfolioScene />
           <CommandPalette />
           <KeyboardShortcutsModal />
           <Navbar />

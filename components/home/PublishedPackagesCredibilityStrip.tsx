@@ -16,7 +16,7 @@ const PACKAGES: QuickPackage[] = [
   {
     name: "LLMFirewall Core",
     dist: "llmfirewall-core",
-    version: "v0.1.0",
+    version: "v1.1.0",
     install: "pip install llmfirewall-core",
     pypiUrl: "https://pypi.org/project/llmfirewall-core/",
   },

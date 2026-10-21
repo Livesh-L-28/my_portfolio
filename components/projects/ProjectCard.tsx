@@ -96,7 +96,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* Visual Showcase (UI Screenshot or Interactive 3D Model) */}
           {(project.thumbnail || threeDType) && (
-            <div className="mb-4 relative rounded-xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-slate-950 aspect-[16/9] w-full">
+            <div
+              className="mb-4 relative rounded-xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-slate-950 aspect-[16/9] w-full"
+              style={{ position: "relative", aspectRatio: "16 / 9" }}
+            >
               {hasBoth && (
                 <div className="absolute top-2 right-2 z-10 flex items-center rounded-md bg-slate-900/90 p-0.5 border border-slate-700 backdrop-blur-sm shadow-md">
                   <button
@@ -135,6 +138,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       key="ui-preview"
                       href={`/projects/${project.slug}`}
                       className="block w-full h-full cursor-pointer relative overflow-hidden"
+                      style={{ position: "relative" }}
                       tabIndex={-1}
                     >
                       <Image
@@ -216,7 +220,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} on GitHub`}
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 <GithubIcon className="h-3 w-3" />
                 <span>Code</span>
@@ -229,7 +233,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Launch ${project.title}`}
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60 px-2 text-xs font-medium text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 transition-colors"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60 px-2 text-xs font-medium text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 <ExternalLink className="h-3 w-3" />
                 <span>Live</span>
@@ -242,7 +246,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} on PyPI`}
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 px-2 text-xs font-medium text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 transition-colors"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 px-2 text-xs font-medium text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 <Package className="h-3 w-3" />
                 <span>PyPI</span>
@@ -252,7 +256,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.slug === "venipuncture-vr" ? (
               <Link
                 href={`/projects/${project.slug}#demos-gallery`}
-                className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/60 px-2 text-xs font-medium text-sky-800 dark:text-sky-300 hover:bg-sky-100 transition-colors"
+                className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/60 px-2 text-xs font-medium text-sky-800 dark:text-sky-300 hover:bg-sky-100 transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
               >
                 <Play className="h-3 w-3 fill-sky-700 text-sky-700" />
                 <span>Demo</span>
@@ -269,7 +273,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       videoButtonRef
                     );
                   }}
-                  className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/60 px-2 text-xs font-medium text-sky-800 dark:text-sky-300 hover:bg-sky-100 transition-colors cursor-pointer"
+                  className="inline-flex h-7 items-center gap-1 rounded-md border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/60 px-2 text-xs font-medium text-sky-800 dark:text-sky-300 hover:bg-sky-100 transition-all active:scale-[0.97] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                 >
                   <Play className="h-3 w-3 fill-sky-700 text-sky-700" />
                   <span>Demo</span>
@@ -293,7 +297,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-9 items-center">
         {/* Visual Showcase: Left Column on Desktop (lg:col-span-5 or 6) with Developer Window Chrome */}
         {(project.thumbnail || threeDType) && (
-          <div className="lg:col-span-5 xl:col-span-5 relative rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-slate-950 aspect-[16/11] w-full shadow-md group-hover:border-indigo-400/60 dark:group-hover:border-indigo-500/60 transition-all flex flex-col">
+          <div
+            className="lg:col-span-5 xl:col-span-5 relative rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-slate-950 aspect-[16/11] w-full shadow-md group-hover:border-indigo-400/60 dark:group-hover:border-indigo-500/60 transition-all flex flex-col"
+            style={{ position: "relative", aspectRatio: "16 / 11" }}
+          >
             {/* macOS Developer Terminal Chrome Header */}
             <div className="flex items-center justify-between px-3.5 py-2 border-b border-slate-200/80 dark:border-slate-800 bg-slate-100/95 dark:bg-slate-900/90 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-1.5">
@@ -352,6 +359,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     key="ui-preview"
                     href={`/projects/${project.slug}`}
                     className="block w-full h-full cursor-pointer relative overflow-hidden"
+                    style={{ position: "relative" }}
                     tabIndex={-1}
                   >
                     <Image
@@ -513,7 +521,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} on GitHub`}
-                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-slate-200/90 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-3.5 text-xs font-mono font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-600 transition-all shadow-2xs hover:scale-[1.02]"
+                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-slate-200/90 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-3.5 text-xs font-mono font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-600 transition-all shadow-2xs hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                 >
                   <GithubIcon className="h-3.5 w-3.5 text-slate-600 dark:text-slate-300" />
                   <span>Code</span>
@@ -527,7 +535,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Launch ${project.title} Live Application`}
-                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60 px-3.5 text-xs font-sans font-semibold text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-all shadow-2xs hover:scale-[1.02]"
+                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60 px-3.5 text-xs font-sans font-semibold text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900 transition-all shadow-2xs hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                   <span>Live App</span>
@@ -541,7 +549,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} on PyPI`}
-                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 px-3.5 text-xs font-sans font-semibold text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-all shadow-2xs hover:scale-[1.02]"
+                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 px-3.5 text-xs font-sans font-semibold text-indigo-800 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-all shadow-2xs hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                 >
                   <PythonIcon className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>PyPI Package</span>
@@ -553,7 +561,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <Link
                   href={`/projects/${project.slug}#demos-gallery`}
                   aria-label={`Watch all 5 ${project.title} demonstrations`}
-                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-sky-300 bg-sky-50 px-3.5 text-xs font-sans font-semibold text-sky-800 hover:bg-sky-100 transition-all cursor-pointer shadow-2xs hover:scale-[1.02]"
+                  className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-sky-300 bg-sky-50 px-3.5 text-xs font-sans font-semibold text-sky-800 hover:bg-sky-100 transition-all cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                 >
                   <Play className="h-3.5 w-3.5 fill-sky-700 text-sky-700" />
                   <span>5 VR Demos</span>
@@ -571,7 +579,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                       )
                     }
                     aria-label={`Watch ${project.title} Demo Video`}
-                    className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-sky-300 bg-sky-50 px-3.5 text-xs font-sans font-semibold text-sky-800 hover:bg-sky-100 transition-all cursor-pointer shadow-2xs hover:scale-[1.02]"
+                    className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-sky-300 bg-sky-50 px-3.5 text-xs font-sans font-semibold text-sky-800 hover:bg-sky-100 transition-all cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                   >
                     <Play className="h-3.5 w-3.5 fill-sky-700 text-sky-700" />
                     <span>Watch Demo</span>

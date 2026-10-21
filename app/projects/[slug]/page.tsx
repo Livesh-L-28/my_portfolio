@@ -32,7 +32,6 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export const instant = false;
 
 export async function generateStaticParams() {
   return PROJECTS.map((project) => ({
@@ -45,9 +44,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project Not Found" };
 
+  const canonicalUrl = `https://livesh.dev/projects/${slug}`;
+
   return {
     title: `${project.title} — AI System Case Study | Livesh L`,
     description: project.tagline,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `${project.title} — AI Engineering Case Study | Livesh L`,
+      description: project.tagline,
+      url: canonicalUrl,
+      siteName: "Livesh L — AI Engineering Portfolio",
+      type: "article",
+      images: project.thumbnail ? [{ url: project.thumbnail, alt: `${project.title} Architecture Preview` }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — AI Engineering Case Study | Livesh L`,
+      description: project.tagline,
+      images: project.thumbnail ? [project.thumbnail] : undefined,
+    },
   };
 }
 

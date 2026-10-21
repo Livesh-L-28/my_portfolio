@@ -51,6 +51,18 @@ const MODES: ModeMeta[] = [
 
 const emptySubscribe = () => () => {};
 
+const subscribeReducedMotion = (callback: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", callback);
+  return () => mediaQuery.removeEventListener("change", callback);
+};
+
+const getReducedMotionSnapshot = () => {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+};
+
 export const Hero3DVisualizer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -59,15 +71,26 @@ export const Hero3DVisualizer: React.FC = () => {
 
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const webGlSupported = useSyncExternalStore(emptySubscribe, checkWebGLSupport, () => true);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    () => false
+  );
 
   const [activeMode, setActiveMode] = useState<VisualizerMode>("vectorspace");
   const [isWireframe, setIsWireframe] = useState<boolean>(false);
-  const [isAutoRotate, setIsAutoRotate] = useState<boolean>(true);
-  const isAutoRotateRef = useRef(true);
+  const [userAutoRotateOverride, setUserAutoRotateOverride] = useState<boolean | null>(null);
+  const isAutoRotate = userAutoRotateOverride ?? !prefersReducedMotion;
+  const isAutoRotateRef = useRef(isAutoRotate);
+  const prefersReducedMotionRef = useRef(prefersReducedMotion);
 
   useEffect(() => {
     isAutoRotateRef.current = isAutoRotate;
   }, [isAutoRotate]);
+
+  useEffect(() => {
+    prefersReducedMotionRef.current = prefersReducedMotion;
+  }, [prefersReducedMotion]);
 
   const [fps, setFps] = useState<number>(60);
 
@@ -98,8 +121,9 @@ export const Hero3DVisualizer: React.FC = () => {
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    const width = container.clientWidth || 500;
-    const height = container.clientHeight || 460;
+    const canvasContainer = canvas.parentElement || container;
+    const width = canvasContainer.clientWidth || container.clientWidth || 500;
+    const height = canvasContainer.clientHeight || 380;
 
     // 1. Scene & Camera
     const scene = new THREE.Scene();
@@ -375,8 +399,14 @@ export const Hero3DVisualizer: React.FC = () => {
     let lastTime = performance.now();
     let frameCount = 0;
     let fpsTimer = performance.now();
+    let isIntersecting = true;
 
     const animate = (time: number) => {
+      if (!isIntersecting) {
+        animFrameRef.current = null;
+        return;
+      }
+
       const delta = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
 
@@ -410,33 +440,37 @@ export const Hero3DVisualizer: React.FC = () => {
         tensorGroup.rotation.x = baseRotationRef.current.x;
         tensorGroup.rotation.y = baseRotationRef.current.y;
 
-        // Dynamic vertex wave displacement
-        const posAttr = coreGeo.attributes.position;
-        const posArr = posAttr.array as Float32Array;
-        const count = posAttr.count;
-        const waveTime = time * 0.002;
-        const pulseAmp = pulseRef.current * 0.35;
+        // Dynamic vertex wave displacement (skipped if user prefers reduced motion)
+        if (!prefersReducedMotionRef.current) {
+          const posAttr = coreGeo.attributes.position;
+          const posArr = posAttr.array as Float32Array;
+          const count = posAttr.count;
+          const waveTime = time * 0.002;
+          const pulseAmp = pulseRef.current * 0.35;
 
-        for (let i = 0; i < count; i++) {
-          const bx = basePositions[i * 3];
-          const by = basePositions[i * 3 + 1];
-          const bz = basePositions[i * 3 + 2];
+          for (let i = 0; i < count; i++) {
+            const bx = basePositions[i * 3];
+            const by = basePositions[i * 3 + 1];
+            const bz = basePositions[i * 3 + 2];
 
-          const wave =
-            Math.sin(bx * 2.0 + waveTime) *
-            Math.cos(by * 2.0 + waveTime * 0.8) *
-            (0.12 + pulseAmp);
+            const wave =
+              Math.sin(bx * 2.0 + waveTime) *
+              Math.cos(by * 2.0 + waveTime * 0.8) *
+              (0.12 + pulseAmp);
 
-          posArr[i * 3] = bx * (1 + wave);
-          posArr[i * 3 + 1] = by * (1 + wave);
-          posArr[i * 3 + 2] = bz * (1 + wave);
+            posArr[i * 3] = bx * (1 + wave);
+            posArr[i * 3 + 1] = by * (1 + wave);
+            posArr[i * 3 + 2] = bz * (1 + wave);
+          }
+          posAttr.needsUpdate = true;
+          coreGeo.computeVertexNormals();
         }
-        posAttr.needsUpdate = true;
-        coreGeo.computeVertexNormals();
 
-        ring1.rotation.z += 0.015;
-        ring2.rotation.x += 0.012;
-        nodePoints.rotation.y -= 0.004;
+        if (!prefersReducedMotionRef.current) {
+          ring1.rotation.z += 0.015;
+          ring2.rotation.x += 0.012;
+          nodePoints.rotation.y -= 0.004;
+        }
       }
 
       // Mode 2 Vector Space animation
@@ -444,10 +478,12 @@ export const Hero3DVisualizer: React.FC = () => {
         vectorGroup.rotation.x = baseRotationRef.current.x;
         vectorGroup.rotation.y = baseRotationRef.current.y;
 
-        const scanT = time * 0.0015;
-        queryBeacon.position.x = Math.sin(scanT) * 1.5;
-        queryBeacon.position.y = Math.cos(scanT * 1.3) * 1.0;
-        queryBeacon.position.z = Math.sin(scanT * 0.7) * 0.8;
+        if (!prefersReducedMotionRef.current) {
+          const scanT = time * 0.0015;
+          queryBeacon.position.x = Math.sin(scanT) * 1.5;
+          queryBeacon.position.y = Math.cos(scanT * 1.3) * 1.0;
+          queryBeacon.position.z = Math.sin(scanT * 0.7) * 0.8;
+        }
       }
 
       // Mode 3 Citadel animation
@@ -455,22 +491,51 @@ export const Hero3DVisualizer: React.FC = () => {
         citadelGroup.rotation.x = baseRotationRef.current.x;
         citadelGroup.rotation.y = baseRotationRef.current.y;
 
-        shieldMesh.rotation.y -= 0.008;
-        isoRing.rotation.z += 0.01;
-        prismMesh.rotation.y += 0.02;
+        if (!prefersReducedMotionRef.current) {
+          shieldMesh.rotation.y -= 0.008;
+          isoRing.rotation.z += 0.01;
+          prismMesh.rotation.y += 0.02;
+        }
       }
 
       renderer.render(scene, camera);
-      animFrameRef.current = requestAnimationFrame(animate);
+      if (isIntersecting) {
+        animFrameRef.current = requestAnimationFrame(animate);
+      } else {
+        animFrameRef.current = null;
+      }
     };
+
+    // IntersectionObserver to pause loop when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const nextIntersecting = entry.isIntersecting;
+        if (isIntersecting !== nextIntersecting) {
+          isIntersecting = nextIntersecting;
+          if (isIntersecting) {
+            if (!animFrameRef.current) {
+              lastTime = performance.now();
+              animFrameRef.current = requestAnimationFrame(animate);
+            }
+          } else {
+            if (animFrameRef.current) {
+              cancelAnimationFrame(animFrameRef.current);
+              animFrameRef.current = null;
+            }
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     animFrameRef.current = requestAnimationFrame(animate);
 
     // 9. Resize Listener
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+      const w = canvasContainer.clientWidth || container.clientWidth;
+      const h = canvasContainer.clientHeight || 380;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -479,11 +544,31 @@ export const Hero3DVisualizer: React.FC = () => {
     window.addEventListener("resize", handleResize);
 
     return () => {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+      observer.disconnect();
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
       window.removeEventListener("resize", handleResize);
       canvas.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerup", handlePointerUp);
+
+      // Deep clean Three.js geometries and materials
+      scene.traverse((obj) => {
+        if (
+          obj instanceof THREE.Mesh ||
+          obj instanceof THREE.Points ||
+          obj instanceof THREE.LineSegments
+        ) {
+          obj.geometry?.dispose();
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach((m) => m.dispose());
+          } else if (obj.material) {
+            obj.material.dispose();
+          }
+        }
+      });
 
       renderer.dispose();
       rendererRef.current = null;
@@ -624,7 +709,7 @@ export const Hero3DVisualizer: React.FC = () => {
 
           <button
             type="button"
-            onClick={() => setIsAutoRotate(!isAutoRotate)}
+            onClick={() => setUserAutoRotateOverride(!isAutoRotate)}
             className={`p-1.5 rounded-lg border text-xs font-mono transition-all backdrop-blur-md cursor-pointer ${
               isAutoRotate
                 ? "bg-white/80 dark:bg-slate-800/80 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700"

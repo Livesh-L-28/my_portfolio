@@ -13,6 +13,7 @@ interface ProjectGridProps {
   limit?: number;
   showFilters?: boolean;
   excludePyPIOnly?: boolean;
+  featuredIds?: string[];
 }
 
 export const ProjectGrid: React.FC<ProjectGridProps> = ({
@@ -20,6 +21,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   limit,
   showFilters = true,
   excludePyPIOnly = false,
+  featuredIds,
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -47,6 +49,13 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
   // Filter & Sort Logic
   const filteredProjects = useMemo(() => {
+    if (featuredIds && featuredIds.length > 0) {
+      const idMap = new Map(PROJECTS.map((p) => [p.id, p]));
+      return featuredIds
+        .map((id) => idMap.get(id))
+        .filter((p): p is ProjectData => Boolean(p));
+    }
+
     let result = [...PROJECTS];
 
     // Exclude PyPI-only packages if requested (e.g. for homepage flagship systems section)
@@ -99,7 +108,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     }
 
     return result;
-  }, [activeCategory, searchQuery, sortBy, limit, excludePyPIOnly]);
+  }, [activeCategory, searchQuery, sortBy, limit, excludePyPIOnly, featuredIds]);
 
   return (
     <div className="w-full">

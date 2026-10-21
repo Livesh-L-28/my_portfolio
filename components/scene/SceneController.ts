@@ -1,4 +1,7 @@
 import * as THREE from "three";
+import { ODYSSEY_CHAPTERS } from "@/lib/scene/odysseyConfig";
+import { CharacterVisualGuide } from "@/lib/scene/characterModel";
+import { ComputationalWorld } from "@/lib/scene/computationalWorld";
 
 interface ProjectThemeConfig {
   keyColor: number;
@@ -82,9 +85,9 @@ const PROJECT_THEMES: Record<string, ProjectThemeConfig> = {
 };
 
 const DEFAULT_THEME: ProjectThemeConfig = {
-  keyColor: 0x6366f1, // Indigo
-  accentColor: 0x06b6d4, // Cyan
-  wireColor: 0x38bdf8, // Sky
+  keyColor: 0x38bdf8, // Sky / Cobalt
+  accentColor: 0x6366f1, // Indigo
+  wireColor: 0x8b5cf6, // Violet
   speed: 1.0,
   particleSize: 0.05,
 };
@@ -95,40 +98,40 @@ export class SceneController {
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
 
-  // Lighting
+  // Cinematic Lighting Rig
   private ambientLight: THREE.AmbientLight;
   private keyLight: THREE.PointLight;
   private fillLight: THREE.PointLight;
+  private rimLight: THREE.PointLight;
 
-  // Spatial Neural Constellation
-  private constellationGroup: THREE.Group;
-  private particlePoints: THREE.Points;
-  private particlePositions: Float32Array;
-  private particleVelocities: Float32Array;
-  private particleCount = 360;
-  private synapseLines: THREE.LineSegments;
-  private synapsePositions: Float32Array;
-  private maxSynapses = 300;
+  // The AI Engineering Odyssey Components
+  private computationalWorld: ComputationalWorld;
+  private character: CharacterVisualGuide;
 
-  // Background Cosmic Dust
+  // Background subtle star dust for cosmic computational depth
   private starDust: THREE.Points;
 
-  // Dynamic State & Controls
+  // Dynamic Navigation & Animation State
   private animFrameId: number | null = null;
   private isDestroyed = false;
   private lastTime = 0;
   private currentProgress = 0;
   private targetProgress = 0;
+  private lastProgress = 0;
+  private scrollVelocity = 0;
+  private isStationaryTimer = 0;
   private pointerX = 0;
   private pointerY = 0;
   private targetPointerX = 0;
   private targetPointerY = 0;
-  private isDark = false;
+  private isDark = true;
   private isReducedMotion = false;
+  private currentRoute = "/";
+  private isProjectPage = false;
 
   private targetTheme: ProjectThemeConfig = DEFAULT_THEME;
 
-  constructor(canvas: HTMLCanvasElement, isDark: boolean = false) {
+  constructor(canvas: HTMLCanvasElement, isDark: boolean = true) {
     this.canvas = canvas;
     this.isDark = isDark;
     this.lastTime = performance.now();
@@ -139,13 +142,14 @@ export class SceneController {
       ).matches;
     }
 
-    // 1. Scene & Camera
+    // 1. Scene & Camera Setup
     this.scene = new THREE.Scene();
+    this.scene.fog = new THREE.FogExp2(isDark ? 0x05070e : 0xf1f5f9, 0.045);
 
     const width = window.innerWidth || 1280;
     const height = window.innerHeight || 800;
-    this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
-    this.camera.position.set(0, 0, 10);
+    this.camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 100);
+    this.camera.position.set(0, 1.4, 6.8);
 
     // 2. High-Performance WebGL Renderer
     this.renderer = new THREE.WebGLRenderer({
@@ -157,81 +161,42 @@ export class SceneController {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.0;
+    this.renderer.toneMappingExposure = isDark ? 1.15 : 1.0;
 
-    // 3. Studio Lighting
+    // 3. Studio Lighting Rig
     this.ambientLight = new THREE.AmbientLight(
-      isDark ? 0x060812 : 0xf8fafc,
-      isDark ? 1.5 : 2.5
+      isDark ? 0x0a0f1d : 0xf8fafc,
+      isDark ? 2.0 : 2.8
     );
     this.scene.add(this.ambientLight);
 
-    this.keyLight = new THREE.PointLight(DEFAULT_THEME.keyColor, 3.5, 30);
-    this.keyLight.position.set(5, 5, 8);
+    this.keyLight = new THREE.PointLight(DEFAULT_THEME.keyColor, 4.0, 30);
+    this.keyLight.position.set(4, 5, 6);
     this.scene.add(this.keyLight);
 
-    this.fillLight = new THREE.PointLight(DEFAULT_THEME.accentColor, 2.5, 30);
-    this.fillLight.position.set(-5, -4, 6);
+    this.fillLight = new THREE.PointLight(DEFAULT_THEME.accentColor, 3.0, 30);
+    this.fillLight.position.set(-4, -2, 4);
     this.scene.add(this.fillLight);
 
-    // 4. Construct Neural Constellation Group
-    this.constellationGroup = new THREE.Group();
-    this.scene.add(this.constellationGroup);
+    this.rimLight = new THREE.PointLight(0x8b5cf6, 2.5, 25);
+    this.rimLight.position.set(0, 4, -8);
+    this.scene.add(this.rimLight);
 
-    // 4A. Primary Neural Synapse Nodes
-    this.particlePositions = new Float32Array(this.particleCount * 3);
-    this.particleVelocities = new Float32Array(this.particleCount * 3);
+    // 4. Initialize Continuous Computational 3D World
+    this.computationalWorld = new ComputationalWorld(this.isDark);
+    this.scene.add(this.computationalWorld.rootGroup);
 
-    for (let i = 0; i < this.particleCount; i++) {
-      // Distribute nodes across a wide spatial volume
-      this.particlePositions[i * 3] = (Math.random() - 0.5) * 26;
-      this.particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 18;
-      this.particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 20 - 4;
+    // 5. Initialize 3D Character Visual Guide
+    this.character = new CharacterVisualGuide(this.isDark);
+    this.scene.add(this.character.group);
 
-      this.particleVelocities[i * 3] = (Math.random() - 0.5) * 0.008;
-      this.particleVelocities[i * 3 + 1] = (Math.random() - 0.5) * 0.008;
-      this.particleVelocities[i * 3 + 2] = (Math.random() - 0.5) * 0.006;
-    }
-
-    const pGeo = new THREE.BufferGeometry();
-    pGeo.setAttribute("position", new THREE.BufferAttribute(this.particlePositions, 3));
-
-    const pMat = new THREE.PointsMaterial({
-      color: DEFAULT_THEME.wireColor,
-      size: DEFAULT_THEME.particleSize,
-      transparent: true,
-      opacity: this.isDark ? 0.75 : 0.45,
-      blending: THREE.AdditiveBlending,
-    });
-
-    this.particlePoints = new THREE.Points(pGeo, pMat);
-    this.constellationGroup.add(this.particlePoints);
-
-    // 4B. Dynamic Synaptic Connections (Nearest-Neighbor Lines)
-    this.synapsePositions = new Float32Array(this.maxSynapses * 6);
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute(
-      "position",
-      new THREE.BufferAttribute(this.synapsePositions, 3)
-    );
-
-    const lineMat = new THREE.LineBasicMaterial({
-      color: DEFAULT_THEME.accentColor,
-      transparent: true,
-      opacity: this.isDark ? 0.22 : 0.12,
-      blending: THREE.AdditiveBlending,
-    });
-
-    this.synapseLines = new THREE.LineSegments(lineGeo, lineMat);
-    this.constellationGroup.add(this.synapseLines);
-
-    // 4C. Distant Cosmic Dust (Deep Stars)
-    const dustCount = 450;
+    // 6. Deep Cosmic Background Dust
+    const dustCount = 300;
     const dustPositions = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount; i++) {
-      dustPositions[i * 3] = (Math.random() - 0.5) * 50;
-      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 35;
-      dustPositions[i * 3 + 2] = -15 - Math.random() * 30;
+      dustPositions[i * 3] = (Math.random() - 0.5) * 40;
+      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 25;
+      dustPositions[i * 3 + 2] = -10 - Math.random() * 25;
     }
     const dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPositions, 3));
@@ -244,7 +209,7 @@ export class SceneController {
     this.starDust = new THREE.Points(dustGeo, dustMat);
     this.scene.add(this.starDust);
 
-    // 5. Bind Listeners
+    // 7. Bind Listeners
     this.handleResize = this.handleResize.bind(this);
     this.handlePointerMove = this.handlePointerMove.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
@@ -263,7 +228,9 @@ export class SceneController {
   }
 
   public setRoute(pathname: string) {
+    this.currentRoute = pathname;
     if (pathname.startsWith("/projects/") && pathname !== "/projects") {
+      this.isProjectPage = true;
       const slug = pathname
         .replace("/projects/", "")
         .split("/")[0]
@@ -271,7 +238,11 @@ export class SceneController {
         .split("#")[0]
         .toLowerCase();
       this.targetTheme = PROJECT_THEMES[slug] || DEFAULT_THEME;
+      // Dim or position character slightly off-center for project focus
+      this.character.group.position.set(2.4, -0.9, 0);
+      this.character.setRotationY(-0.4);
     } else {
+      this.isProjectPage = false;
       this.targetTheme = DEFAULT_THEME;
     }
   }
@@ -282,17 +253,11 @@ export class SceneController {
 
   public setTheme(isDark: boolean) {
     this.isDark = isDark;
-    this.ambientLight.color.setHex(isDark ? 0x060812 : 0xf8fafc);
-    this.ambientLight.intensity = isDark ? 1.5 : 2.5;
-
-    const pMat = this.particlePoints.material as THREE.PointsMaterial;
-    pMat.opacity = isDark ? 0.75 : 0.45;
-
-    const lMat = this.synapseLines.material as THREE.LineBasicMaterial;
-    lMat.opacity = isDark ? 0.22 : 0.12;
-
-    const dMat = this.starDust.material as THREE.PointsMaterial;
-    dMat.opacity = isDark ? 0.35 : 0.15;
+    this.ambientLight.color.setHex(isDark ? 0x0a0f1d : 0xf8fafc);
+    this.ambientLight.intensity = isDark ? 2.0 : 2.8;
+    if (this.scene.fog) {
+      (this.scene.fog as THREE.FogExp2).color.setHex(isDark ? 0x05070e : 0xf1f5f9);
+    }
   }
 
   private handleContextLost(event: Event) {
@@ -352,105 +317,150 @@ export class SceneController {
     this.animFrameId = requestAnimationFrame(tick);
   }
 
+  private getInterpolatedChapterState(p: number): {
+    camPos: THREE.Vector3;
+    camTarget: THREE.Vector3;
+    charPos: THREE.Vector3;
+    charRotY: number;
+    keyColor: THREE.Color;
+    accentColor: THREE.Color;
+  } {
+    const chapters = ODYSSEY_CHAPTERS;
+    if (p <= chapters[0].startProgress) {
+      const c = chapters[0];
+      return {
+        camPos: new THREE.Vector3(...c.cameraPos),
+        camTarget: new THREE.Vector3(...c.cameraTarget),
+        charPos: new THREE.Vector3(...c.characterPos),
+        charRotY: c.characterRotY,
+        keyColor: new THREE.Color(c.keyColor),
+        accentColor: new THREE.Color(c.accentColor),
+      };
+    }
+
+    if (p >= chapters[chapters.length - 1].endProgress) {
+      const c = chapters[chapters.length - 1];
+      return {
+        camPos: new THREE.Vector3(...c.cameraPos),
+        camTarget: new THREE.Vector3(...c.cameraTarget),
+        charPos: new THREE.Vector3(...c.characterPos),
+        charRotY: c.characterRotY,
+        keyColor: new THREE.Color(c.keyColor),
+        accentColor: new THREE.Color(c.accentColor),
+      };
+    }
+
+    // Find active or bounding chapters
+    let currentIdx = 0;
+    for (let i = 0; i < chapters.length; i++) {
+      if (p >= chapters[i].startProgress && p <= chapters[i].endProgress) {
+        currentIdx = i;
+        break;
+      }
+      if (i < chapters.length - 1 && p > chapters[i].endProgress && p < chapters[i + 1].startProgress) {
+        currentIdx = i;
+        break;
+      }
+    }
+
+    const c1 = chapters[currentIdx];
+    const c2 = chapters[Math.min(currentIdx + 1, chapters.length - 1)];
+
+    const span = Math.max(c2.startProgress - c1.startProgress, 0.001);
+    const t = Math.min(Math.max((p - c1.startProgress) / span, 0), 1);
+    const easeT = t * t * (3 - 2 * t); // Smooth cubic hermite ease
+
+    const camPos = new THREE.Vector3(
+      THREE.MathUtils.lerp(c1.cameraPos[0], c2.cameraPos[0], easeT),
+      THREE.MathUtils.lerp(c1.cameraPos[1], c2.cameraPos[1], easeT),
+      THREE.MathUtils.lerp(c1.cameraPos[2], c2.cameraPos[2], easeT)
+    );
+
+    const camTarget = new THREE.Vector3(
+      THREE.MathUtils.lerp(c1.cameraTarget[0], c2.cameraTarget[0], easeT),
+      THREE.MathUtils.lerp(c1.cameraTarget[1], c2.cameraTarget[1], easeT),
+      THREE.MathUtils.lerp(c1.cameraTarget[2], c2.cameraTarget[2], easeT)
+    );
+
+    const charPos = new THREE.Vector3(
+      THREE.MathUtils.lerp(c1.characterPos[0], c2.characterPos[0], easeT),
+      THREE.MathUtils.lerp(c1.characterPos[1], c2.characterPos[1], easeT),
+      THREE.MathUtils.lerp(c1.characterPos[2], c2.characterPos[2], easeT)
+    );
+
+    const charRotY = THREE.MathUtils.lerp(c1.characterRotY, c2.characterRotY, easeT);
+    const keyColor = new THREE.Color(c1.keyColor).lerp(new THREE.Color(c2.keyColor), easeT);
+    const accentColor = new THREE.Color(c1.accentColor).lerp(new THREE.Color(c2.accentColor), easeT);
+
+    return { camPos, camTarget, charPos, charRotY, keyColor, accentColor };
+  }
+
   private renderFrame(time: number, delta: number) {
-    // 1. Lerp scroll progress
+    // 1. Lerp smooth scroll progress
     const pDiff = this.targetProgress - this.currentProgress;
     this.currentProgress += pDiff * (1 - Math.exp(-8 * delta));
     const p = this.currentProgress;
 
-    // 2. Lerp pointer coordinates
+    // Track scroll velocity
+    this.scrollVelocity = (p - this.lastProgress) / Math.max(delta, 0.001);
+    this.lastProgress = p;
+
+    if (Math.abs(this.scrollVelocity) < 0.005) {
+      this.isStationaryTimer += delta;
+    } else {
+      this.isStationaryTimer = 0;
+    }
+    const isStationary = this.isStationaryTimer > 0.15;
+
+    // 2. Lerp pointer parallax
     this.pointerX += (this.targetPointerX - this.pointerX) * 0.05;
     this.pointerY += (this.targetPointerY - this.pointerY) * 0.05;
 
-    // 3. Update particle drift and boundary wrap
-    if (!this.isReducedMotion) {
-      const posAttr = this.particlePoints.geometry.attributes.position;
-      const positions = posAttr.array as Float32Array;
+    // 3. Update Computational 3D World animations
+    this.computationalWorld.update(time, delta);
 
-      for (let i = 0; i < this.particleCount; i++) {
-        positions[i * 3] += this.particleVelocities[i * 3] * this.targetTheme.speed;
-        positions[i * 3 + 1] += this.particleVelocities[i * 3 + 1] * this.targetTheme.speed;
-        positions[i * 3 + 2] += this.particleVelocities[i * 3 + 2] * this.targetTheme.speed;
+    if (!this.isProjectPage) {
+      // 4. Update Odyssey Choreography along Chapters
+      const state = this.getInterpolatedChapterState(p);
 
-        // Soft boundary wraps
-        if (positions[i * 3] > 14) positions[i * 3] = -14;
-        if (positions[i * 3] < -14) positions[i * 3] = 14;
-        if (positions[i * 3 + 1] > 10) positions[i * 3 + 1] = -10;
-        if (positions[i * 3 + 1] < -10) positions[i * 3 + 1] = 10;
-        if (positions[i * 3 + 2] > 6) positions[i * 3 + 2] = -14;
-        if (positions[i * 3 + 2] < -14) positions[i * 3 + 2] = 6;
-      }
-      posAttr.needsUpdate = true;
+      // Camera glides along trajectory with subtle pointer parallax
+      const camX = state.camPos.x + this.pointerX * 0.35;
+      const camY = state.camPos.y + this.pointerY * 0.25;
+      const camZ = state.camPos.z;
 
-      // 4. Update Synaptic nearest-neighbor connections
-      let lineIdx = 0;
-      const distThresholdSq = 3.6 * 3.6;
+      this.camera.position.set(camX, camY, camZ);
+      this.camera.lookAt(
+        state.camTarget.x + this.pointerX * 0.2,
+        state.camTarget.y,
+        state.camTarget.z
+      );
 
-      for (let i = 0; i < this.particleCount && lineIdx < this.maxSynapses; i++) {
-        const x1 = positions[i * 3];
-        const y1 = positions[i * 3 + 1];
-        const z1 = positions[i * 3 + 2];
+      // Character updates position, orientation, and walking kinematics
+      this.character.setPosition(state.charPos.x, state.charPos.y, state.charPos.z);
+      this.character.setRotationY(state.charRotY);
+      this.character.update(delta, this.scrollVelocity, isStationary);
 
-        // Connect only forward to avoid duplicates
-        for (let j = i + 1; j < this.particleCount && lineIdx < this.maxSynapses; j++) {
-          const dx = x1 - positions[j * 3];
-          const dy = y1 - positions[j * 3 + 1];
-          const dz = z1 - positions[j * 3 + 2];
-          const dSq = dx * dx + dy * dy + dz * dz;
+      // Harmonize lighting with active chapter palette
+      this.keyLight.color.lerp(state.keyColor, 0.08);
+      this.fillLight.color.lerp(state.accentColor, 0.08);
+    } else {
+      // Project Detail Page: Focus on ambient project palette
+      const keyCol = new THREE.Color(this.targetTheme.keyColor);
+      const accentCol = new THREE.Color(this.targetTheme.accentColor);
+      this.keyLight.color.lerp(keyCol, 0.06);
+      this.fillLight.color.lerp(accentCol, 0.06);
 
-          if (dSq < distThresholdSq) {
-            this.synapsePositions[lineIdx * 6] = x1;
-            this.synapsePositions[lineIdx * 6 + 1] = y1;
-            this.synapsePositions[lineIdx * 6 + 2] = z1;
-            this.synapsePositions[lineIdx * 6 + 3] = positions[j * 3];
-            this.synapsePositions[lineIdx * 6 + 4] = positions[j * 3 + 1];
-            this.synapsePositions[lineIdx * 6 + 5] = positions[j * 3 + 2];
-            lineIdx++;
-          }
-        }
-      }
-
-      // Zero out unused line segments
-      for (let k = lineIdx; k < this.maxSynapses; k++) {
-        this.synapsePositions[k * 6] = 0;
-        this.synapsePositions[k * 6 + 1] = 0;
-        this.synapsePositions[k * 6 + 2] = 0;
-        this.synapsePositions[k * 6 + 3] = 0;
-        this.synapsePositions[k * 6 + 4] = 0;
-        this.synapsePositions[k * 6 + 5] = 0;
-      }
-
-      this.synapseLines.geometry.attributes.position.needsUpdate = true;
-
-      // Slow rotation of constellation
-      this.constellationGroup.rotation.y = time * 0.04 + this.pointerX * 0.15;
-      this.constellationGroup.rotation.x = Math.sin(time * 0.03) * 0.06 + this.pointerY * 0.15;
-      this.starDust.rotation.y = -time * 0.015;
+      // Gentle camera orbit for project view
+      const angle = time * 0.04 + this.pointerX * 0.1;
+      this.camera.position.set(Math.sin(angle) * 1.5, 0.8 + this.pointerY * 0.2, 5.5);
+      this.camera.lookAt(0, 0.2, 0);
+      this.character.update(delta, 0, true);
     }
 
-    // 5. Scroll-responsive Camera Gliding
-    const camAngle = p * Math.PI * 0.8;
-    const targetCamX = Math.sin(camAngle) * 2.0 + this.pointerX * 0.5;
-    const targetCamY = -p * 3.0 + this.pointerY * 0.4;
-    const targetCamZ = 10 - p * 3.5;
+    // 5. Cosmic dust slow drift
+    this.starDust.rotation.y = -time * 0.015;
 
-    this.camera.position.set(targetCamX, targetCamY, targetCamZ);
-    this.camera.lookAt(this.pointerX * 0.8, -p * 1.5, 0);
-
-    // 6. Smooth Theme Color Lerp
-    const keyColorObj = new THREE.Color(this.targetTheme.keyColor);
-    const accentColorObj = new THREE.Color(this.targetTheme.accentColor);
-    const wireColorObj = new THREE.Color(this.targetTheme.wireColor);
-
-    this.keyLight.color.lerp(keyColorObj, 0.06);
-    this.fillLight.color.lerp(accentColorObj, 0.06);
-
-    const pMat = this.particlePoints.material as THREE.PointsMaterial;
-    pMat.color.lerp(wireColorObj, 0.06);
-
-    const lMat = this.synapseLines.material as THREE.LineBasicMaterial;
-    lMat.color.lerp(accentColorObj, 0.06);
-
+    // 6. Render frame
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -467,6 +477,8 @@ export class SceneController {
     this.canvas.removeEventListener("webglcontextlost", this.handleContextLost);
     this.canvas.removeEventListener("webglcontextrestored", this.handleContextRestored);
 
+    this.computationalWorld.dispose();
+    this.character.dispose();
     this.scene.clear();
     this.renderer.dispose();
   }

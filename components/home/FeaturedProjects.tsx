@@ -28,7 +28,7 @@ export const FeaturedProjects: React.FC = () => {
               Selected Systems &amp; Case Studies
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium font-sans max-w-xl leading-relaxed">
-              Production AI platforms, clinical VR simulators, and ML audit systems backed by documented benchmarks and live trials.
+              Production AI platforms, autonomous reliability frameworks, and in-process LLM security engines backed by documented benchmarks and automated test suites.
             </p>
           </div>
 
@@ -41,8 +41,12 @@ export const FeaturedProjects: React.FC = () => {
           </Link>
         </div>
 
-        {/* Flagship Featured Applied Systems (Excludes PyPI packages which are showcased in Section 02 below) */}
-        <ProjectGrid showFilters={false} limit={3} excludePyPIOnly={true} />
+        {/* Flagship Featured Systems: NexaRAG, AEGIS Framework, and LLMFirewall Core */}
+        <ProjectGrid
+          showFilters={false}
+          limit={3}
+          featuredIds={["nexarag", "aegis-framework", "llmfirewall-core"]}
+        />
 
         {/* View All Projects Directory CTA */}
         <div className="mt-12 text-center">

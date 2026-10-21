@@ -79,14 +79,14 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     let animateCallback: (delta: number) => void = () => { };
 
     if (type === "nexarag") {
-      // 1. NEXARAG: 3D Vector Space & Dense Embeddings Lattice
-      const particleCount = 120;
+      // 1. NEXARAG: 3D Vector Space, Ingested Chunking Cards & Hybrid RRF Manifold
+      const particleCount = 140;
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const colors = new Float32Array(particleCount * 3);
 
       for (let i = 0; i < particleCount; i++) {
-        const radius = 2.4;
+        const radius = 2.5;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(Math.random() * 2 - 1);
         const r = Math.cbrt(Math.random()) * radius;
@@ -95,11 +95,11 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
         positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
         positions[i * 3 + 2] = r * Math.cos(phi);
 
-        // Gradient from cyan (dense vector) to violet (lexical candidate)
-        const isDense = Math.random() > 0.4;
-        colors[i * 3] = isDense ? 0.38 : 0.02; // R
-        colors[i * 3 + 1] = isDense ? 0.4 : 0.71; // G
-        colors[i * 3 + 2] = isDense ? 0.95 : 0.83; // B
+        // Cyan (pgvector dense) vs Violet (BM25 sparse tokens)
+        const isDense = Math.random() > 0.45;
+        colors[i * 3] = isDense ? 0.02 : 0.54; // R
+        colors[i * 3 + 1] = isDense ? 0.71 : 0.36; // G
+        colors[i * 3 + 2] = isDense ? 0.83 : 0.96; // B
       }
 
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
@@ -115,15 +115,15 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       const particleSystem = new THREE.Points(geometry, particleMaterial);
       rootGroup.add(particleSystem);
 
-      // Connecting nearest-neighbor lines (KNN)
+      // Connecting nearest-neighbor lines (KNN HNSW graph)
       const lineMaterial = new THREE.LineBasicMaterial({
         color: 0x6366f1,
         transparent: true,
-        opacity: 0.25,
+        opacity: 0.28,
       });
 
       const linePositions: number[] = [];
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 48; i++) {
         const i1 = Math.floor(Math.random() * particleCount);
         const i2 = Math.floor(Math.random() * particleCount);
         linePositions.push(
@@ -144,18 +144,56 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
       rootGroup.add(lines);
 
-      // Central query vector point (glowing beacon)
-      const queryGeo = new THREE.SphereGeometry(0.2, 16, 16);
-      const queryMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+      // Central Reciprocal Rank Fusion (RRF k=60) Beacon
+      const queryGeo = new THREE.DodecahedronGeometry(0.24, 0);
+      const queryMat = new THREE.MeshStandardMaterial({
+        color: 0x10b981,
+        emissive: 0x059669,
+        emissiveIntensity: 0.8,
+        metalness: 0.8,
+      });
       const queryMesh = new THREE.Mesh(queryGeo, queryMat);
       rootGroup.add(queryMesh);
 
+      // Ingested document chunk planes (floating semantic cards)
+      const chunkMat = new THREE.MeshStandardMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.65,
+        metalness: 0.7,
+      });
+      const chunks: THREE.Mesh[] = [];
+      for (let c = 0; c < 3; c++) {
+        const cGeo = new THREE.BoxGeometry(0.4, 0.55, 0.02);
+        const cMesh = new THREE.Mesh(cGeo, chunkMat);
+        const angle = (c * Math.PI * 2) / 3;
+        cMesh.position.set(Math.cos(angle) * 1.8, Math.sin(angle) * 1.2, 0.4);
+        rootGroup.add(cMesh);
+        chunks.push(cMesh);
+      }
+
+      // 7-Tier Context window orbit ring
+      const contextRingGeo = new THREE.TorusGeometry(2.2, 0.035, 16, 64);
+      const contextRingMat = new THREE.MeshBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const contextRing = new THREE.Mesh(contextRingGeo, contextRingMat);
+      contextRing.rotation.x = Math.PI / 3;
+      rootGroup.add(contextRing);
+
       animateCallback = (delta) => {
-        rootGroup.rotation.y += delta * 0.25;
-        rootGroup.rotation.x += delta * 0.1;
+        rootGroup.rotation.y += delta * 0.22;
+        rootGroup.rotation.x += delta * 0.08;
+        queryMesh.rotation.y -= delta * 0.5;
+        contextRing.rotation.z += delta * 0.3;
+        chunks.forEach((ch, idx) => {
+          ch.rotation.z += delta * (0.2 + idx * 0.1);
+        });
       };
     } else if (type === "llmfirewall") {
-      // 2. LLMFIREWALL: 3D Geodesic Security Shield & Defense Perimeter
+      // 2. LLMFIREWALL: Sub-Millisecond Inspection Tunnel, DAN Jailbreak Interceptor & Defense Perimeter
       const shieldGeo = new THREE.IcosahedronGeometry(2.1, 1);
       const wireframeMat = new THREE.MeshStandardMaterial({
         color: 0x8b5cf6,
@@ -166,8 +204,8 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       const shieldMesh = new THREE.Mesh(shieldGeo, wireframeMat);
       rootGroup.add(shieldMesh);
 
-      // Inner protected core
-      const coreGeo = new THREE.OctahedronGeometry(1.0, 0);
+      // Inner protected model core (emerald)
+      const coreGeo = new THREE.OctahedronGeometry(0.9, 0);
       const coreMat = new THREE.MeshStandardMaterial({
         color: 0x10b981,
         roughness: 0.2,
@@ -177,8 +215,8 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       const coreMesh = new THREE.Mesh(coreGeo, coreMat);
       rootGroup.add(coreMesh);
 
-      // Orbital defense ring
-      const ringGeo = new THREE.TorusGeometry(2.6, 0.04, 16, 64);
+      // Inspection Ring (glowing violet)
+      const ringGeo = new THREE.TorusGeometry(2.5, 0.04, 16, 64);
       const ringMat = new THREE.MeshBasicMaterial({
         color: 0x22d3ee,
         transparent: true,
@@ -188,12 +226,38 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       ringMesh.rotation.x = Math.PI / 3;
       rootGroup.add(ringMesh);
 
+      // Adversarial Deflected Path (Crimson ray representing intercepted DAN payload)
+      const blockedRayGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.8, 1.2, 0),
+        new THREE.Vector3(-1.0, 0.6, 0),
+        new THREE.Vector3(-0.4, 1.8, 0.5), // Blocked & redirected upward
+      ]);
+      const blockedRayMat = new THREE.LineBasicMaterial({
+        color: 0xf43f5e,
+        linewidth: 2,
+      });
+      const blockedRay = new THREE.Line(blockedRayGeo, blockedRayMat);
+      rootGroup.add(blockedRay);
+
+      // Sanitized Allowed Path (Emerald ray passing through to core)
+      const allowedRayGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.8, -0.8, 0),
+        new THREE.Vector3(-0.8, -0.4, 0),
+        new THREE.Vector3(0, 0, 0), // Passes cleanly into core
+      ]);
+      const allowedRayMat = new THREE.LineBasicMaterial({
+        color: 0x10b981,
+        linewidth: 2,
+      });
+      const allowedRay = new THREE.Line(allowedRayGeo, allowedRayMat);
+      rootGroup.add(allowedRay);
+
       animateCallback = (delta) => {
-        shieldMesh.rotation.y += delta * 0.3;
-        shieldMesh.rotation.x += delta * 0.15;
-        coreMesh.rotation.y -= delta * 0.6;
-        coreMesh.rotation.z += delta * 0.4;
-        ringMesh.rotation.z += delta * 0.5;
+        shieldMesh.rotation.y += delta * 0.28;
+        shieldMesh.rotation.x += delta * 0.12;
+        coreMesh.rotation.y -= delta * 0.5;
+        coreMesh.rotation.z += delta * 0.3;
+        ringMesh.rotation.z += delta * 0.45;
       };
     } else if (type === "visualmemory") {
       // 3. AI VISUAL MEMORY: 3D Spatial Tracking & Perspective Camera Frustum
@@ -237,44 +301,67 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
         rootGroup.rotation.y += delta * 0.2;
       };
     } else if (type === "aegis") {
-      // 4. AEGIS: 3D Distributed Cluster Pod Mesh & Telemetry Rings
-      const ringCount = 3;
-      const rings: THREE.Mesh[] = [];
+      // 4. AEGIS: Multi-Tenant Cryptographic Isolation Boundary, Telemetry Conduits & Fail-Closed Gate
+      // Outer Geodesic Tenant Boundary
+      const shieldGeo = new THREE.IcosahedronGeometry(2.2, 1);
+      const shieldWire = new THREE.WireframeGeometry(shieldGeo);
+      const shieldMat = new THREE.LineBasicMaterial({
+        color: 0x536dff, // Electric Cobalt
+        transparent: true,
+        opacity: 0.5,
+      });
+      const shieldMesh = new THREE.LineSegments(shieldWire, shieldMat);
+      rootGroup.add(shieldMesh);
 
-      for (let i = 0; i < ringCount; i++) {
-        const radius = 1.4 + i * 0.7;
-        const torusGeo = new THREE.TorusGeometry(radius, 0.03, 16, 60);
+      // Inner AST Causal Reasoning Engine (octahedron)
+      const coreGeo = new THREE.OctahedronGeometry(0.85, 0);
+      const coreMat = new THREE.MeshPhysicalMaterial({
+        color: 0x06b6d4, // Cyan
+        metalness: 0.9,
+        roughness: 0.15,
+        clearcoat: 1.0,
+      });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      rootGroup.add(coreMesh);
+
+      // 3 Distributed Telemetry Conduits (OTel traces, Prometheus metrics, Loki logs)
+      const telemetryColors = [0x06b6d4, 0x10b981, 0x8b5cf6];
+      const telemetryRings: THREE.Mesh[] = [];
+      for (let i = 0; i < 3; i++) {
+        const radius = 1.6 + i * 0.45;
+        const torusGeo = new THREE.TorusGeometry(radius, 0.035, 16, 64);
         const torusMat = new THREE.MeshBasicMaterial({
-          color: i === 0 ? 0x10b981 : i === 1 ? 0x6366f1 : 0xf59e0b,
+          color: telemetryColors[i],
           transparent: true,
           opacity: 0.7,
         });
         const ring = new THREE.Mesh(torusGeo, torusMat);
         ring.rotation.x = (i * Math.PI) / 3;
         ring.rotation.y = (i * Math.PI) / 4;
-        rings.push(ring);
+        telemetryRings.push(ring);
         rootGroup.add(ring);
       }
 
-      // Cluster nodes
-      const nodeGeo = new THREE.DodecahedronGeometry(0.18, 0);
-      const nodeMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: 0.9,
+      // Fail-Closed Cryptographic Approval Gate (Diamond lock on outer boundary)
+      const gateGeo = new THREE.DodecahedronGeometry(0.22, 0);
+      const gateMat = new THREE.MeshStandardMaterial({
+        color: 0x10b981, // Emerald: verified fail-closed gate
+        metalness: 0.8,
+        roughness: 0.2,
       });
-
-      for (let i = 0; i < 8; i++) {
-        const mesh = new THREE.Mesh(nodeGeo, nodeMat);
-        const angle = (i / 8) * Math.PI * 2;
-        mesh.position.set(Math.cos(angle) * 2.1, Math.sin(angle) * 2.1, (i % 2) * 0.5 - 0.25);
-        rootGroup.add(mesh);
-      }
+      const gateMesh = new THREE.Mesh(gateGeo, gateMat);
+      gateMesh.position.set(0, 2.2, 0);
+      rootGroup.add(gateMesh);
 
       animateCallback = (delta) => {
-        rings.forEach((r, idx) => {
-          r.rotation.z += delta * (0.2 + idx * 0.1);
+        shieldMesh.rotation.y += delta * 0.18;
+        shieldMesh.rotation.x += delta * 0.08;
+        coreMesh.rotation.y -= delta * 0.4;
+        coreMesh.rotation.z += delta * 0.25;
+        telemetryRings.forEach((r, idx) => {
+          r.rotation.z += delta * (0.25 + idx * 0.1);
         });
-        rootGroup.rotation.y += delta * 0.15;
+        gateMesh.rotation.y += delta * 0.6;
       };
     } else if (type === "medical") {
       // 5. VENIPUNCTURE VR: 3D Precision Medical Phlebotomy Apparatus, Insertion Angle & Procedural Guidance
@@ -469,6 +556,32 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       ringMesh.rotation.x = Math.PI / 2.5;
       rootGroup.add(ringMesh);
 
+      // Deterministic Seed-Lock Anchor (emerald diamond at top)
+      const lockGeo = new THREE.OctahedronGeometry(0.2, 0);
+      const lockMat = new THREE.MeshStandardMaterial({
+        color: 0x10b981,
+        emissive: 0x059669,
+        emissiveIntensity: 0.8,
+      });
+      const lockMesh = new THREE.Mesh(lockGeo, lockMat);
+      lockMesh.position.set(0, 1.8, 0);
+      rootGroup.add(lockMesh);
+
+      // Dual-State Comparator (Expected vs Actual baseline rails)
+      const railGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-1.8, -1.4, 0),
+        new THREE.Vector3(1.8, -1.4, 0),
+        new THREE.Vector3(-1.8, -1.6, 0),
+        new THREE.Vector3(1.8, -1.6, 0),
+      ]);
+      const railMat = new THREE.LineBasicMaterial({
+        color: 0x10b981,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const rails = new THREE.LineSegments(railGeo, railMat);
+      rootGroup.add(rails);
+
       animateCallback = (delta) => {
         coreMesh.rotation.y += delta * 0.4;
         coreMesh.rotation.x += delta * 0.2;
@@ -476,6 +589,7 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
         shieldMesh.rotation.y -= delta * 0.25;
         shieldMesh.rotation.z += delta * 0.15;
         ringMesh.rotation.z += delta * 0.5;
+        lockMesh.rotation.y += delta * 0.8;
         rootGroup.rotation.y += delta * 0.1;
       };
     } else if (type === "fastapicicd") {
@@ -758,18 +872,15 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
     window.addEventListener("touchend", onTouchEnd);
 
     // Animation loop with pause on offscreen (IntersectionObserver)
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
     let isVisible = true;
     let lastTime = performance.now();
 
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-    });
-    observer.observe(container);
-
     const render = () => {
-      animationFrameId = requestAnimationFrame(render);
-      if (!isVisible) return;
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
 
       const now = performance.now();
       const delta = Math.min((now - lastTime) / 1000, 0.1);
@@ -780,9 +891,33 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       }
 
       renderer.render(scene, camera);
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(render);
+      } else {
+        animationFrameId = null;
+      }
     };
 
-    render();
+    const observer = new IntersectionObserver(([entry]) => {
+      const nextVisible = entry.isIntersecting;
+      if (isVisible !== nextVisible) {
+        isVisible = nextVisible;
+        if (isVisible) {
+          if (!animationFrameId) {
+            lastTime = performance.now();
+            animationFrameId = requestAnimationFrame(render);
+          }
+        } else {
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        }
+      }
+    });
+    observer.observe(container);
+
+    animationFrameId = requestAnimationFrame(render);
 
     // Resize handler
     const handleResize = () => {
@@ -798,7 +933,10 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
 
     return () => {
       observer.disconnect();
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
       window.removeEventListener("resize", handleResize);
 
       domElement.removeEventListener("mousedown", onMouseDown);
@@ -810,6 +948,21 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
       window.removeEventListener("touchend", onTouchEnd);
 
       // Clean up Three.js resources
+      scene.traverse((obj) => {
+        if (
+          obj instanceof THREE.Mesh ||
+          obj instanceof THREE.Points ||
+          obj instanceof THREE.LineSegments
+        ) {
+          obj.geometry?.dispose();
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach((m) => m.dispose());
+          } else if (obj.material) {
+            obj.material.dispose();
+          }
+        }
+      });
+
       renderer.dispose();
       if (container.contains(domElement)) {
         container.removeChild(domElement);

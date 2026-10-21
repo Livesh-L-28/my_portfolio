@@ -32,11 +32,19 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
     xl: "h-3.5 w-3.5 ring-2",
   };
 
+  const pixelSizes = {
+    sm: 32,
+    md: 40,
+    lg: 56,
+    xl: 80,
+  };
+
   const hasValidImage = Boolean(src && !imgError);
 
   return (
     <div
       className={`relative shrink-0 select-none ${sizeClasses[size]} ${className}`}
+      style={{ width: pixelSizes[size], height: pixelSizes[size], position: "relative" }}
     >
       {hasValidImage ? (
         <div className="relative h-full w-full overflow-hidden rounded-inherit border border-slate-200 bg-slate-100 shadow-sm">

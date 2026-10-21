@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Search,
   Copy,
@@ -132,8 +132,17 @@ export const CommandPalette: React.FC = () => {
   const soundActive = useSoundEnabled();
   const [copilotAnswer, setCopilotAnswer] = useState<CopilotAnswer | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const selectedItemRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
+  const shouldReduceMotion = useReducedMotion();
+
+  // Scroll active item into view during keyboard navigation
+  useEffect(() => {
+    if (selectedItemRef.current) {
+      selectedItemRef.current.scrollIntoView({ block: "nearest" });
+    }
+  }, [selectedIndex]);
 
   // Listen for Cmd+K / Ctrl+K and custom event
   useEffect(() => {
@@ -205,7 +214,7 @@ export const CommandPalette: React.FC = () => {
     list.push({
       id: "pypi-llmfirewall",
       title: "pip install llmfirewall-core",
-      subtitle: "PyPI v0.1.0 · In-process prompt injection & PII firewall (~0.02ms)",
+      subtitle: "PyPI v1.1.0 · In-process prompt injection & PII firewall (~0.02ms)",
       category: "PyPI Packages",
       badge: "PyPI Distribution",
       icon: Package,
@@ -435,10 +444,10 @@ export const CommandPalette: React.FC = () => {
 
           {/* Modal Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -10 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -10 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: -10 }}
+            transition={shouldReduceMotion ? { duration: 0.05 } : { duration: 0.2, ease: "easeOut" }}
             className="relative w-full max-w-xl rounded-3xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl shadow-2xl overflow-hidden z-10"
           >
             {/* Top search bar */}
@@ -525,7 +534,7 @@ export const CommandPalette: React.FC = () => {
                       <button
                         key={q}
                         onClick={() => handleTriggerCopilot(q)}
-                        className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2 py-0.5 text-[11px] font-sans text-slate-700 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-300 transition-all cursor-pointer shadow-2xs"
+                        className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/90 px-2 py-0.5 text-[11px] font-sans text-slate-700 dark:text-slate-300 hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-300 transition-all cursor-pointer shadow-2xs active:scale-95 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500"
                       >
                         {q}
                       </button>
@@ -551,12 +560,13 @@ export const CommandPalette: React.FC = () => {
                               </div>
                             )}
                             <button
+                              ref={isSelected ? selectedItemRef : undefined}
                               onClick={item.perform}
                               onMouseEnter={() => setSelectedIndex(idx)}
-                              className={`w-full flex items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-colors cursor-pointer select-none ${
+                              className={`w-full flex items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-all duration-150 cursor-pointer select-none border-l-2 ${
                                 isSelected
-                                  ? "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-200"
-                                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/70 dark:hover:bg-slate-800/60"
+                                  ? "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-200 border-indigo-500 shadow-2xs translate-x-0.5"
+                                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 border-transparent"
                               }`}
                             >
                               <div className="flex items-center gap-3 min-w-0">
