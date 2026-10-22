@@ -110,6 +110,7 @@ export interface CertificationItem {
 
 export type Project3DType =
   | 'nexarag'
+  | 'sentinel'
   | 'llmfirewall'
   | 'visualmemory'
   | 'aegis'
@@ -124,6 +125,9 @@ export function getProject3DType(slug: string): Project3DType {
   switch (slug) {
     case 'nexarag':
       return 'nexarag';
+    case 'sentinel-ai':
+    case 'sentinel':
+      return 'sentinel';
     case 'venipuncture-vr':
       return 'medical';
     case 'llmfirewall-core':

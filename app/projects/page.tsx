@@ -5,7 +5,7 @@ import { Terminal, ShieldCheck, Database } from "lucide-react";
 export const metadata: Metadata = {
   title: "Projects & System Architectures — Livesh L",
   description:
-    "Explore 10 AI engineering projects spanning RAG architectures, in-process LLM firewalls, deterministic agent reliability engines, and computer vision systems.",
+    "Explore 11 production AI engineering repositories spanning RAG architectures, industrial safety intelligence, in-process LLM firewalls, deterministic agent reliability engines, and computer vision systems.",
 };
 
 export default function ProjectsPage() {
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
           </h1>
 
           <p className="mt-3 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-medium font-sans leading-relaxed">
-            Explore 10 production-oriented repositories, open-source packages, and systems. Every project features verified code, documented test suites, or live deployments.
+            Explore 11 production-oriented repositories, open-source packages, and systems. Every project features verified code, documented test suites, or live deployments.
           </p>
 
           {/* Quick Metrics Bar - High-Craft Frosted Chips */}
@@ -38,7 +38,7 @@ export default function ProjectsPage() {
               <div className="h-5 w-5 rounded-md bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center">
                 <Terminal className="h-3 w-3 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <span className="text-slate-950 dark:text-white font-bold">10 Verified Repositories</span>
+              <span className="text-slate-950 dark:text-white font-bold">11 Verified Repositories</span>
             </span>
             <span className="flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/90 backdrop-blur-md px-3.5 py-2 shadow-2xs font-medium hover:border-emerald-300 transition-colors">
               <div className="h-5 w-5 rounded-md bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center">
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
               <div className="h-5 w-5 rounded-md bg-sky-50 dark:bg-sky-950 border border-sky-200 dark:border-sky-800 flex items-center justify-center">
                 <Database className="h-3 w-3 text-sky-600 dark:text-sky-400" />
               </div>
-              <span className="text-slate-950 dark:text-white font-bold">1,290+ Passing Tests</span>
+              <span className="text-slate-950 dark:text-white font-bold">1,400+ Passing Tests</span>
             </span>
           </div>
         </div>

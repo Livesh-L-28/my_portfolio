@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
             >
               {/* Light sweep animation */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-              <span>Explore Projects (11)</span>
+              <span>Explore Projects (12)</span>
               <ArrowDown className="h-3.5 w-3.5 text-indigo-300 group-hover:translate-y-0.5 transition-transform" />
             </a>
 

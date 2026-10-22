@@ -104,6 +104,25 @@ const PYTEST_DATA: Record<string, PytestSuiteData> = {
       { file: "test_attribution.py", name: "test_strict_citation_grounding_verification", duration: "0.016s", status: "PASSED" },
     ],
   },
+  "sentinel-ai": {
+    command: "pytest tests/test_tracking.py tests/test_zones.py tests/test_evidence.py -v",
+    totalTests: 116,
+    passingTime: "1.45s",
+    metrics: [
+      { label: "YOLO Inference", value: "<18ms Real-Time" },
+      { label: "Policy Evaluation", value: "100% Deterministic" },
+      { label: "Agent Pipeline", value: "4-Stage Investigation Trace" },
+      { label: "Evidence Ledger", value: "SHA-256 Tamper-Evident" },
+    ],
+    tests: [
+      { file: "test_tracking.py", name: "test_yolo_multi_object_tracking_persistence", duration: "0.019s", status: "PASSED" },
+      { file: "test_zones.py", name: "test_spatial_polygon_hazard_breach_detection", duration: "0.014s", status: "PASSED" },
+      { file: "test_evidence.py", name: "test_sha256_incident_snapshot_hash_chain", duration: "0.009s", status: "PASSED" },
+      { file: "test_agents.py", name: "test_4_stage_investigation_gate_pipeline", duration: "0.024s", status: "PASSED" },
+      { file: "test_digital_twin.py", name: "test_3d_spatial_coordinate_projection", duration: "0.016s", status: "PASSED" },
+      { file: "test_auth_rbac.py", name: "test_fail_closed_jwt_safety_policy_enforcement", duration: "0.011s", status: "PASSED" },
+    ],
+  },
 };
 
 interface ProjectVisualShowcaseProps {

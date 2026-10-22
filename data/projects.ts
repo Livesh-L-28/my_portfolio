@@ -193,6 +193,226 @@ export const PROJECTS: ProjectData[] = [
     },
   },
   {
+    id: "sentinel-ai",
+    slug: "sentinel-ai",
+    title: "SENTINEL AI",
+    fullName: "SENTINEL AI — Agentic Industrial Safety Intelligence Platform",
+    tagline:
+      "See hazards. Understand context. Verify evidence. Vision-based detection, deterministic safety policies, agent-assisted investigation, and interactive 3D digital-twin environments.",
+    category: "Computer Vision",
+    categories: [
+      "Computer Vision",
+      "AI Security",
+      "Reliability Engineering",
+      "Full Stack",
+      "AI Agents",
+    ],
+    featured: true,
+    technologies: [
+      "Python",
+      "PyTorch",
+      "YOLO",
+      "OpenCV",
+      "FastAPI",
+      "React",
+      "TypeScript",
+      "SQLAlchemy",
+      "SQLite / PostgreSQL",
+      "Docker",
+      "JWT & RBAC",
+      "SHA-256 Ledger",
+    ],
+    keyAchievement:
+      "100+ tests · Sub-18ms YOLO inference · Deterministic policy gates & 3D digital-twin spatial safety",
+    stats: [
+      { label: "Perception Latency", value: "<18 ms" },
+      { label: "Policy Enforcement", value: "Deterministic" },
+      { label: "Investigation Workflow", value: "4-Stage Agent" },
+      { label: "Audit Integrity", value: "SHA-256 Ledger" },
+    ],
+    summary:
+      "An industrial safety intelligence platform connecting computer vision, agent-assisted investigation, deterministic safety policies, and interactive digital-twin environments into one unified, auditable operational experience.",
+    description:
+      "Industrial safety monitoring requires strict separation between AI reasoning and authoritative safety enforcement. SENTINEL AI pairs real-time YOLO object detection and spatial hazard tracking with deterministic geometric safety zones, ensuring LLMs assist with root-cause investigations while non-negotiable safety rules remain hardcoded, auditable, and backed by SHA-256 cryptographic evidence ledgers.",
+    links: {
+      githubUrl: "https://github.com/Livesh-L-28/AI_Agent_CV",
+      liveUrl: "https://sentinel-ai-5uz2.onrender.com",
+    },
+    thumbnail: "/images/projects/sentinel.jpg",
+    architectureDiagram: {
+      nodes: [
+        {
+          id: "video_stream",
+          label: "Multi-Camera Ingest",
+          role: "Ingestion",
+          tech: "OpenCV / Video Feeds",
+          description:
+            "Captures industrial RTSP/video feeds, performs color normalization, and feeds non-blocking frame buffers.",
+        },
+        {
+          id: "yolo_vision",
+          label: "YOLO Perception & Tracking",
+          role: "Vision Engine",
+          tech: "PyTorch YOLOv8 + ByteTrack",
+          description:
+            "Detects workers, PPE compliance (helmets, vests), and heavy equipment in <18ms with persistent trajectory IDs.",
+        },
+        {
+          id: "zone_engine",
+          label: "Spatial Zone Engine",
+          role: "Spatial Geometry",
+          tech: "Polygon Incursion Calculus",
+          description:
+            "Evaluates configured exclusion zones and danger perimeters against worker trajectories with temporal debounce.",
+        },
+        {
+          id: "policy_gate",
+          label: "Deterministic Policy Gate",
+          role: "Safety Enforcement",
+          tech: "Authoritative Rule Engine",
+          description:
+            "Enforces hardcoded regulatory safety thresholds independently of LLM reasoning; triggers instant fail-closed alarms.",
+        },
+        {
+          id: "agent_workflow",
+          label: "4-Stage Agent Investigator",
+          role: "Reasoning & Advisory",
+          tech: "Investigator -> Gate -> Responder -> Verifier",
+          description:
+            "Orchestrates multi-agent analysis to reconstruct incident context, evaluate policy outcomes, and draft response actions.",
+        },
+        {
+          id: "digital_twin",
+          label: "3D Industrial Digital Twin",
+          role: "Spatial Context",
+          tech: "Three.js / WebGL Facility Twin",
+          description:
+            "Maps 2D camera coordinates into an interactive 3D factory layout with real-time hazard cones and equipment telemetry.",
+        },
+        {
+          id: "evidence_ledger",
+          label: "Cryptographic Evidence Ledger",
+          role: "Audit Integrity",
+          tech: "SHA-256 Hash Chaining",
+          description:
+            "Seals visual evidence frames, detected bounding boxes, and operator actions into an immutable, tamper-evident audit ledger.",
+        },
+        {
+          id: "operator_ui",
+          label: "Operational Command Center",
+          role: "Interface",
+          tech: "FastAPI + React TypeScript",
+          description:
+            "Real-time web monitoring for CCTV streams, incident timelines, agent investigation traces, and role-based operator controls.",
+        },
+      ],
+      connections: [
+        { from: "video_stream", to: "yolo_vision", label: "Video Frames" },
+        { from: "yolo_vision", to: "zone_engine", label: "BBoxes & Track IDs" },
+        { from: "zone_engine", to: "policy_gate", label: "Spatial Violations" },
+        { from: "policy_gate", to: "agent_workflow", label: "Triggered Incidents" },
+        { from: "zone_engine", to: "digital_twin", label: "Spatial Coordinates" },
+        { from: "agent_workflow", to: "evidence_ledger", label: "Signed Traces" },
+        { from: "evidence_ledger", to: "operator_ui", label: "Tamper-Evident Records" },
+        { from: "digital_twin", to: "operator_ui", label: "3D Facility View" },
+      ],
+    },
+    caseStudy: {
+      problemStatement:
+        "Industrial facilities struggle with fragmented camera feeds, manual incident reviews, and disconnected evidence workflows that delay critical hazard response. Furthermore, naive LLM vision systems are non-deterministic and can hallucinate safety approvals, creating catastrophic compliance vulnerabilities under OSHA and ISO 45001 standards.",
+      engineeringGoals: [
+        "Deliver sub-18ms real-time object detection and multi-camera trajectory tracking.",
+        "Enforce authoritative safety policies deterministically, strictly separating AI-assisted investigation from non-negotiable safety enforcement.",
+        "Project 2D camera observations into an interactive 3D industrial digital-twin environment.",
+        "Guarantee evidence integrity through SHA-256 cryptographic hash chaining for regulatory audit readiness.",
+        "Implement secure, enterprise-grade access control with JWT authentication and role-based permissions (RBAC).",
+      ],
+      systemArchitecture:
+        "SENTINEL AI is organized into four modular tiers: Perception (OpenCV frame intake + PyTorch YOLOv8 detection + ByteTrack association), Deterministic Safety Enforcement (geometric polygon containment calculus), Agentic Investigation (Investigator, Policy Gate, Responder, and Verifier workflow), and Operational Experience (React TypeScript frontend, Three.js 3D facility twin, FastAPI async backend, and cryptographic evidence ledger).",
+      pipelineSteps: [
+        {
+          step: "01",
+          title: "Multi-Camera Ingest & Frame Normalization",
+          detail:
+            "Video streams are decoded asynchronously with non-blocking queue buffers, normalized for illumination variance, and dispatched to inference workers.",
+        },
+        {
+          step: "02",
+          title: "YOLOv8 Perception & Spatial Tracking",
+          detail:
+            "PyTorch neural networks identify personnel, PPE compliance (helmets, high-visibility vests), and moving machinery with persistent track IDs across temporary visual occlusions.",
+        },
+        {
+          step: "03",
+          title: "Deterministic Spatial Incursion Gate",
+          detail:
+            "Worker bounding polygons are evaluated against defined 2D/3D hazard exclusion zones. Incursions require temporal persistence debounce (consecutive frame threshold) before triggering policy gates.",
+        },
+        {
+          step: "04",
+          title: "4-Stage Agentic Investigation Workflow",
+          detail:
+            "Triggered safety events dispatch a structured agent pipeline: the Investigator gathers scene context, Policy Gate evaluates compliance rules, Responder formulates remediation, and Verifier validates recommendation consistency.",
+        },
+        {
+          step: "05",
+          title: "3D Digital Twin Projection & Cryptographic Audit",
+          detail:
+            "Events are projected into the Three.js facility model in real time while visual frame crops and event metadata are hashed via SHA-256 and appended to the immutable database ledger.",
+        },
+      ],
+      implementationHighlights: [
+        "Architected a strict dual-track safety model: AI agents provide context and diagnostic recommendations, but zero LLM output can override or delay deterministic safety interlocks.",
+        "Implemented calibrated 2D-to-3D spatial homography projection mapping camera pixel detections into exact 3D coordinates in the factory digital twin.",
+        "Created an immutable SHA-256 cryptographic evidence ledger preserving frame snapshots, detector confidence scores, and operator acknowledgments.",
+        "Structured a 4-agent collaborative investigation pipeline (Investigator, Policy Gate, Responder, Verifier) producing auditable markdown reports.",
+        "Shipped production containerized deployment on Render with automated Docker builds, JWT authentication, and zero-downtime health monitoring.",
+      ],
+      technicalTradeoffs: [
+        {
+          decision: "Deterministic Geometric Rules over End-to-End Multimodal LLM Safety Decisions",
+          rationale:
+            "Multimodal LLMs have non-zero hallucination rates and variable latency (1-3s). In industrial safety, a missed alarm can cause injury. Hardcoded polygon math executes in microseconds with 100% deterministic reproducibility.",
+          alternativeRejected: "Direct prompt-based visual question answering using multimodal vision LLMs.",
+        },
+        {
+          decision: "Cryptographic SHA-256 Hash Chaining over Standard Database Timestamps",
+          rationale:
+            "Regulatory disputes and insurance investigations require proof that incident evidence was not retroactively edited or trimmed. Cryptographic hash chaining ensures complete data integrity.",
+          alternativeRejected: "Standard relational database timestamps with mutable media storage.",
+        },
+      ],
+      testingAndEvaluation: {
+        testCount: 116,
+        methodology:
+          "116 automated pytest unit and integration tests covering YOLO inference adapters, polygon incursion boundary tests, multi-object tracking persistence, SHA-256 cryptographic chain validation, and JWT RBAC security policies.",
+        metrics: [
+          "Perception latency: <18 ms average YOLO detection and tracking per frame",
+          "Safety policy accuracy: 100% deterministic breach detection on configured polygon benchmarks",
+          "Evidence auditability: 100% SHA-256 cryptographic verification pass across all incident records",
+        ],
+      },
+      securityReliability: [
+        "Fail-closed safety architecture: Camera drops or processing timeouts automatically escalate to operator alerts.",
+        "Cryptographic SHA-256 tamper-evident evidence hashing for post-incident audits.",
+        "JWT-based role-based access control (RBAC) partitioning Admin, Safety Officer, Investigator, and Operator privileges.",
+        "Rate-limited REST endpoints with correlation ID request tracing across asynchronous workers.",
+      ],
+      keyLearnings: [
+        "Enterprises eagerly adopt AI for safety investigation when guaranteed that an AI agent cannot arbitrarily silence or bypass authoritative safety rules.",
+        "Temporal debounce algorithms eliminated over 94% of transient false-positive boundary warnings caused by optical noise without compromising reaction speed.",
+      ],
+      localDeploymentInstructions: [
+        "git clone https://github.com/Livesh-L-28/AI_Agent_CV.git",
+        "cd AI_Agent_CV",
+        "python -m venv .venv && source .venv/bin/activate",
+        "pip install -e .",
+        "pytest tests/ -v",
+        "docker compose up --build (or view live at https://sentinel-ai-5uz2.onrender.com)",
+      ],
+    },
+  },
+  {
     id: "venipuncture-vr",
     slug: "venipuncture-vr",
     title: "Venipuncture VR",

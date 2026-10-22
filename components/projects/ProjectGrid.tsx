@@ -92,10 +92,15 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
       result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     } else if (sortBy === "tests") {
       const getTestScore = (p: ProjectData) => {
+        if (p.caseStudy?.testingAndEvaluation?.testCount) {
+          return p.caseStudy.testingAndEvaluation.testCount;
+        }
         if (p.id === "llmfirewall-core") return 608;
         if (p.id === "aireliability") return 362;
         if (p.id === "nexarag") return 321;
         if (p.id === "venipuncture-vr") return 120;
+        if (p.id === "sentinel-ai" || p.id === "sentinel") return 116;
+        if (p.id === "logicfalcon") return 101;
         return 0;
       };
       result.sort((a, b) => getTestScore(b) - getTestScore(a));

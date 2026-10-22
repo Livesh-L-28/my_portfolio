@@ -192,6 +192,98 @@ export const Project3DCanvas: React.FC<Project3DCanvasProps> = ({
           ch.rotation.z += delta * (0.2 + idx * 0.1);
         });
       };
+    } else if (type === "sentinel") {
+      // SENTINEL AI: Industrial Digital Twin, 3D Spatial Danger Zone Polygons, Camera Frustum & Worker Tracking
+      // 1. Factory floor spatial grid
+      const grid = new THREE.GridHelper(6, 12, 0x06b6d4, 0x1e293b);
+      grid.position.y = -1.5;
+      rootGroup.add(grid);
+
+      // 2. Hazardous Exclusion Zone (Red Glowing Danger Polygon Ring on Floor)
+      const hazardZoneShape = new THREE.Shape();
+      hazardZoneShape.moveTo(-1.8, -1.8);
+      hazardZoneShape.lineTo(0.6, -1.8);
+      hazardZoneShape.lineTo(0.6, 0.4);
+      hazardZoneShape.lineTo(-1.8, 0.4);
+      hazardZoneShape.closePath();
+
+      const hazardPoints = hazardZoneShape.getPoints();
+      const hazardGeo = new THREE.BufferGeometry().setFromPoints(
+        hazardPoints.map((pt) => new THREE.Vector3(pt.x, -1.48, pt.y))
+      );
+      const hazardLine = new THREE.LineLoop(
+        hazardGeo,
+        new THREE.LineBasicMaterial({ color: 0xef4444, linewidth: 2 })
+      );
+      rootGroup.add(hazardLine);
+
+      // Hazard zone perimeter barrier posts (yellow warning beacons)
+      const beaconMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
+      const beaconGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.5, 8);
+      [
+        [-1.8, -1.8],
+        [0.6, -1.8],
+        [0.6, 0.4],
+        [-1.8, 0.4],
+      ].forEach(([x, z]) => {
+        const beacon = new THREE.Mesh(beaconGeo, beaconMat);
+        beacon.position.set(x, -1.25, z);
+        rootGroup.add(beacon);
+      });
+
+      // 3. Heavy Industrial Machinery Bounding Box (Inside Hazard Zone)
+      const machineGeo = new THREE.BoxGeometry(1.2, 0.9, 1.2);
+      const machineEdges = new THREE.EdgesGeometry(machineGeo);
+      const machineLine = new THREE.LineSegments(
+        machineEdges,
+        new THREE.LineBasicMaterial({ color: 0xf43f5e, linewidth: 2 })
+      );
+      machineLine.position.set(-0.6, -1.05, -0.7);
+      rootGroup.add(machineLine);
+
+      // 4. Safe Walkway Zone Worker (Green Bounding Box)
+      const safeBoxGeo = new THREE.BoxGeometry(0.8, 1.3, 0.6);
+      const safeBoxEdges = new THREE.EdgesGeometry(safeBoxGeo);
+      const safeWorker = new THREE.LineSegments(
+        safeBoxEdges,
+        new THREE.LineBasicMaterial({ color: 0x10b981, linewidth: 2 })
+      );
+      safeWorker.position.set(1.6, -0.85, 0.8);
+      rootGroup.add(safeWorker);
+
+      // 5. Incursion Worker Bounding Box (Amber Warning / Violation Near Hazard)
+      const incursionBoxGeo = new THREE.BoxGeometry(0.7, 1.3, 0.6);
+      const incursionEdges = new THREE.EdgesGeometry(incursionBoxGeo);
+      const incursionWorker = new THREE.LineSegments(
+        incursionEdges,
+        new THREE.LineBasicMaterial({ color: 0xfbbf24, linewidth: 2 })
+      );
+      incursionWorker.position.set(0.4, -0.85, 0.2);
+      rootGroup.add(incursionWorker);
+
+      // 6. CCTV Observer Camera Frustum Pyramid
+      const cctvFrustumGeo = new THREE.ConeGeometry(1.8, 2.6, 4, 1, true);
+      const cctvFrustumEdges = new THREE.EdgesGeometry(cctvFrustumGeo);
+      const cctvFrustum = new THREE.LineSegments(
+        cctvFrustumEdges,
+        new THREE.LineBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.6 })
+      );
+      cctvFrustum.position.set(-2.0, 1.8, -2.0);
+      cctvFrustum.rotation.x = Math.PI * 0.75;
+      cctvFrustum.rotation.z = Math.PI * 0.25;
+      rootGroup.add(cctvFrustum);
+
+      // 7. Pulse light for safety scanner
+      const scannerLight = new THREE.PointLight(0xef4444, 1.5, 6);
+      scannerLight.position.set(-0.6, 0.2, -0.7);
+      rootGroup.add(scannerLight);
+
+      let pulseTime = 0;
+      animateCallback = (delta) => {
+        rootGroup.rotation.y += delta * 0.18;
+        pulseTime += delta * 3;
+        scannerLight.intensity = 1.0 + Math.sin(pulseTime) * 0.8;
+      };
     } else if (type === "llmfirewall") {
       // 2. LLMFIREWALL: Sub-Millisecond Inspection Tunnel, DAN Jailbreak Interceptor & Defense Perimeter
       const shieldGeo = new THREE.IcosahedronGeometry(2.1, 1);
