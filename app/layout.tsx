@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "935e2140f559c6e8",
+    google: "j06bIKBtj-WSpTmugFzbF82rvLpxQLpCqstqrwdsVD0",
   },
 };
 
@@ -236,6 +236,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta
+          name="google-site-verification"
+          content="j06bIKBtj-WSpTmugFzbF82rvLpxQLpCqstqrwdsVD0"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
