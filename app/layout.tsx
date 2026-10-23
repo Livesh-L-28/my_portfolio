@@ -8,6 +8,8 @@ import { CommandPalette } from "@/components/ui/CommandPalette";
 import { KeyboardShortcutsModal } from "@/components/ui/KeyboardShortcutsModal";
 import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 
+import { getSiteUrl } from "@/lib/seo";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,6 +20,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = getSiteUrl();
+
 export const viewport: Viewport = {
   themeColor: "#fafbfc",
   width: "device-width",
@@ -25,12 +29,23 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://livesh.dev"),
-  title: "Livesh L — AI Developer | LLM Systems & AI Security",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Livesh L — AI Developer & Systems Engineer | Official Portfolio",
+    template: "%s | Livesh L",
+  },
   description:
-    "Portfolio of Livesh L, AI Developer specializing in production LLM applications, RAG systems, AI security firewalls, deterministic reliability engineering, and published PyPI packages.",
+    "Official portfolio of Livesh L, AI Developer and Systems Engineer. Specializing in production LLM applications, hybrid RAG systems, in-process AI security firewalls, deterministic reliability testing, and published PyPI packages.",
   keywords: [
+    "Livesh",
     "Livesh L",
+    "Livesh-L-28",
+    "Livesh AI",
+    "Livesh Developer",
+    "Livesh Portfolio",
+    "Livesh AI Developer",
+    "Livesh AI Systems Engineer",
+    "Livesh Prathyusha",
     "AI Developer",
     "LLM Engineering",
     "RAG Systems",
@@ -39,9 +54,9 @@ export const metadata: Metadata = {
     "llmfirewall-core",
     "aireliability",
     "aegis-resilience",
-    "logicfalcon",
     "LogicFalcon",
-    "AEGIS Framework",
+    "logicfalcon",
+    "Sentinel AI",
     "AI Security",
     "Deterministic Testing",
     "PyPI Packages",
@@ -50,24 +65,47 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Livesh L", url: "https://github.com/Livesh-L-28" }],
   creator: "Livesh L",
+  publisher: "Livesh L",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://livesh.dev",
-    title: "Livesh L — AI Developer | LLM Systems & AI Security",
+    url: siteUrl,
+    title: "Livesh L — AI Developer & Systems Engineer | Official Portfolio",
     description:
-      "Production-oriented LLM applications, retrieval-augmented generation, AI security firewalls, deterministic reliability engineering, and published PyPI packages.",
-    siteName: "Livesh L AI Portfolio",
+      "Official portfolio of Livesh L. Production LLM systems, hybrid RAG architectures, AI firewalls, and published PyPI packages.",
+    siteName: "Livesh L — AI Engineering Portfolio",
+    images: [
+      {
+        url: `${siteUrl}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Livesh L — AI Developer & Systems Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Livesh L — AI Developer | LLM Systems & AI Security",
+    title: "Livesh L — AI Developer & Systems Engineer",
     description:
       "Production-oriented LLM applications, retrieval-augmented generation, AI security firewalls, and deterministic reliability engineering.",
+    images: [`${siteUrl}/opengraph-image`],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
 };
 
@@ -76,10 +114,21 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://livesh.dev/#person",
+      "@id": `${siteUrl}/#person`,
       name: "Livesh L",
-      url: "https://github.com/Livesh-L-28",
+      givenName: "Livesh",
+      familyName: "L",
+      alternateName: ["Livesh", "Livesh-L-28", "Livesh AI Developer", "Livesh Lakshmanan"],
+      url: siteUrl,
+      image: `${siteUrl}/opengraph-image`,
       jobTitle: "AI Systems Engineer & LLM Developer",
+      email: "liveshjaidj@gmail.com",
+      telephone: "+91 9345406612",
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "Tamil Nadu",
+        addressCountry: "IN",
+      },
       alumniOf: {
         "@type": "EducationalOrganization",
         name: "Prathyusha Engineering College",
@@ -100,7 +149,32 @@ const jsonLd = {
         "https://github.com/Livesh-L-28",
         "https://linkedin.com/in/livesh-l-aa9821322",
         "https://pypi.org/user/Livesh-L-28/",
+        "https://github.com/Livesh-L-28/my_portfolio",
       ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Livesh L — Official AI Engineering Portfolio",
+      description:
+        "Official portfolio of Livesh L, AI Developer specializing in production LLM applications, RAG systems, and AI security.",
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+      author: {
+        "@id": `${siteUrl}/#person`,
+      },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${siteUrl}/#profile`,
+      url: siteUrl,
+      name: "Livesh L — Profile & Engineering Portfolio",
+      mainEntity: {
+        "@id": `${siteUrl}/#person`,
+      },
     },
     {
       "@type": "SoftwareSourceCode",
@@ -114,7 +188,7 @@ const jsonLd = {
       description:
         "High-performance, in-process prompt injection, DAN jailbreak interception, and PII masking firewall for LLMs (~0.02ms latency).",
       author: {
-        "@id": "https://livesh.dev/#person",
+        "@id": `${siteUrl}/#person`,
       },
     },
     {
@@ -129,7 +203,7 @@ const jsonLd = {
       description:
         "Deterministic reliability testing framework and CLI for AI agents and LLM production pipelines.",
       author: {
-        "@id": "https://livesh.dev/#person",
+        "@id": `${siteUrl}/#person`,
       },
     },
     {
@@ -144,7 +218,7 @@ const jsonLd = {
       description:
         "Autonomous telemetry isolation and resilient incident root-cause remediation framework.",
       author: {
-        "@id": "https://livesh.dev/#person",
+        "@id": `${siteUrl}/#person`,
       },
     },
   ],

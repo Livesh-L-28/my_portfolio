@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PROJECTS, getProjectBySlug } from "@/data/projects";
+import { getAbsoluteUrl } from "@/lib/seo";
 import { ProjectArchitecture } from "@/components/projects/ProjectArchitecture";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import {
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project Not Found" };
 
-  const canonicalUrl = `https://livesh.dev/projects/${slug}`;
+  const canonicalUrl = getAbsoluteUrl(`/projects/${slug}`);
 
   return {
     title: `${project.title} — AI System Case Study | Livesh L`,

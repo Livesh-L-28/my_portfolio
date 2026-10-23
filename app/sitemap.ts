@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { PROJECTS } from "@/data/projects";
+import { getSiteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://livesh.dev";
+  const baseUrl = getSiteUrl();
   const lastModified = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
